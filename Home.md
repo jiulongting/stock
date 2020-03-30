@@ -1,3 +1,5 @@
+表结构clone下来可以看到
+
 列表
 http://quote.eastmoney.com/stocklist.html
 http://app.finance.ifeng.com/hq/list.php?type=stock_a&class=sa
