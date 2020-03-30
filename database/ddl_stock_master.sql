@@ -1,3 +1,4 @@
+```sql
 -- DROP DATABASE IF EXISTS `stock_master`;
 -- CREATE DATABASE `stock_master` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
 
@@ -22,14 +23,14 @@ CREATE TABLE `holiday_calendar` (
 
 CREATE TABLE `stock_info` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `code` varchar(6) COLLATE utf8_bin NOT NULL,
-  `name` varchar(50) COLLATE utf8_bin NOT NULL,
-  `exchange` varchar(2) COLLATE utf8_bin NOT NULL,
-  `abbreviation` varchar(50) COLLATE utf8_bin NOT NULL,
+  `code` varchar(6) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `exchange` varchar(2) NOT NULL,
+  `abbreviation` varchar(50) NOT NULL,
   `state` tinyint(4) unsigned NOT NULL DEFAULT '0',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `description` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `description` varchar(100) NOT NULL DEFAULT '',
   `mark_for_delete` tinyint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_exchange_code` (`exchange`,`code`)
@@ -40,11 +41,11 @@ CREATE TABLE `stock_log` (
   `stock_info_id` int(11) unsigned NOT NULL,
   `date` date NOT NULL,
   `type` tinyint(4) unsigned NOT NULL,
-  `old_value` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `new_value` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `old_value` varchar(50) NOT NULL DEFAULT '',
+  `new_value` varchar(50) NOT NULL DEFAULT '',
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `description` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `description` varchar(100) NOT NULL DEFAULT '',
   `mark_for_delete` tinyint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
@@ -73,7 +74,7 @@ CREATE TABLE `task` (
   `state` tinyint(4) unsigned NOT NULL,
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `description` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `description` varchar(100) NOT NULL DEFAULT '',
   `mark_for_delete` tinyint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_name` (`name`)
@@ -97,13 +98,13 @@ CREATE TABLE `execute_info` (
 
 CREATE TABLE `ticker_config` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `key` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `value` varchar(200) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `key` varchar(50) NOT NULL DEFAULT '',
+  `value` varchar(200) NOT NULL DEFAULT '',
   `state` tinyint(4) unsigned NOT NULL DEFAULT '0',
   `robot_id` int(11) unsigned NOT NULL DEFAULT '0',
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `description` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `description` varchar(100) NOT NULL DEFAULT '',
   `mark_for_delete` tinyint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
@@ -111,11 +112,13 @@ CREATE TABLE `ticker_config` (
 CREATE TABLE `robot` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `type` tinyint(4) unsigned NOT NULL DEFAULT '0',
-  `webhook` varchar(200) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `webhook` varchar(200) NOT NULL DEFAULT '',
   `state` tinyint(4) unsigned NOT NULL DEFAULT '0',
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `description` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `description` varchar(100) NOT NULL DEFAULT '',
   `mark_for_delete` tinyint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
+
+```

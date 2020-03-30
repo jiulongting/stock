@@ -1,3 +1,4 @@
+```sql
 INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('1', 'begin_of_year', '1', 'begin of year');
 INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('2', 'end_of_year', '1', 'end of year');
 INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('3', 'begin_of_day', '1', 'begin of day');
@@ -15,3 +16,5 @@ INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('5', '5', '2');
 INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('6', '6', '0');
 INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('7', '7', '2');
 INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('8', '8', '2');
+
+```
