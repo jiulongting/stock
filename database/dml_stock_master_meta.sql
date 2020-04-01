@@ -17,4 +17,7 @@ INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('6', '6', '0');
 INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('7', '7', '2');
 INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('8', '8', '2');
 
+INSERT INTO `robot` (`id`, `type`, `webhook`, `state`) VALUES ('1', '0', 'webhook, like dingding', '1');
+INSERT INTO `ticker_config` (`id`, `key`, `value`, `state`, `robot_id`) VALUES ('1', 'stock_list', '601360,601688,002945,002751,601236', '1', '1');
+
 ```
