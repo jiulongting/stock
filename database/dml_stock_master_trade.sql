@@ -16,9 +16,9 @@ INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('9', 'trade_ti
 
 INSERT INTO `execute_info` (`id`, `task_id`, `start_time`, `complete_time`, `params_str`, `is_manual`, `state`, `message`, `create_user_id`) VALUES ('9', '9', NULL, NULL, '', '0', '2', NULL, '0');
 
-INSERT INTO  `trade_rule` (`id`, `rate`, `state`, `description`) VALUES ('1', '0.009700', '1', '一级 0.0097');
-INSERT INTO  `trade_rule` (`id`, `rate`, `state`, `description`) VALUES ('2', '0.019700', '1', '二级 0.0197');
-INSERT INTO  `trade_rule` (`id`, `rate`, `state`, `description`) VALUES ('3', '0.029700', '1', '三级 0.0297');
+INSERT INTO `trade_rule` (`id`, `rate`, `state`, `description`, `create_time`, `update_time`, `mark_for_delete`) VALUES ('1', '0.013700', '1', '1.37%', '2019-10-22 15:36:57', '2020-04-03 19:05:01', '0');
+INSERT INTO `trade_rule` (`id`, `rate`, `state`, `description`, `create_time`, `update_time`, `mark_for_delete`) VALUES ('2', '0.020700', '1', '2.07%', '2019-10-22 15:36:58', '2020-04-03 19:05:01', '0');
+INSERT INTO `trade_rule` (`id`, `rate`, `state`, `description`, `create_time`, `update_time`, `mark_for_delete`) VALUES ('3', '0.030700', '1', '3.07%', '2019-10-22 15:36:58', '2020-04-03 19:05:01', '0');
 
 INSERT INTO  `trade_stock_info_rule` (`id`, `stock_code`, `rule_id`, `state`) VALUES ('1', '601236', '2', '1');
 INSERT INTO  `trade_stock_info_rule` (`id`, `stock_code`, `rule_id`, `state`) VALUES ('2', '002945', '2', '1');
