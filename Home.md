@@ -1,5 +1,3 @@
-表结构clone下来可以看到
-
 列表
 http://quote.eastmoney.com/stocklist.html
 http://app.finance.ifeng.com/hq/list.php?type=stock_a&class=sa
@@ -14,7 +12,7 @@ http://mdfm.eastmoney.com/EM_UBG_MinuteApi/Js/Get?dtype=all&rows=5000&page=1&id=
 http://hq.sinajs.cn/list=sz300542
 
 沪市A股
-600 601 603
+600 601 603 605
 688 科创板
 深市A股
 000

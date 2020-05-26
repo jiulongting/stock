@@ -1,5 +1,3 @@
-```sql
-
 INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('1', 'get_asserts', 'https://jy.xzsec.com/Com/GetAssetsEx?validatekey=${validatekey}', '1', '我的资产');
 INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('2', 'submit', 'https://jy.xzsec.com/Trade/SubmitTrade?validatekey=${validatekey}', '1', '提交挂单');
 INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('3', 'revoke', 'https://jy.xzsec.com/Trade/RevokeOrders?validatekey=${validatekey}', '1', '撤单');
@@ -27,5 +25,3 @@ INSERT INTO `trade_stock_info_rule` (`id`, `stock_code`, `rule_id`, `state`) VAL
 INSERT INTO `user` (`id`, `username`, `password`, `name`) VALUES ('1', 'wild', '48FA4C38043122C03A61B1FB03D378EE', 'wild');
 
 INSERT INTO `trade_strategy` (`id`, `name`, `bean_name`, `state`) VALUES ('1', 'volumeStrategy', 'volumeStrategyHandler', '1');
-
-```

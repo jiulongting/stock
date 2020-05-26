@@ -1,4 +1,3 @@
-```sql
 INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('1', 'begin_of_year', '1', 'begin of year');
 INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('2', 'end_of_year', '1', 'end of year');
 INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('3', 'begin_of_day', '1', 'begin of day');
@@ -17,7 +16,8 @@ INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('6', '6', '0');
 INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('7', '7', '2');
 INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('8', '8', '2');
 
-INSERT INTO `robot` (`id`, `type`, `webhook`, `state`) VALUES ('1', '0', 'webhook, like dingding', '1');
-INSERT INTO `ticker_config` (`id`, `key`, `value`, `state`, `robot_id`) VALUES ('1', 'stock_list', '601360,601688,002945,002751,601236', '1', '1');
+INSERT INTO `robot` (`id`, `type`, `webhook`, `state`) VALUES ('1', '0', 'your webhook', '1');
 
-```
+INSERT INTO `stock_selected` (`id`, `code`, `rate`) VALUES ('1', '601236', '0.02');
+INSERT INTO `stock_selected` (`id`, `code`, `rate`) VALUES ('2', '601688', '0.02');
+INSERT INTO `stock_selected` (`id`, `code`, `rate`) VALUES ('3', '601696', '0.02');

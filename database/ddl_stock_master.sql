@@ -1,13 +1,13 @@
-```sql
 -- DROP DATABASE IF EXISTS `stock_master`;
 -- CREATE DATABASE `stock_master` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
 
 DROP TABLE IF EXISTS `robot`;
-DROP TABLE IF EXISTS `ticker_config`;
+DROP TABLE IF EXISTS `stock_selected`;
 DROP TABLE IF EXISTS `holiday_calendar`;
 DROP TABLE IF EXISTS `stock_info`;
 DROP TABLE IF EXISTS `stock_log`;
 DROP TABLE IF EXISTS `daily_index`;
+DROP TABLE IF EXISTS `execute_info`;
 DROP TABLE IF EXISTS `task`;
 DROP TABLE IF EXISTS `execute_info`;
 
@@ -16,7 +16,6 @@ CREATE TABLE `holiday_calendar` (
   `date` date NOT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `mark_for_delete` tinyint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_date` (`date`)
 ) ENGINE=InnoDB;
@@ -31,7 +30,6 @@ CREATE TABLE `stock_info` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `description` varchar(100) NOT NULL DEFAULT '',
-  `mark_for_delete` tinyint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_exchange_code` (`exchange`,`code`)
 ) ENGINE=InnoDB;
@@ -46,7 +44,6 @@ CREATE TABLE `stock_log` (
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `description` varchar(100) NOT NULL DEFAULT '',
-  `mark_for_delete` tinyint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
@@ -63,7 +60,6 @@ CREATE TABLE `daily_index` (
   `trading_value` decimal(20, 2) NOT NULL,
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `mark_for_delete` tinyint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `ik_stock_info_id` (`stock_info_id`)
 ) ENGINE=InnoDB;
@@ -75,7 +71,6 @@ CREATE TABLE `task` (
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `description` varchar(100) NOT NULL DEFAULT '',
-  `mark_for_delete` tinyint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_name` (`name`)
 ) ENGINE=InnoDB;
@@ -92,20 +87,16 @@ CREATE TABLE `execute_info` (
   `create_user_id` int(11) unsigned NOT NULL DEFAULT '0',
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `mark_for_delete` tinyint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
-CREATE TABLE `ticker_config` (
+CREATE TABLE `stock_selected` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `key` varchar(50) NOT NULL DEFAULT '',
-  `value` varchar(200) NOT NULL DEFAULT '',
-  `state` tinyint(4) unsigned NOT NULL DEFAULT '0',
-  `robot_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `code` varchar(50) NOT NULL,
+  `rate` decimal(20, 2) NOT NULL DEFAULT '0.02',
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `description` varchar(100) NOT NULL DEFAULT '',
-  `mark_for_delete` tinyint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
@@ -117,8 +108,5 @@ CREATE TABLE `robot` (
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `description` varchar(100) NOT NULL DEFAULT '',
-  `mark_for_delete` tinyint(4) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
-
-```
