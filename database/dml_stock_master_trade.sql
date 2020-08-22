@@ -22,6 +22,6 @@ INSERT INTO  `trade_stock_info_rule` (`id`, `stock_code`, `rule_id`, `state`) VA
 INSERT INTO  `trade_stock_info_rule` (`id`, `stock_code`, `rule_id`, `state`) VALUES ('2', '002945', '2', '1');
 INSERT INTO `trade_stock_info_rule` (`id`, `stock_code`, `rule_id`, `state`) VALUES ('3', '601688', '1', '1');
 
-INSERT INTO `user` (`id`, `username`, `password`, `name`) VALUES ('1', 'wild', '48FA4C38043122C03A61B1FB03D378EE', 'wild');
+INSERT INTO `user` (`id`, `username`, `password`, `name`) VALUES ('1', 'wild', 'e10adc3949ba59abbe56e057f20f883e', 'wild');
 
 INSERT INTO `trade_strategy` (`id`, `name`, `bean_name`, `state`) VALUES ('1', 'volumeStrategy', 'volumeStrategyHandler', '1');

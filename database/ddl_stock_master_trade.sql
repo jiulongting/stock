@@ -1,3 +1,11 @@
+DROP TABLE IF EXISTS `trade_user`;
+DROP TABLE IF EXISTS `trade_method`;
+DROP TABLE IF EXISTS `trade_rule`;
+DROP TABLE IF EXISTS `trade_stock_info_rule`;
+DROP TABLE IF EXISTS `trade_order`;
+DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `trade_strategy`;
+
 CREATE TABLE `trade_user` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -6,7 +14,7 @@ CREATE TABLE `trade_user` (
   `validate_key` varchar(50) NOT NULL,
   `state` tinyint(4) unsigned NOT NULL DEFAULT '1',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
@@ -17,7 +25,7 @@ CREATE TABLE `trade_method` (
   `state` tinyint(4) unsigned NOT NULL DEFAULT '1',
   `description` varchar(100) NOT NULL DEFAULT '',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
@@ -27,7 +35,7 @@ CREATE TABLE `trade_rule` (
   `state` tinyint(4) unsigned NOT NULL DEFAULT '1',
   `description` varchar(100) NOT NULL DEFAULT '',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
@@ -37,7 +45,7 @@ CREATE TABLE `trade_stock_info_rule` (
   `rule_id` int(11) unsigned NOT NULL,
   `state` tinyint(4) unsigned NOT NULL DEFAULT '1',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
@@ -50,7 +58,7 @@ CREATE TABLE `trade_order` (
   `trade_type` varchar(50) NOT NULL,
   `entrust_code` varchar(50) NOT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
@@ -62,7 +70,7 @@ CREATE TABLE `user` (
   `mobile` varchar(50) NOT NULL DEFAULT '',
   `email` varchar(50) NOT NULL DEFAULT '',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_username` (`username`)
 ) ENGINE=InnoDB;
