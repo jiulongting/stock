@@ -20,7 +20,7 @@ INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('7', '7', '2');
 INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('8', '8', '2');
 INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('9', '9', '0');
 
-INSERT INTO `robot` (`id`, `type`, `http://webhook`, `state`) VALUES ('1', '0', 'webhook', '1');
+INSERT INTO `robot` (`id`, `type`, `webhook`, `state`) VALUES ('1', '0', 'http://webhook', '1');
 
 INSERT INTO `stock_selected` (`id`, `code`, `rate`) VALUES ('1', '601456', '0.02');
 INSERT INTO `stock_selected` (`id`, `code`, `rate`) VALUES ('2', '601688', '0.02');
