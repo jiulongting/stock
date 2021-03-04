@@ -1,5 +1,7 @@
 INSERT INTO `user` (`id`, `username`, `password`, `name`) VALUES ('1', 'wild', 'e10adc3949ba59abbe56e057f20f883e', 'wild');
 
+INSERT INTO `system_config` (`id`, `name`, `value1`, `value2`, `value3`, `state`) VALUES ('1', 'trade_mock', '0', '', '', '1');
+
 INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('1', 'begin_of_year', '1', 'begin of year');
 INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('2', 'end_of_year', '1', 'end of year');
 INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('3', 'begin_of_day', '1', 'begin of day');
@@ -39,12 +41,6 @@ INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES 
 
 INSERT INTO `trade_user` (`id`, `account_id`, `name`, `cookie`, `validate_key`, `state`) VALUES ('1', '资金账号', 'wild', '', '', '1');
 
-INSERT INTO `trade_rule` (`id`, `rate`, `state`, `description`) VALUES ('1', '0.013700', '1', '1.37%');
-INSERT INTO `trade_rule` (`id`, `rate`, `state`, `description`) VALUES ('2', '0.020700', '1', '2.07%');
-INSERT INTO `trade_rule` (`id`, `rate`, `state`, `description`) VALUES ('3', '0.030700', '1', '3.07%');
+INSERT INTO `trade_rule` (`id`, `stock_code`, `strategy_id`, `user_id`, `type`, `value`, `volume`, `open_price`, `highest_price`, `lowest_price`, `state`, `description`) VALUES ('1', '300059', '1', '1', '1', '1.000000', '300', '31', '40.000000', '30.000000', '0', '');
 
-INSERT INTO `trade_stock_info_rule` (`id`, `stock_code`, `rule_id`, `state`) VALUES ('1', '601456', '3', '1');
-INSERT INTO `trade_stock_info_rule` (`id`, `stock_code`, `rule_id`, `state`) VALUES ('2', '300059', '3', '1');
-INSERT INTO `trade_stock_info_rule` (`id`, `stock_code`, `rule_id`, `state`) VALUES ('3', '601688', '2', '1');
-
-INSERT INTO `trade_strategy` (`id`, `name`, `bean_name`, `state`) VALUES ('1', 'volumeStrategy', 'volumeStrategyHandler', '1');
+INSERT INTO `trade_strategy` (`id`, `name`, `bean_name`, `state`) VALUES ('1', 'gridStrategy', 'gridStrategyHandler', '1');
