@@ -29,7 +29,7 @@ INSERT INTO `stock_selected` (`id`, `code`, `rate`) VALUES ('2', '601688', '0.02
 INSERT INTO `stock_selected` (`id`, `code`, `rate`) VALUES ('3', '300059', '0.02');
 
 INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('1', 'get_asserts', 'https://jywg.18.cn/Com/GetAssetsEx?validatekey=${validatekey}', '1', '我的资产');
-INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('2', 'submit', 'https://jywg.18.cn/Trade/SubmitTrade?validatekey=${validatekey}', '1', '提交挂单');
+INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('2', 'submit', 'https://jywg.18.cn/Trade/SubmitTradeV2?validatekey=${validatekey}', '1', '提交挂单');
 INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('3', 'revoke', 'https://jywg.18.cn/Trade/RevokeOrders?validatekey=${validatekey}', '1', '撤单');
 INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('4', 'get_stock_list', 'https://jywg.18.cn/Search/GetStockList?validatekey=${validatekey}', '1', '我的持仓');
 INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('5', 'get_orders_data', 'https://jywg.18.cn/Search/GetOrdersData?validatekey=${validatekey}', '1', '当日委托');
