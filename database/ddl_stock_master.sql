@@ -213,3 +213,17 @@ CREATE TABLE `trade_strategy` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_name` (`name`)
 ) ENGINE=InnoDB;
+
+CREATE TABLE `trade_deal` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `stock_code` varchar(50) NOT NULL,
+  `deal_code` varchar(50) NOT NULL,
+  `price` decimal(20, 2) NOT NULL,
+  `volume` int(11) unsigned NOT NULL,
+  `trade_type` varchar(50) NOT NULL,
+  `trade_time` timestamp NOT NULL,
+  `user_id` int(11) unsigned NOT NULL DEFAULT '1',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
