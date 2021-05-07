@@ -8,7 +8,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('8', '688122', '西部超导', 'sh', 'xbcd', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('9', '300891', '惠云钛业', 'sz', 'hyty', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('10', '300751', '迈为股份', 'sz', 'mwgf', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('11', '000007', '全新好', 'sz', 'qxh', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('11', '000007', '*ST全新', 'sz', 'stqx', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('12', '000927', '中国铁物', 'sz', 'zgtw', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('13', '603982', '泉峰汽车', 'sh', 'qfqc', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('14', '002781', '奇信股份', 'sz', 'qxgf', '0', '0', '');
@@ -122,7 +122,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('122', '300065', '海兰信', 'sz', 'hlx', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('123', '300224', '正海磁材', 'sz', 'zhcc', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('124', '300820', '英杰电气', 'sz', 'yjdq', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('125', '600139', '西部资源', 'sh', 'xbzy', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('125', '600139', 'ST西源', 'sh', 'stxy', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('126', '002190', '成飞集成', 'sz', 'cfjc', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('127', '300516', '久之洋', 'sz', 'jzy', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('128', '002160', '常铝股份', 'sz', 'clgf', '0', '0', '');
@@ -162,7 +162,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('162', '600550', '保变电气', 'sh', 'bbdq', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('163', '002623', '亚玛顿', 'sz', 'ymd', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('164', '300121', '阳谷华泰', 'sz', 'yght', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('165', '003000', '华文食品', 'sz', 'hwsp', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('165', '003000', '劲仔食品', 'sz', 'jzsp', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('166', '300268', '佳沃股份', 'sz', 'jwgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('167', '600359', '新农开发', 'sh', 'xnkf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('168', '002240', '盛新锂能', 'sz', 'sxln', '0', '0', '');
@@ -202,7 +202,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('202', '600367', '红星发展', 'sh', 'hxfz', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('203', '600408', 'ST安泰', 'sh', 'stat', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('204', '002772', '众兴菌业', 'sz', 'zxjy', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('205', '601020', '华钰矿业', 'sh', 'hyky', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('205', '601020', 'ST华钰', 'sh', 'sthy', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('206', '601038', '一拖股份', 'sh', 'ytgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('207', '600580', '卧龙电驱', 'sh', 'wldq', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('208', '600671', '*ST目药', 'sh', 'stmy', '0', '0', '');
@@ -244,7 +244,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('244', '600097', '开创国际', 'sh', 'kcgj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('245', '002703', '浙江世宝', 'sz', 'zjsb', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('246', '300169', '天晟新材', 'sz', 'tsxc', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('247', '600382', '广东明珠', 'sh', 'gdmz', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('247', '600382', '*ST广珠', 'sh', 'stgz', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('248', '300484', '蓝海华腾', 'sz', 'lhht', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('249', '002009', '天奇股份', 'sz', 'tqgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('250', '605006', '山东玻纤', 'sh', 'sdbx', '0', '0', '');
@@ -310,7 +310,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('310', '002667', '鞍重股份', 'sz', 'azgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('311', '600343', '航天动力', 'sh', 'htdl', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('312', '002046', '国机精工', 'sz', 'gjjg', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('313', '002473', 'ST圣莱', 'sz', 'stsl', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('313', '002473', '*ST圣莱', 'sz', 'stsl', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('314', '002578', '闽发铝业', 'sz', 'mfly', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('315', '300189', '神农科技', 'sz', 'snkj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('316', '601011', '宝泰隆', 'sh', 'btl', '0', '0', '');
@@ -335,7 +335,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('335', '300900', '广联航空', 'sz', 'glhk', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('336', '300274', '阳光电源', 'sz', 'ygdy', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('337', '000762', '西藏矿业', 'sz', 'xzky', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('338', '600275', 'ST昌鱼', 'sh', 'stcy', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('338', '600275', '*ST昌鱼', 'sh', 'stcy', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('339', '300243', '瑞丰高材', 'sz', 'rfgc', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('340', '601717', '郑煤机', 'sh', 'zmj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('341', '002481', '双塔食品', 'sz', 'stsp', '0', '0', '');
@@ -369,7 +369,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('369', '002227', '奥特迅', 'sz', 'atx', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('370', '300037', '新宙邦', 'sz', 'xzb', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('371', '601100', '恒立液压', 'sh', 'hlyy', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('372', '600191', '华资实业', 'sh', 'hzsy', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('372', '600191', '*ST华资', 'sh', 'sthz', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('373', '000980', '*ST众泰', 'sz', 'stzt', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('374', '002001', '新和成', 'sz', 'xhc', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('375', '002228', '合兴包装', 'sz', 'hxbz', '0', '0', '');
@@ -476,7 +476,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('476', '002294', '信立泰', 'sz', 'xlt', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('477', '002758', '浙农股份', 'sz', 'zngf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('478', '300619', '金银河', 'sz', 'jyh', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('479', '600870', 'ST厦华', 'sh', 'stsh', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('479', '600870', '*ST厦华', 'sh', 'stsh', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('480', '002631', '德尔未来', 'sz', 'dewl', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('481', '300850', '新强联', 'sz', 'xql', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('482', '000868', '安凯客车', 'sz', 'akkc', '0', '0', '');
@@ -607,7 +607,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('607', '003008', '开普检测', 'sz', 'kpjc', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('608', '605108', '同庆楼', 'sh', 'tql', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('609', '000718', '苏宁环球', 'sz', 'snhq', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('610', '300178', '腾邦国际', 'sz', 'tbgj', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('610', '300178', '*ST腾邦', 'sz', 'sttb', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('611', '688595', '芯海科技', 'sh', 'xhkj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('612', '300141', '和顺电气', 'sz', 'hsdq', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('613', '002681', '奋达科技', 'sz', 'fdkj', '0', '0', '');
@@ -618,7 +618,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('618', '600089', '特变电工', 'sh', 'tbdg', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('619', '600600', '青岛啤酒', 'sh', 'qdpj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('620', '300690', '双一科技', 'sz', 'sykj', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('621', '300530', '达志科技', 'sz', 'dzkj', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('621', '300530', '*ST达志', 'sz', 'stdz', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('622', '600302', '标准股份', 'sh', 'bzgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('623', '002188', '*ST巴士', 'sz', 'stbs', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('624', '515710', '食品ETF', 'sh', 'spetf', '0', '2', '');
@@ -702,7 +702,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('702', '300869', '康泰医学', 'sz', 'ktyx', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('703', '688036', '传音控股', 'sh', 'cykg', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('704', '300547', '川环科技', 'sz', 'chkj', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('705', '600091', 'ST明科', 'sh', 'stmk', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('705', '600091', '*ST明科', 'sh', 'stmk', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('706', '002799', '环球印务', 'sz', 'hqyw', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('707', '300012', '华测检测', 'sz', 'hcjc', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('708', '601608', '中信重工', 'sh', 'zxzg', '0', '0', '');
@@ -755,7 +755,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('755', '002938', '鹏鼎控股', 'sz', 'pdkg', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('756', '601995', '中金公司', 'sh', 'zjgs', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('757', '000795', '英洛华', 'sz', 'ylh', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('758', '002770', 'ST科迪', 'sz', 'stkd', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('758', '002770', '*ST科迪', 'sz', 'stkd', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('759', '300337', '银邦股份', 'sz', 'ybgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('760', '600483', '福能股份', 'sh', 'fngf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('761', '603200', '上海洗霸', 'sh', 'shxb', '0', '0', '');
@@ -843,7 +843,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('843', '603978', '深圳新星', 'sh', 'szxx', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('844', '603290', '斯达半导', 'sh', 'sdbd', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('845', '300541', '先进数通', 'sz', 'xjst', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('846', '000606', '顺利办', 'sz', 'slb', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('846', '000606', 'ST顺利', 'sz', 'stsl', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('847', '002353', '杰瑞股份', 'sz', 'jrgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('848', '002461', '珠江啤酒', 'sz', 'zjpj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('849', '603023', '威帝股份', 'sh', 'wdgf', '0', '0', '');
@@ -876,7 +876,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('876', '002859', '洁美科技', 'sz', 'jmkj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('877', '000750', '国海证券', 'sz', 'ghzq', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('878', '002718', '友邦吊顶', 'sz', 'ybdd', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('879', '600601', '方正科技', 'sh', 'fzkj', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('879', '600601', 'ST方科', 'sh', 'stfk', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('880', '603699', '纽威股份', 'sh', 'nwgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('881', '601618', '中国中冶', 'sh', 'zgzy', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('882', '002031', '巨轮智能', 'sz', 'jlzn', '0', '0', '');
@@ -942,7 +942,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('942', '300015', '爱尔眼科', 'sz', 'aeyk', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('943', '600719', '大连热电', 'sh', 'dlrd', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('944', '603909', '合诚股份', 'sh', 'hcgf', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('945', '000525', '红太阳', 'sz', 'hty', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('945', '000525', 'ST红太阳', 'sz', 'sthty', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('946', '002515', '金字火腿', 'sz', 'jzht', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('947', '600103', '青山纸业', 'sh', 'qszy', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('948', '300767', '震安科技', 'sz', 'zakj', '0', '0', '');
@@ -1059,7 +1059,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1059', '002783', '凯龙股份', 'sz', 'klgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1060', '300252', '金信诺', 'sz', 'jxn', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1061', '600998', '九州通', 'sh', 'jzt', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1062', '300312', '邦讯技术', 'sz', 'bxjs', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1062', '300312', '*ST邦讯', 'sz', 'stbx', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1063', '603668', '天马科技', 'sh', 'tmkj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1064', '600866', '星湖科技', 'sh', 'xhkj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1065', '603332', '苏州龙杰', 'sh', 'szlj', '0', '0', '');
@@ -1149,7 +1149,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1149', '000707', '*ST双环', 'sz', 'stsh', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1150', '002339', '积成电子', 'sz', 'jcdz', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1151', '300040', '九洲集团', 'sz', 'jzjt', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1152', '000611', 'ST天首', 'sz', 'stts', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1152', '000611', '*ST天首', 'sz', 'stts', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1153', '002269', '美邦服饰', 'sz', 'mbfs', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1154', '002047', '宝鹰股份', 'sz', 'bygf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1155', '600871', '石化油服', 'sh', 'shyf', '0', '0', '');
@@ -1190,7 +1190,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1190', '603168', '莎普爱思', 'sh', 'spas', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1191', '002258', '利尔化学', 'sz', 'lehx', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1192', '300376', '易事特', 'sz', 'yst', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1193', '002321', '华英农业', 'sz', 'hyny', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1193', '002321', '*ST华英', 'sz', 'sthy', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1194', '601369', '陕鼓动力', 'sh', 'sgdl', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1195', '300265', '通光线缆', 'sz', 'tgxl', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1196', '600114', '东睦股份', 'sh', 'dmgf', '0', '0', '');
@@ -1384,7 +1384,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1384', '603283', '赛腾股份', 'sh', 'stgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1385', '300220', '金运激光', 'sz', 'jyjg', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1386', '605177', '东亚药业', 'sh', 'dyyy', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1387', '002684', 'ST猛狮', 'sz', 'stms', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1387', '002684', '*ST猛狮', 'sz', 'stms', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1388', '601698', '中国卫通', 'sh', 'zgwt', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1389', '603737', '三棵树', 'sh', 'sks', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1390', '688618', '三旺通信', 'sh', 'swtx', '0', '0', '');
@@ -1432,7 +1432,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1432', '600673', '东阳光', 'sh', 'dyg', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1433', '688368', '晶丰明源', 'sh', 'jfmy', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1434', '159991', '创大盘', 'sz', 'cdp', '0', '2', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1435', '002175', 'ST东网', 'sz', 'stdw', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1435', '002175', '*ST东网', 'sz', 'stdw', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1436', '600815', '厦工股份', 'sh', 'sggf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1437', '600515', '*ST基础', 'sh', 'stjc', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1438', '002023', '海特高新', 'sz', 'htgx', '0', '0', '');
@@ -1443,7 +1443,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1443', '002533', '金杯电工', 'sz', 'jbdg', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1444', '159944', '材料ETF', 'sz', 'cletf', '0', '2', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1445', '600872', '中炬高新', 'sh', 'zjgx', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1446', '000609', '中迪投资', 'sz', 'zdtz', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1446', '000609', '*ST中迪', 'sz', 'stzd', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1447', '300258', '精锻科技', 'sz', 'jdkj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1448', '000717', '韶钢松山', 'sz', 'sgss', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1449', '300889', '爱克股份', 'sz', 'akgf', '0', '0', '');
@@ -1653,7 +1653,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1653', '300353', '东土科技', 'sz', 'dtkj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1654', '603697', '有友食品', 'sh', 'yysp', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1655', '300078', '思创医惠', 'sz', 'scyh', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1656', '600461', '洪城水业', 'sh', 'hcsy', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1656', '600461', '洪城环境', 'sh', 'hchj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1657', '002939', '长城证券', 'sz', 'zczq', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1658', '511270', '10年地方债ETF', 'sh', '10ndfzetf', '0', '2', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1659', '600476', '湘邮科技', 'sh', 'xykj', '0', '0', '');
@@ -1668,7 +1668,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1668', '688093', '世华科技', 'sh', 'shkj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1669', '159969', '深100P', 'sz', 's100p', '0', '2', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1670', '159949', '创业板50', 'sz', 'cyb50', '0', '2', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1671', '603863', '松炀资源', 'sh', 'syzy', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1671', '603863', 'ST松炀', 'sh', 'stsy', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1672', '510350', '工银沪深300ETF', 'sh', 'gyhs300etf', '0', '2', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1673', '300323', '华灿光电', 'sz', 'hcgd', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1674', '600285', '羚锐制药', 'sh', 'lrzy', '0', '0', '');
@@ -1775,7 +1775,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1775', '159993', '龙头券商', 'sz', 'ltqs', '0', '2', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1776', '512870', '杭州湾区ETF', 'sh', 'hzwqetf', '0', '2', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1777', '300261', '雅本化学', 'sz', 'ybhx', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1778', '603557', '起步股份', 'sh', 'qbgf', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1778', '603557', 'ST起步', 'sh', 'stqb', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1779', '600599', '*ST熊猫', 'sh', 'stxm', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1780', '603169', '兰石重装', 'sh', 'lszz', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1781', '515810', '中证800ETF', 'sh', 'zz800etf', '0', '2', '');
@@ -1813,7 +1813,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1813', '601838', '成都银行', 'sh', 'cdyh', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1814', '603080', '新疆火炬', 'sh', 'xjhj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1815', '002523', '天桥起重', 'sz', 'tqqz', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1816', '000005', '世纪星源', 'sz', 'sjxy', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1816', '000005', 'ST星源', 'sz', 'stxy', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1817', '588000', '科创50ETF', 'sh', 'kc50etf', '0', '2', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1818', '603856', '东宏股份', 'sh', 'dhgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1819', '600423', 'ST柳化', 'sh', 'stlh', '0', '0', '');
@@ -1888,7 +1888,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1888', '300765', '新诺威', 'sz', 'xnw', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1889', '605255', '天普股份', 'sh', 'tpgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1890', '002365', '永安药业', 'sz', 'yayy', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1891', '600589', '广东榕泰', 'sh', 'gdrt', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1891', '600589', 'ST榕泰', 'sh', 'strt', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1892', '159813', '芯片', 'sz', 'xp', '0', '2', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1893', '300532', '今天国际', 'sz', 'jtgj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('1894', '600190', '锦州港', 'sh', 'jzg', '0', '0', '');
@@ -2008,7 +2008,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2008', '000020', '深华发A', 'sz', 'shfa', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2009', '601577', '长沙银行', 'sh', 'zsyh', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2010', '603730', '岱美股份', 'sh', 'dmgf', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2011', '000802', '北京文化', 'sz', 'bjwh', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2011', '000802', 'ST北文', 'sz', 'stbw', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2012', '511380', '可转债ETF', 'sh', 'kzzetf', '0', '2', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2013', '600499', '科达制造', 'sh', 'kdzz', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2014', '515820', '沪深800ETF', 'sh', 'hs800etf', '0', '2', '');
@@ -2274,7 +2274,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2274', '300186', '大华农', 'sz', 'dhn', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2275', '300216', '千山退', 'sz', 'qst', '2', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2276', '300250', '初灵信息', 'sz', 'clxx', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2277', '300278', '华昌达', 'sz', 'hcd', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2277', '300278', '*ST华昌', 'sz', 'sthc', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2278', '300345', '华民股份', 'sz', 'hmgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2279', '300362', '天翔环境', 'sz', 'txhj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2280', '300372', '欣泰退', 'sz', 'xtt', '2', '0', '');
@@ -2328,7 +2328,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2328', '600269', '赣粤高速', 'sh', 'gygs', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2329', '600270', '外运发展', 'sh', 'wyfz', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2330', '600286', 'S*ST国瓷', 'sh', 'sstgc', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2331', '600291', '西水股份', 'sh', 'xsgf', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2331', '600291', '*ST西水', 'sh', 'stxs', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2332', '600296', 'S兰铝', 'sh', 'sll', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2333', '600328', '中盐化工', 'sh', 'zyhg', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2334', '600351', '亚宝药业', 'sh', 'ybyy', '0', '0', '');
@@ -2366,7 +2366,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2366', '600677', '*ST航通', 'sh', 'stht', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2367', '600680', '*ST上普', 'sh', 'stsp', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2368', '600700', '*ST数码', 'sh', 'stsm', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2369', '600701', '退市工新', 'sh', 'tsgx', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2369', '600701', '退市工新', 'sh', 'tsgx', '2', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2370', '600705', '中航资本', 'sh', 'zhzb', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2371', '600708', '光明地产', 'sh', 'gmdc', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2372', '600709', 'ST生态', 'sh', 'stst', '0', '0', '');
@@ -2398,7 +2398,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2398', '600868', '梅雁吉祥', 'sh', 'myjx', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2399', '600878', '*ST北科', 'sh', 'stbk', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2400', '600879', '航天电子', 'sh', 'htdz', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2401', '600891', '退市秋林', 'sh', 'tsql', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2401', '600891', '退市秋林', 'sh', 'tsql', '2', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2402', '600892', '大晟文化', 'sh', 'dswh', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2403', '600899', '*ST信联', 'sh', 'stxl', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2404', '600919', '江苏银行', 'sh', 'jsyh', '0', '0', '');
@@ -2515,7 +2515,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2515', '600138', '中青旅', 'sh', 'zql', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2516', '603868', '飞科电器', 'sh', 'fkdq', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2517', '002191', '劲嘉股份', 'sz', 'jjgf', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2518', '000502', '绿景控股', 'sz', 'ljkg', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2518', '000502', '*ST绿景', 'sz', 'stlj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2519', '601828', '美凯龙', 'sh', 'mkl', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2520', '600560', '金自天正', 'sh', 'jztz', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2521', '511220', '城投债ETF', 'sh', 'ctzetf', '0', '2', '');
@@ -2697,7 +2697,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2697', '002421', '达实智能', 'sz', 'dszn', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2698', '600261', '阳光照明', 'sh', 'ygzm', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2699', '600688', '上海石化', 'sh', 'shsh', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2700', '600078', '澄星股份', 'sh', 'cxgf', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2700', '600078', '*ST澄星', 'sh', 'stcx', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2701', '002729', '好利来', 'sz', 'hll', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2702', '601966', '玲珑轮胎', 'sh', 'lllt', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2703', '688118', '普元信息', 'sh', 'pyxx', '0', '0', '');
@@ -2748,7 +2748,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2748', '000782', '美达股份', 'sz', 'mdgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2749', '300365', '恒华科技', 'sz', 'hhkj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2750', '515100', '低波红利ETF', 'sh', 'dbhletf', '0', '2', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2751', '600615', '丰华股份', 'sh', 'fhgf', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2751', '600615', '*ST丰华', 'sh', 'stfh', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2752', '600170', '上海建工', 'sh', 'shjg', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2753', '600284', '浦东建设', 'sh', 'pdjs', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2754', '600370', '三房巷', 'sh', 'sfx', '0', '0', '');
@@ -2837,7 +2837,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2837', '300479', '神思电子', 'sz', 'ssdz', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2838', '300006', '莱美药业', 'sz', 'lmyy', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2839', '002495', '佳隆股份', 'sz', 'jlgf', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2840', '603007', '花王股份', 'sh', 'hwgf', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2840', '603007', 'ST花王', 'sh', 'sthw', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2841', '600873', '梅花生物', 'sh', 'mhsw', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2842', '300802', '矩子科技', 'sz', 'jzkj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2843', '002630', '华西能源', 'sz', 'hxny', '0', '0', '');
@@ -2913,7 +2913,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2913', '603159', '上海亚虹', 'sh', 'shyh', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2914', '605066', '天正电气', 'sh', 'tzdq', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2915', '002166', '莱茵生物', 'sz', 'lysw', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2916', '600387', '海越能源', 'sh', 'hyny', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2916', '600387', 'ST海越', 'sh', 'sthy', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2917', '603331', '百达精工', 'sh', 'bdjg', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2918', '000543', '皖能电力', 'sz', 'wndl', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('2919', '601186', '中国铁建', 'sh', 'zgtj', '0', '0', '');
@@ -3022,7 +3022,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3022', '510650', '金融地产ETF', 'sh', 'jrdcetf', '0', '2', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3023', '300778', '新城市', 'sz', 'xcs', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3024', '300392', '腾信股份', 'sz', 'txgf', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3025', '600652', 'ST游久', 'sh', 'styj', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3025', '600652', '*ST游久', 'sh', 'styj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3026', '002241', '歌尔股份', 'sz', 'gegf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3027', '512750', '基本面50ETF', 'sh', 'jbm50etf', '0', '2', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3028', '002193', '如意集团', 'sz', 'ryjt', '0', '0', '');
@@ -3111,7 +3111,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3111', '000908', '景峰医药', 'sz', 'jfyy', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3112', '603595', '东尼电子', 'sh', 'dndz', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3113', '600468', '百利电气', 'sh', 'bldq', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3114', '600358', '*ST联合', 'sh', 'stlh', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3114', '600358', '国旅联合', 'sh', 'gllh', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3115', '300125', '聆达股份', 'sz', 'ldgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3116', '600820', '隧道股份', 'sh', 'sdgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3117', '601607', '上海医药', 'sh', 'shyy', '0', '0', '');
@@ -3248,10 +3248,10 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3248', '002368', '太极股份', 'sz', 'tjgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3249', '600383', '金地集团', 'sh', 'jdjt', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3250', '002745', '木林森', 'sz', 'mls', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3251', '000523', '广州浪奇', 'sz', 'gzlq', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3251', '000523', '*ST浪奇', 'sz', 'stlq', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3252', '002819', '东方中科', 'sz', 'dfzk', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3253', '300510', '金冠股份', 'sz', 'jggf', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3254', '600265', 'ST景谷', 'sh', 'stjg', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3254', '600265', '*ST景谷', 'sh', 'stjg', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3255', '000004', '国华网安', 'sz', 'ghwa', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3256', '300291', '华录百纳', 'sz', 'hlbn', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3257', '603963', '大理药业', 'sh', 'dlyy', '0', '0', '');
@@ -3266,7 +3266,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3266', '002083', '孚日股份', 'sz', 'frgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3267', '002574', '明牌珠宝', 'sz', 'mpzb', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3268', '300330', '华虹计通', 'sz', 'hhjt', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3269', '603729', '龙韵股份', 'sh', 'lygf', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3269', '603729', 'ST龙韵', 'sh', 'stly', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3270', '600689', '上海三毛', 'sh', 'shsm', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3271', '002079', '苏州固锝', 'sz', 'szgd', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3272', '300525', '博思软件', 'sz', 'bsrj', '0', '0', '');
@@ -3683,7 +3683,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3683', '300259', '新天科技', 'sz', 'xtkj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3684', '002785', '万里石', 'sz', 'wls', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3685', '600340', '华夏幸福', 'sh', 'hxxf', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3686', '600198', '大唐电信', 'sh', 'dtdx', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3686', '600198', '*ST大唐', 'sh', 'stdt', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3687', '600011', '华能国际', 'sh', 'hngj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3688', '603656', '泰禾智能', 'sh', 'thzn', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3689', '513680', '恒生国企ETF', 'sh', 'hsgqetf', '0', '2', '');
@@ -3710,14 +3710,14 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3710', '000100', 'TCL科技', 'sz', 'tclkj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3711', '002981', '朝阳科技', 'sz', 'cykj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3712', '515050', '5GETF', 'sh', '5getf', '0', '2', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3713', '600518', 'ST康美', 'sh', 'stkm', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3713', '600518', '*ST康美', 'sh', 'stkm', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3714', '688218', '江苏北人', 'sh', 'jsbr', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3715', '600685', '中船防务', 'sh', 'zcfw', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3716', '002254', '泰和新材', 'sz', 'thxc', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3717', '603517', '绝味食品', 'sh', 'jwsp', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3718', '603768', '常青股份', 'sh', 'cqgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3719', '002650', 'ST加加', 'sz', 'stjj', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3720', '600393', '粤泰股份', 'sh', 'ytgf', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3720', '600393', 'ST粤泰', 'sh', 'styt', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3721', '002084', '海鸥住工', 'sz', 'hozg', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3722', '300400', '劲拓股份', 'sz', 'jtgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3723', '600661', '昂立教育', 'sh', 'aljy', '0', '0', '');
@@ -3799,7 +3799,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3799', '000533', '顺钠股份', 'sz', 'sngf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3800', '000861', '海印股份', 'sz', 'hygf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3801', '688123', '聚辰股份', 'sh', 'jcgf', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3802', '300044', '赛为智能', 'sz', 'swzn', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3802', '300044', '*ST赛为', 'sz', 'stsw', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3803', '002755', '奥赛康', 'sz', 'ask', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3804', '000917', '电广传媒', 'sz', 'dgcm', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3805', '300715', '凯伦股份', 'sz', 'klgf', '0', '0', '');
@@ -3997,7 +3997,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3997', '688396', '华润微', 'sh', 'hrw', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3998', '300838', '浙江力诺', 'sz', 'zjln', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('3999', '002646', '青青稞酒', 'sz', 'qqkj', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4000', '000616', '海航投资', 'sz', 'hhtz', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4000', '000616', 'ST海投', 'sz', 'stht', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4001', '688256', '寒武纪-U', 'sh', 'hwj-u', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4002', '300213', '佳讯飞鸿', 'sz', 'jxfh', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4003', '003021', '兆威机电', 'sz', 'zwjd', '0', '0', '');
@@ -4008,7 +4008,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4008', '512930', 'AIETF', 'sh', 'aietf', '0', '2', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4009', '603890', '春秋电子', 'sh', 'cqdz', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4010', '603123', '翠微股份', 'sh', 'cwgf', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4011', '002358', '森源电气', 'sz', 'sydq', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4011', '002358', 'ST森源', 'sz', 'stsy', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4012', '300329', '海伦钢琴', 'sz', 'hlgq', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4013', '600704', '物产中大', 'sh', 'wczd', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4014', '603809', '豪能股份', 'sh', 'hngf', '0', '0', '');
@@ -4114,7 +4114,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4114', '002236', '大华股份', 'sz', 'dhgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4115', '300769', '德方纳米', 'sz', 'dfnm', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4116', '515500', '中证长三角领先', 'sh', 'zzzsjlx', '0', '2', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4117', '300269', '联建光电', 'sz', 'ljgd', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4117', '300269', 'ST联建', 'sz', 'stlj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4118', '000988', '华工科技', 'sz', 'hgkj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4119', '002332', '仙琚制药', 'sz', 'xjzy', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4120', '000564', '*ST大集', 'sz', 'stdj', '0', '0', '');
@@ -4166,15 +4166,15 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4166', '300184', '力源信息', 'sz', 'lyxx', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4167', '002657', '中科金财', 'sz', 'zkjc', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4168', '601231', '环旭电子', 'sh', 'hxdz', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4169', '300202', '聚龙股份', 'sz', 'jlgf', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4169', '300202', '*ST聚龙', 'sz', 'stjl', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4170', '300554', '三超新材', 'sz', 'scxc', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4171', '000800', '一汽解放', 'sz', 'yqjf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4172', '515980', '人工智能ETF', 'sh', 'rgznetf', '0', '2', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4173', '300079', '数码视讯', 'sz', 'smsx', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4174', '000021', '深科技', 'sz', 'skj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4175', '000732', '泰禾集团', 'sz', 'thjt', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4176', '600896', '览海医疗', 'sh', 'lhyl', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4177', '002618', '丹邦科技', 'sz', 'dbkj', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4176', '600896', '*ST海医', 'sh', 'sthy', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4177', '002618', '*ST丹邦', 'sz', 'stdb', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4178', '300357', '我武生物', 'sz', 'wwsw', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4179', '002195', '二三四五', 'sz', 'essw', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4180', '603869', '新智认知', 'sh', 'xzrz', '0', '0', '');
@@ -4278,7 +4278,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4278', '300232', '洲明科技', 'sz', 'zmkj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4279', '002677', '浙江美大', 'sz', 'zjmd', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4280', '002815', '崇达技术', 'sz', 'cdjs', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4281', '600112', 'ST天成', 'sh', 'sttc', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4281', '600112', '*ST天成', 'sh', 'sttc', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4282', '300388', '节能国祯', 'sz', 'jngz', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4283', '300424', '航新科技', 'sz', 'hxkj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4284', '000581', '威孚高科', 'sz', 'wfgk', '0', '0', '');
@@ -4323,14 +4323,14 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4323', '300635', '中达安', 'sz', 'zda', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4324', '300503', '昊志机电', 'sz', 'hzjd', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4325', '002617', '露笑科技', 'sz', 'lxkj', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4326', '600157', 'ST永泰', 'sh', 'styt', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4326', '600157', '永泰能源', 'sh', 'ytny', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4327', '002605', '姚记科技', 'sz', 'yjkj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4328', '601199', '江南水务', 'sh', 'jnsw', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4329', '603970', '中农立华', 'sh', 'znlh', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4330', '000063', '中兴通讯', 'sz', 'zxtx', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4331', '600579', '克劳斯', 'sh', 'kls', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4332', '300623', '捷捷微电', 'sz', 'jjwd', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4333', '002640', '跨境通', 'sz', 'kjt', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4333', '002640', '*ST跨境', 'sz', 'stkj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4334', '300770', '新媒股份', 'sz', 'xmgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4335', '600126', '杭钢股份', 'sh', 'hggf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4336', '300596', '利安隆', 'sz', 'lal', '0', '0', '');
@@ -4338,7 +4338,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4338', '300480', '光力科技', 'sz', 'glkj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4339', '300568', '星源材质', 'sz', 'xycz', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4340', '600702', 'ST舍得', 'sh', 'stsd', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4341', '002619', '艾格拉斯', 'sz', 'agls', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4341', '002619', '*ST艾格', 'sz', 'stag', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4342', '300671', '富满电子', 'sz', 'fmdz', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4343', '300032', '金龙机电', 'sz', 'jljd', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4344', '300145', '中金环境', 'sz', 'zjhj', '0', '0', '');
@@ -4453,7 +4453,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4453', '002766', '*ST索菱', 'sz', 'stsl', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4454', '002256', '*ST兆新', 'sz', 'stzx', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4455', '603225', '新凤鸣', 'sh', 'xfm', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4456', '600319', 'ST亚星', 'sh', 'styx', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4456', '600319', '*ST亚星', 'sh', 'styx', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4457', '300603', '立昂技术', 'sz', 'lajs', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4458', '600311', '*ST荣华', 'sh', 'strh', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4459', '600696', 'ST岩石', 'sh', 'stys', '0', '0', '');
@@ -4465,7 +4465,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4465', '600816', '*ST安信', 'sh', 'stax', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4466', '300920', '润阳科技', 'sz', 'rykj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4467', '002912', '中新赛克', 'sz', 'zxsk', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4468', '002071', '长城退', 'sz', 'zct', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4468', '002071', '长城退', 'sz', 'zct', '2', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4469', '002176', '江特电机', 'sz', 'jtdj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4470', '300296', '利亚德', 'sz', 'lyd', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4471', '600083', '*ST博信', 'sh', 'stbx', '0', '0', '');
@@ -4553,7 +4553,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4553', '002908', '德生科技', 'sz', 'dskj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4554', '002373', '千方科技', 'sz', 'qfkj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4555', '300590', '移为通信', 'sz', 'ywtx', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4556', '300325', 'ST德威', 'sz', 'stdw', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4556', '300325', '*ST德威', 'sz', 'stdw', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4557', '159986', '消费100', 'sz', 'xf100', '0', '2', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4558', '300196', '长海股份', 'sz', 'zhgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4559', '300664', '鹏鹞环保', 'sz', 'pyhb', '0', '0', '');
@@ -4575,7 +4575,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4575', '002360', '同德化工', 'sz', 'tdhg', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4576', '688008', '澜起科技', 'sh', 'lqkj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4577', '300058', '蓝色光标', 'sz', 'lsgb', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4578', '300495', '美尚生态', 'sz', 'msst', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4578', '300495', '*ST美尚', 'sz', 'stms', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4579', '603686', '龙马环卫', 'sh', 'lmhw', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4580', '300592', '华凯创意', 'sz', 'hkcy', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4581', '000584', '哈工智能', 'sz', 'hgzn', '0', '0', '');
@@ -4647,7 +4647,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4647', '300894', '火星人', 'sz', 'hxr', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4648', '300305', '裕兴股份', 'sz', 'yxgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4649', '300459', '金科文化', 'sz', 'jkwh', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4650', '300038', 'ST数知', 'sz', 'stsz', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4650', '300038', '*ST数知', 'sz', 'stsz', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4651', '003036', '泰坦股份', 'sz', 'ttgf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4652', '159824', '新能汽车', 'sz', 'xnqc', '0', '2', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4653', '688350', '富淼科技', 'sh', 'fmkj', '0', '0', '');
@@ -4821,15 +4821,15 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4821', '300976', '达瑞电子', 'sz', 'drdz', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4822', '688533', '上声电子', 'sh', 'ssdz', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4823', '300977', '深圳瑞捷', 'sz', 'szrj', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4824', '300978', 'C东箭', 'sz', 'cdj', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4825', '300979', 'C华利', 'sz', 'chl', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4824', '300978', '东箭科技', 'sz', 'djkj', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4825', '300979', '华利集团', 'sz', 'hljt', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4826', '300980', '祥源新材', 'sz', 'xyxc', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4827', '605016', '百龙创园', 'sh', 'blcy', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4828', '605117', '德业股份', 'sh', 'dygf', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4829', '159845', '中证1000', 'sz', 'zz1000', '0', '2', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4830', '159871', '有色金属', 'sz', 'ysjs', '0', '2', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4831', '300981', 'C中红', 'sz', 'czh', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4832', '300982', 'C苏文', 'sz', 'csw', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4831', '300981', '中红医疗', 'sz', 'zhyl', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4832', '300982', '苏文电能', 'sz', 'swdn', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4833', '688201', '信安世纪', 'sh', 'xasj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4834', '688639', '华恒生物', 'sh', 'hhsw', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4835', '688682', '霍莱沃', 'sh', 'hlw', '0', '0', '');
@@ -4844,8 +4844,8 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4844', '159866', '日经ETF', 'sz', 'rjetf', '0', '2', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4845', '516550', '农业ETF', 'sh', 'nyetf', '0', '2', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4846', '605180', '华生科技', 'sh', 'hskj', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4847', '300985', '致远新能', 'sz', 'zyxn', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4848', '300986', '志特新材', 'sz', 'ztxc', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4847', '300985', 'C致远', 'sz', 'czy', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4848', '300986', 'C志特', 'sz', 'czt', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4849', '516330', '物联网ETF', 'sh', 'wlwetf', '0', '2', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4850', '600906', '财达证券', 'sh', 'cdzq', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4851', '688323', '瑞华泰', 'sh', 'rht', '0', '0', '');
@@ -4853,7 +4853,7 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4853', '688395', '正弦电气', 'sh', 'zxdq', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4854', '001203', '大中矿业', 'sz', 'dzky', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4855', '605300', '佳禾食品', 'sh', 'jhsp', '0', '0', '');
-INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4856', '605080', '浙大自然', 'sh', 'zdzr', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4856', '605080', '浙江自然', 'sh', 'zjzr', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4857', '605305', '中际联合', 'sh', 'zjlh', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4858', '688113', '联测科技', 'sh', 'lckj', '0', '0', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4859', '603511', '爱慕股份', 'sh', 'amgf', '0', '0', '');
@@ -4884,3 +4884,15 @@ INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `sta
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4884', '159886', '机械ETF', 'sz', 'jxetf', '0', '2', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4885', '516900', '食品50ETF', 'sh', 'sp50etf', '0', '2', '');
 INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4886', '688613', '奥精医疗', 'sh', 'ajyl', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4887', '300614', '百川畅银', 'sz', 'bccy', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4888', '300992', '泰福泵业', 'sz', 'tfby', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4889', '688359', '三孚新科', 'sh', 'sfxk', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4890', '159883', '医疗器械', 'sz', 'ylqx', '0', '2', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4891', '300993', '玉马遮阳', 'sz', 'ymzy', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4892', '300995', '奇德新材', 'sz', 'qdxc', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4893', '605090', '九丰能源', 'sh', 'jfny', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4894', '516110', '汽车ETF', 'sh', 'qcetf', '0', '2', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4895', '516960', '机械ETF', 'sh', 'jxetf', '0', '2', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4896', '601665', '齐鲁银行', 'sh', 'qlyh', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4897', '603836', '海程邦达', 'sh', 'hcbd', '0', '0', '');
+INSERT INTO `stock_info` (`id`, `code`, `name`, `exchange`, `abbreviation`, `state`, `type`, `description`) VALUES ('4898', '605499', '东鹏饮料', 'sh', 'dpyl', '0', '0', '');
