@@ -125,7 +125,7 @@ CREATE TABLE `execute_info` (
 CREATE TABLE `stock_selected` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(50) NOT NULL,
-  `rate` decimal(20, 2) NOT NULL DEFAULT '0.02',
+  `rate` decimal(20, 6) NOT NULL DEFAULT '0.02',
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `description` varchar(100) NOT NULL DEFAULT '',
