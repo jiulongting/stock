@@ -12,15 +12,12 @@ http://quote.eastmoney.com/stocklist.html
 f12: 代码
 f13: 交易所 0 深交所, 1 上交所
 f14: 名称
-
+其他的返回有需要可以获取
 
 http://app.finance.ifeng.com/hq/list.php?type=stock_a&class=sa
-
-历史价格
-http://www.aigaogao.com/tools/history.html?s=000002
 
 分时
 http://mdfm.eastmoney.com/EM_UBG_MinuteApi/Js/Get?dtype=all&rows=5000&page=1&id=6009031
 
 当前数据
-http://hq.sinajs.cn/list=sz300542
+http://hq.sinajs.cn/list=sz300542,sz300059
