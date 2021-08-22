@@ -38,12 +38,13 @@ INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES 
 INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('5', 'get_orders_data', 'https://jywg.18.cn/Search/GetOrdersData?validatekey=${validatekey}', '1', '当日委托');
 INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('6', 'get_deal_data', 'https://jywg.18.cn/Search/GetDealData?validatekey=${validatekey}', '1', '当日成交');
 INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('7', 'authentication', 'https://jywg.18.cn/Login/Authentication', '1', '登录');
-INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('8', 'authentication_check', 'https://jywg.18.cn/Trade/Buy', '1', '登录验证');
-INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('9', 'get_his_deal_data', 'https://jywg.18.cn/Search/GetHisDealData?validatekey=${validatekey}', '1', '历史成交');
-INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('10', 'get_his_orders_data', 'https://jywg.18.cn/Search/GetHisOrdersData?validatekey=${validatekey}', '1', '历史委托');
-INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('11', 'get_can_buy_new_stock_list_v3', 'https://jywg.18.cn/Trade/GetCanBuyNewStockListV3?validatekey=${validatekey}', '1', '查询可申购新股列表');
-INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('12', 'get_convertible_bond_list_v2', 'https://jywg.18.cn/Trade/GetConvertibleBondListV2?validatekey=${validatekey}', '1', '查询可申购新债列表');
-INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('13', 'submit_bat_trade_v2', 'https://jywg.18.cn/Trade/SubmitBatTradeV2?validatekey=${validatekey}', '1', '批量申购');
+INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('8', 'yzm', 'https://jywg.18.cn/Login/YZM?randNum=', '1', '登录验证码');
+INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('9', 'authentication_check', 'https://jywg.18.cn/Trade/Buy', '1', '登录验证');
+INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('10', 'get_his_deal_data', 'https://jywg.18.cn/Search/GetHisDealData?validatekey=${validatekey}', '1', '历史成交');
+INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('11', 'get_his_orders_data', 'https://jywg.18.cn/Search/GetHisOrdersData?validatekey=${validatekey}', '1', '历史委托');
+INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('12', 'get_can_buy_new_stock_list_v3', 'https://jywg.18.cn/Trade/GetCanBuyNewStockListV3?validatekey=${validatekey}', '1', '查询可申购新股列表');
+INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('13', 'get_convertible_bond_list_v2', 'https://jywg.18.cn/Trade/GetConvertibleBondListV2?validatekey=${validatekey}', '1', '查询可申购新债列表');
+INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('14', 'submit_bat_trade_v2', 'https://jywg.18.cn/Trade/SubmitBatTradeV2?validatekey=${validatekey}', '1', '批量申购');
 
 INSERT INTO `trade_user` (`id`, `account_id`, `name`, `cookie`, `validate_key`, `state`) VALUES ('1', '资金账号', 'wild', '', '', '1');
 

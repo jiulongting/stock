@@ -177,6 +177,8 @@ CREATE TABLE `trade_rule` (
   `open_price` decimal(20,6) NOT NULL,
   `highest_price` decimal(20,6) NOT NULL,
   `lowest_price` decimal(20,6) NOT NULL,
+  `highest_volume` decimal(20,6) NOT NULL DEFAULT '100000000',
+  `lowest_volume` decimal(20,6) NOT NULL DEFAULT '0',
   `state` tinyint(4) unsigned NOT NULL DEFAULT '1',
   `description` varchar(100) NOT NULL DEFAULT '',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
