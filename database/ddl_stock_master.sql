@@ -145,8 +145,8 @@ CREATE TABLE `robot` (
 
 CREATE TABLE `trade_user` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
   `account_id` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
   `cookie` varchar(500) NOT NULL,
   `validate_key` varchar(50) NOT NULL,
   `state` tinyint(4) unsigned NOT NULL DEFAULT '1',

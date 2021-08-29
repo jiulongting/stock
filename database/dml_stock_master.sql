@@ -4,32 +4,26 @@ INSERT INTO `system_config` (`id`, `name`, `value1`, `value2`, `value3`, `state`
 INSERT INTO `system_config` (`id`, `name`, `value1`, `value2`, `value3`, `state`) VALUES ('2', 'apply_new_convertible_bond', '1', '', '', '1');
 
 INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('1', 'begin_of_year', '1', 'begin of year');
-INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('2', 'end_of_year', '1', 'end of year');
-INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('3', 'begin_of_day', '1', 'begin of day');
-INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('4', 'end_of_day', '1', 'end of day');
-INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('5', 'update_of_stock', '1', 'update of stock');
-INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('6', 'update_of_stock_state', '1', 'update of stock state');
-INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('7', 'update_of_daily_index', '1', 'update of daily index');
-INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('8', 'ticker', '1', 'ticker');
-INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('9', 'trade_ticker', '1', 'trade ticker');
-INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('10', 'apply_new_stock', '1', 'apply new stock');
+INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('2', 'begin_of_day', '1', 'begin of day');
+INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('3', 'update_of_stock', '1', 'update of stock');
+INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('4', 'update_of_daily_index', '1', 'update of daily index');
+INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('5', 'ticker', '1', 'ticker');
+INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('6', 'trade_ticker', '1', 'trade ticker');
+INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('7', 'apply_new_stock', '1', 'apply new stock');
+INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('8', 'auto_login', '1', 'auto login');
 
 INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('1', '1', '2');
-INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('2', '2', '0');
+INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('2', '2', '2');
 INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('3', '3', '2');
-INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('4', '4', '0');
+INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('4', '4', '2');
 INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('5', '5', '2');
-INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('6', '6', '0');
+INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('6', '6', '2');
 INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('7', '7', '2');
 INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('8', '8', '2');
-INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('9', '9', '0');
-INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('10', '10', '2');
 
 INSERT INTO `robot` (`id`, `type`, `webhook`, `state`) VALUES ('1', '0', 'http://webhook', '1');
 
-INSERT INTO `stock_selected` (`id`, `code`, `rate`) VALUES ('1', '601456', '0.02');
-INSERT INTO `stock_selected` (`id`, `code`, `rate`) VALUES ('2', '601688', '0.02');
-INSERT INTO `stock_selected` (`id`, `code`, `rate`) VALUES ('3', '300059', '0.02');
+INSERT INTO `stock_selected` (`id`, `code`, `rate`) VALUES ('1', '300059', '0.02');
 
 INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('1', 'get_asserts', 'https://jywg.18.cn/Com/GetAssetsEx?validatekey=${validatekey}', '1', '我的资产');
 INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('2', 'submit', 'https://jywg.18.cn/Trade/SubmitTradeV2?validatekey=${validatekey}', '1', '提交挂单');
@@ -46,7 +40,7 @@ INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES 
 INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('13', 'get_convertible_bond_list_v2', 'https://jywg.18.cn/Trade/GetConvertibleBondListV2?validatekey=${validatekey}', '1', '查询可申购新债列表');
 INSERT INTO `trade_method` (`id`, `name`, `url`, `state`, `description`) VALUES ('14', 'submit_bat_trade_v2', 'https://jywg.18.cn/Trade/SubmitBatTradeV2?validatekey=${validatekey}', '1', '批量申购');
 
-INSERT INTO `trade_user` (`id`, `account_id`, `name`, `cookie`, `validate_key`, `state`) VALUES ('1', '资金账号', 'wild', '', '', '1');
+INSERT INTO `trade_user` (`id`, `account_id`, `password`, `cookie`, `validate_key`, `state`) VALUES ('1', '资金账号', '登录密码', '', '', '1');
 
 INSERT INTO `trade_rule` (`id`, `stock_code`, `strategy_id`, `user_id`, `type`, `value`, `volume`, `open_price`, `highest_price`, `lowest_price`, `state`, `description`) VALUES ('1', '300059', '1', '1', '1', '1.000000', '300', '31', '40.000000', '30.000000', '0', '');
 
