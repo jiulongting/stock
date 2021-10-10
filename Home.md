@@ -21,3 +21,6 @@ http://mdfm.eastmoney.com/EM_UBG_MinuteApi/Js/Get?dtype=all&rows=5000&page=1&id=
 
 当前数据
 http://hq.sinajs.cn/list=sz300542,sz300059
+
+历史行情
+https://www.aigaogao.com/tools/history.html
