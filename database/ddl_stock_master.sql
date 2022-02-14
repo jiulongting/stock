@@ -81,8 +81,7 @@ CREATE TABLE `stock_log` (
 
 CREATE TABLE `daily_index` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `stock_info_id` int(11) unsigned NOT NULL,
-  `date` date NOT NULL,
+  `code` varchar(50) NOT NULL,
   `pre_closing_price` decimal(20, 2) NOT NULL,
   `opening_price` decimal(20, 2) NOT NULL,
   `highest_price` decimal(20, 2) NOT NULL,
@@ -90,10 +89,11 @@ CREATE TABLE `daily_index` (
   `closing_price` decimal(20, 2) NOT NULL,
   `trading_volume` bigint NOT NULL,
   `trading_value` decimal(20, 2) NOT NULL,
+  `rurnover_rate` decimal(20, 2) NOT NULL,
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `ik_stock_info_id` (`stock_info_id`)
+  KEY `ik_code` (`code`)
 ) ENGINE=InnoDB;
 
 CREATE TABLE `task` (
