@@ -82,6 +82,7 @@ CREATE TABLE `stock_log` (
 CREATE TABLE `daily_index` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(50) NOT NULL,
+  `date` date NOT NULL,
   `pre_closing_price` decimal(20, 2) NOT NULL,
   `opening_price` decimal(20, 2) NOT NULL,
   `highest_price` decimal(20, 2) NOT NULL,
