@@ -1,4 +1,4 @@
-列表
+列表和实时数据
 http://quote.eastmoney.com/stocklist.html
 
 参数 fs 说明
@@ -27,7 +27,7 @@ f21: 流通市值
 
 其他的返回有需要可以获取
 
-当前数据
+当前数据: 不包括换手, 假如需要换手可以换上面东财的接口
 http://hq.sinajs.cn/list=sz300542,sz300059
 
 历史行情
