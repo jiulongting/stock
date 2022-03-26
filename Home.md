@@ -16,12 +16,19 @@ http://20.push2.eastmoney.com/api/qt/clist/get?pn=1&pz=1&np=1&fid=f3&fields=f1,f
 f2: 收盘
 f3: 跌幅
 f4: 涨跌
+f5: 成交量
+f6: 成交额
+f7: 振幅
 f8: 换手
 f9: 市盈率
 f10: 量比
 f12: 代码
 f13: 交易所 0 深交所或北交所, 1 上交所
 f14: 名称
+f15: 最高
+f16: 最低
+f17: 今开
+f18: 昨收
 f20: 总市值
 f21: 流通市值
 
