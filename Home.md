@@ -11,7 +11,6 @@ http://quote.eastmoney.com/stocklist.html
 
 例如
 http://20.push2.eastmoney.com/api/qt/clist/get?pn=1&pz=10000&np=1&fid=f3&fields=f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f12,f13,f14,f15,f16,f17,f18,f20,f21,f23,f24,f25,f22,f11,f62,f128,f136,f115,f152&fs=m:0+t:6,m:0+t:13,m:0+t:80,m:0+t:81+s:2048,m:1+t:2,m:1+t:23,b:MK0021,b:MK0022,b:MK0023,b:MK0024
-http://20.push2.eastmoney.com/api/qt/clist/get?pn=1&pz=10000&np=1&fid=f3&fields=f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f12,f13,f14,f15,f16,f17,f18,f20,f21,f23,f24,f25,f22,f11,f62,f128,f136,f115,f152&fs=m:0+t:6,m:0+t:13,m:0+t:81+s:2048,m:1+t:2,m:1+t:23,b:MK0021,b:MK0022,b:MK0023,b:MK0024
 
 返回说明
 f2: 收盘
@@ -35,7 +34,7 @@ f21: 流通市值
 
 其他的返回有需要可以获取
 
-当前数据: 不包括换手, 假如需要换手可以换上面东财的接口
+当前数据: 多个股票按,分隔, 不包括换手, 假如需要换手可以换上面东财的接口
 http://hq.sinajs.cn/list=sz300542,sz300059
 
 历史行情
