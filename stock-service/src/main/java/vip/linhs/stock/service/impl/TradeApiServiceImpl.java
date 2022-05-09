@@ -145,7 +145,7 @@ public class TradeApiServiceImpl extends AbstractTradeApiService {
         }
 
         String content;
-        if (systemConfigService.isMock()) {
+        if (systemConfigService.isMock()) {//判断是否模拟交易1代表模拟交易
             content = getMockData(request);
         } else {
             if (isSendList) {

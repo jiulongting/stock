@@ -98,7 +98,7 @@ public class ScheduledTasks {
     }
 
     /**
-     * ticker
+     * ticker: 价格提醒
      */
     @Scheduled(cron = "0,15,30,45 * 9,10,11,13,14 ? * MON-FRI")
     public void runTicker() {
@@ -116,7 +116,7 @@ public class ScheduledTasks {
     }
 
     /**
-     * apply new stock
+     * apply_new_stock: 申购新股
      */
     @Scheduled(cron = "0 1 10,14 ? * MON-FRI")
     public void applyNewStock() {

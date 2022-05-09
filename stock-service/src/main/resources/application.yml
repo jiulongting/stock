@@ -5,23 +5,23 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/stock_master?useSSL=false&characterEncoding=utf-8&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
     username: root
-    password: IamWild!@#123
+    password: zjl005
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
-    host: localhost
+    host: 127.0.0.1
     port: 6379
     timeout: 1000
     database: 0
 
 ocr:
-  service: aliyunOcrService
+  service: chaojiyingOcrService
   third:
     aliyun:
       appcode:
     chaojiying:
-      user:
-      pass:
-      softid: 000000
+      user: jiulongting
+      pass: zjl005
+      softid: 933062
 
 logging:
   file:

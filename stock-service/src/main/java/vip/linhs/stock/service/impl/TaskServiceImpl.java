@@ -298,6 +298,7 @@ public class TaskServiceImpl implements TaskService {
         PageParam pageParam = new PageParam();
         pageParam.setStart(0);
         pageParam.setLength(Integer.MAX_VALUE);
+        //获取自动交易的股票，并匹配对应的策略。
         PageVo<TradeRuleVo> pageVo = tradeService.getTradeRuleList(pageParam);
 
         pageVo.getData().forEach(v -> {
@@ -305,6 +306,7 @@ public class TaskServiceImpl implements TaskService {
                 String beanName = v.getStrategyBeanName();
                 StrategyHandler strategyHandler = SpringUtil.getBean(beanName, StrategyHandler.class);
                 try {
+                    //执行对应的策略
                     strategyHandler.handle(v);
                 } catch (Exception e) {
                     logger.error("strategyHandler {} {} error", v.getStockCode(), v.getStrategyName(), e);

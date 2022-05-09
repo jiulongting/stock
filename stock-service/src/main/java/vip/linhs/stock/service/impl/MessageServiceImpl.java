@@ -15,6 +15,7 @@ import vip.linhs.stock.model.po.Robot;
 import vip.linhs.stock.service.MessageService;
 import vip.linhs.stock.service.RobotService;
 import vip.linhs.stock.util.HttpUtil;
+import vip.linhs.stock.util.MailUtils;
 import vip.linhs.stock.util.StockConsts;
 
 @Service
@@ -57,8 +58,9 @@ public class MessageServiceImpl implements MessageService {
                     ? buildTextMessageParams(message.getBody())
                     : buildMarkdownMessageParams(title, message.getBody());
             MessageServiceImpl.logger.info("send message content: {}", params);
-            String result = HttpUtil.sendPostJson(httpClient, message.getTarget(), params);
-            MessageServiceImpl.logger.info("send message result: {}", result);
+            //String result = HttpUtil.sendGet(httpClient, message.getTarget() + "?title=" + title + "&desp=" + body, "UTF-8");
+            boolean res = MailUtils.sendMail("945659921@qq.com", title == null ? body : title, body);
+            MessageServiceImpl.logger.info("send message result 发送 {}", res?"成功":"失败");
         } catch (Exception e) {
             MessageServiceImpl.logger.error("send message error", e);
         }
@@ -70,7 +72,7 @@ public class MessageServiceImpl implements MessageService {
 
         HashMap<String, Object> params = new HashMap<>();
         params.put("msgtype", "text");
-        params.put("text", text);
+        params.put("desp", text);
 
         return params;
     }

@@ -59,20 +59,22 @@ public class GridStrategyHandler extends BaseStrategyHandler<GridStrategyInput, 
 
     @Override
     public GridStrategyInput queryInput(TradeRuleVo tradeRuleVo) {
+        //获取当日成交
         TradeResultVo<GetDealDataResponse> dealData = tradeApiService.getDealData(new GetDealDataRequest(tradeRuleVo.getUserId()));
         if (!dealData.isSuccess()) {
             throw new ServiceException("execute GridStrategyHandler get deal error: " + dealData.getMessage());
         }
-
+        //获取当日委托
         TradeResultVo<GetOrdersDataResponse> orderData = tradeApiService.getOrdersData(new GetOrdersDataRequest(tradeRuleVo.getUserId()));
         if (!orderData.isSuccess()) {
             throw new ServiceException("execute GridStrategyHandler get order error: " + dealData.getMessage());
         }
 
+        //从当日成交中过滤出自动交易股票的成交
         List<GetDealDataResponse> dealDataList = TradeUtil.mergeDealList(dealData.getData()
                 .stream().filter(v -> v.getZqdm().equals(tradeRuleVo.getStockCode())).collect(Collectors.toList()));
 
-        // 30 day, yibao yicheng
+        // 30 day, yibao yicheng 从trade_order获取交易记录
         List<TradeOrder> tradeOrderList = tradeService.getLastTradeOrderListByRuleId(tradeRuleVo.getId());
 
         updateTradeState(tradeOrderList, dealDataList, orderData.getData());

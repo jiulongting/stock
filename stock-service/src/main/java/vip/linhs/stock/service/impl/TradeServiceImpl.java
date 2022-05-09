@@ -207,8 +207,9 @@ public class TradeServiceImpl implements TradeService {
 
     @Override
     public PageVo<TradeRuleVo> getTradeRuleList(PageParam pageParam) {
+        //获取trade_rule（自动交易的股票）表的所有数据
         PageVo<TradeRule> pageVo = tradeRuleDao.get(pageParam);
-
+        //获取trade_strategy（交易策略）所有数据,目前仅有网格策略
         List<TradeStrategy> strategyList = tradeStrategyDao.getAll();
         List<TradeRule> list = pageVo.getData();
 

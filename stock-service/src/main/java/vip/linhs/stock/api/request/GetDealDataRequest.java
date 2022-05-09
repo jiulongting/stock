@@ -8,6 +8,7 @@ public class GetDealDataRequest extends BaseTradeRequest {
 
     @Override
     public String getMethod() {
+        //当日成交
         return BaseTradeRequest.TradeRequestMethod.GetDealDataRequest.value();
     }
 
