@@ -22,6 +22,11 @@ public class ReportController extends BaseController {
         return stockService.getStockList(pageParam);
     }
 
+    @RequestMapping("selectStockList")
+    public PageVo<StockInfo> getSelectStockList(PageParam pageParam) {
+        return stockService.getStockList(pageParam);
+    }
+
     @RequestMapping("dailyIndexList")
     public PageVo<DailyIndexVo> getDailyIndexList(PageParam pageParam) {
         return stockService.getDailyIndexList(pageParam);

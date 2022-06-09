@@ -25,6 +25,7 @@ public class DailyIndexDaoImpl extends BaseDao implements DailyIndexDao {
 
     @Override
     public void save(List<DailyIndex> list) {
+
         jdbcTemplate.batchUpdate(DailyIndexDaoImpl.INSERT_SQL, list, list.size(),
                 DailyIndexDaoImpl::setArgument);
     }

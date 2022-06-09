@@ -106,6 +106,9 @@ public class TaskServiceImpl implements TaskService {
             case AutoLogin:
                 autoLogin();
                 break;
+            case UpdateOfStockInfo:
+                updateOfStockInfo();
+                break;
             default:
                 break;
             }
@@ -119,6 +122,11 @@ public class TaskServiceImpl implements TaskService {
 
         executeInfo.setCompleteTime(new Date());
         executeInfoDao.update(executeInfo);
+    }
+
+    private void updateOfStockInfo() {
+        //stockService.fixDailyIndex(Integer.parseInt(DateFormatUtils.format(new Date(), "yyyyMM")), null);
+        stockService.fixDailyIndex(202206, null);
     }
 
     private void autoLogin() {
