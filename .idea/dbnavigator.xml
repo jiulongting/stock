@@ -18,6 +18,7 @@
       <destination value="FILE" />
       <format value="EXCEL" />
       <charset value="UTF-8" />
+      <charset value="UTF-8" />
     </export-instructions>
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
@@ -28,7 +29,11 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="7ec45d18-d637-4b33-a90b-a84cf75f7ae7">
-      <console name="Connection 1" type="STANDARD" schema="stock_master" session="Main"><![CDATA[select * from trade_user
+      <console name="Connection 1" type="STANDARD" schema="stock_master" session="Main"><![CDATA[select * from user
+
+update stock_master.trade_rule set value='0.006' where id=1
+
+select * from trade_user
 select id, type, webhook, state from robot
 update robot set webhook='https://sctapi.ftqq.com/SCT84190To7lZtN3gtC3C9K2nsI1UHAGc.send' where id=1;
 commit;
@@ -43,17 +48,236 @@ select id as id, name as name, bean_name as beanName, state as state, create_tim
 
 select id, rule_id as ruleId, stock_code as stockCode, entrust_code as entrustCode, deal_code as dealCode, related_deal_code as relatedDealCode, price, volume, trade_type as tradeType, trade_state as tradeState, trade_time as tradeTime, state, create_time as createTime, update_time as updateTime from trade_order]]></console>
     </connection>
+    <connection id="1636b64b-770a-495d-bde8-1c716d8c2b61">
+      <console name="122.9.129.71" type="STANDARD" schema="stock_master" session="Main"><![CDATA[-- DROP DATABASE IF EXISTS `stock_master`;
+-- CREATE DATABASE `stock_master` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+DROP TABLE IF EXISTS `system_config`;
+DROP TABLE IF EXISTS `holiday_calendar`;
+DROP TABLE IF EXISTS `robot`;
+DROP TABLE IF EXISTS `stock_selected`;
+DROP TABLE IF EXISTS `stock_info`;
+DROP TABLE IF EXISTS `stock_log`;
+DROP TABLE IF EXISTS `daily_index`;
+DROP TABLE IF EXISTS `execute_info`;
+DROP TABLE IF EXISTS `task`;
+DROP TABLE IF EXISTS `trade_user`;
+DROP TABLE IF EXISTS `trade_method`;
+DROP TABLE IF EXISTS `trade_rule`;
+DROP TABLE IF EXISTS `trade_order`;
+DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `trade_strategy`;
+CREATE TABLE `system_config` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `value1` varchar(100) NOT NULL,
+  `value2` varchar(100) NOT NULL DEFAULT '',
+  `value3` varchar(100) NOT NULL DEFAULT '',
+  `state` tinyint(4) unsigned NOT NULL DEFAULT '1',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
+
+CREATE TABLE `user` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL NOT NULL DEFAULT '',
+  `mobile` varchar(50) NOT NULL DEFAULT '',
+  `email` varchar(50) NOT NULL DEFAULT '',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_username` (`username`)
+) ENGINE = InnoDB;
+
+CREATE TABLE `holiday_calendar` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_date` (`date`)
+) ENGINE = InnoDB;
+CREATE TABLE `stock_info` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `code` varchar(6) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `exchange` varchar(2) NOT NULL,
+  `abbreviation` varchar(50) NOT NULL,
+  `state` tinyint(4) unsigned NOT NULL DEFAULT '0',
+  `type` tinyint(4) unsigned NOT NULL DEFAULT '0',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `description` varchar(100) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_exchange_code` (`exchange`, `code`)
+) ENGINE = InnoDB;
+CREATE TABLE `stock_log` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `stock_info_id` int(11) unsigned NOT NULL,
+  `date` date NOT NULL,
+  `type` tinyint(4) unsigned NOT NULL,
+  `old_value` varchar(50) NOT NULL DEFAULT '',
+  `new_value` varchar(50) NOT NULL DEFAULT '',
+  `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `description` varchar(100) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
+CREATE TABLE `daily_index` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) NOT NULL,
+  `date` date NOT NULL,
+  `pre_closing_price` decimal(20, 2) NOT NULL,
+  `opening_price` decimal(20, 2) NOT NULL,
+  `highest_price` decimal(20, 2) NOT NULL,
+  `lowest_price` decimal(20, 2) NOT NULL,
+  `closing_price` decimal(20, 2) NOT NULL,
+  `trading_volume` bigint NOT NULL,
+  `trading_value` decimal(20, 2) NOT NULL,
+  `rurnover_rate` decimal(20, 2) NOT NULL,
+  `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `ik_code` (`code`)
+) ENGINE = InnoDB;
+CREATE TABLE `task` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `state` tinyint(4) unsigned NOT NULL,
+  `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `description` varchar(100) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_name` (`name`)
+) ENGINE = InnoDB;
+CREATE TABLE `execute_info` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `task_id` int(11) unsigned NOT NULL,
+  `start_time` DATETIME DEFAULT NULL,
+  `complete_time` DATETIME DEFAULT NULL,
+  `params_str` varchar(200) NOT NULL DEFAULT '',
+  `is_manual` tinyint(4) unsigned NOT NULL DEFAULT '0',
+  `state` tinyint(4) unsigned NOT NULL DEFAULT '0',
+  `message` varchar(500) DEFAULT NULL,
+  `create_user_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
+CREATE TABLE `stock_selected` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) NOT NULL,
+  `rate` decimal(20, 6) NOT NULL DEFAULT '0.02',
+  `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `description` varchar(100) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
+CREATE TABLE `robot` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `type` tinyint(4) unsigned NOT NULL DEFAULT '0',
+  `webhook` varchar(200) NOT NULL DEFAULT '',
+  `state` tinyint(4) unsigned NOT NULL DEFAULT '0',
+  `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `description` varchar(100) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
+CREATE TABLE `trade_user` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `account_id` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `cookie` varchar(500) NOT NULL,
+  `validate_key` varchar(50) NOT NULL,
+  `state` tinyint(4) unsigned NOT NULL DEFAULT '1',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
+CREATE TABLE `trade_method` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `url` varchar(100) NOT NULL,
+  `state` tinyint(4) unsigned NOT NULL DEFAULT '1',
+  `description` varchar(100) NOT NULL DEFAULT '',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
+CREATE TABLE `trade_rule` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `stock_code` varchar(50) NOT NULL,
+  `strategy_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL DEFAULT '1',
+  `type` tinyint(4) unsigned NOT NULL DEFAULT '0',
+  `value` decimal(20, 6) NOT NULL,
+  `volume` int(11) unsigned NOT NULL,
+  `open_price` decimal(20, 6) NOT NULL,
+  `highest_price` decimal(20, 6) NOT NULL,
+  `lowest_price` decimal(20, 6) NOT NULL,
+  `highest_volume` decimal(20, 6) NOT NULL DEFAULT '100000000',
+  `lowest_volume` decimal(20, 6) NOT NULL DEFAULT '0',
+  `state` tinyint(4) unsigned NOT NULL DEFAULT '1',
+  `description` varchar(100) NOT NULL DEFAULT '',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
+CREATE TABLE `trade_order` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `rule_id` int(11) unsigned NOT NULL,
+  `stock_code` varchar(50) NOT NULL,
+  `entrust_code` varchar(50) NOT NULL,
+  `deal_code` varchar(50) NOT NULL,
+  `related_deal_code` varchar(50) NOT NULL,
+  `price` decimal(20, 2) NOT NULL,
+  `volume` int(11) unsigned NOT NULL,
+  `trade_type` varchar(50) NOT NULL,
+  `trade_state` varchar(50) NOT NULL DEFAULT 'YIBAO',
+  `trade_time` timestamp NOT NULL,
+  `state` tinyint(4) unsigned NOT NULL DEFAULT '1',
+  `user_id` int(11) unsigned NOT NULL DEFAULT '1',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
+CREATE TABLE `trade_strategy` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `bean_name` varchar(50) NOT NULL,
+  `state` tinyint(4) unsigned NOT NULL DEFAULT '0',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_name` (`name`)
+) ENGINE = InnoDB;
+CREATE TABLE `trade_deal` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `stock_code` varchar(50) NOT NULL,
+  `deal_code` varchar(50) NOT NULL,
+  `price` decimal(20, 2) NOT NULL,
+  `volume` int(11) unsigned NOT NULL,
+  `trade_type` varchar(50) NOT NULL,
+  `trade_time` timestamp NOT NULL,
+  `user_id` int(11) unsigned NOT NULL DEFAULT '1',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB;]]></console>
+    </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="7ec45d18-d637-4b33-a90b-a84cf75f7ae7" object-ref="consoles/Connection 1" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="7ec45d18-d637-4b33-a90b-a84cf75f7ae7" />
+    <connection id="1636b64b-770a-495d-bde8-1c716d8c2b61" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="7ec45d18-d637-4b33-a90b-a84cf75f7ae7" dataset="stock_master.trade_user" active-filter-id="" />
+    <filter-actions connection-id="7ec45d18-d637-4b33-a90b-a84cf75f7ae7" dataset="stock_master.trade_rule" active-filter-id="" />
     <filter-actions connection-id="7ec45d18-d637-4b33-a90b-a84cf75f7ae7" dataset="stock_master.user" active-filter-id="" />
     <filter-actions connection-id="7ec45d18-d637-4b33-a90b-a84cf75f7ae7" dataset="stock_master.daily_index" active-filter-id="" />
   </component>
@@ -142,7 +366,91 @@ select id, rule_id as ruleId, stock_code as stockCode, entrust_code as entrustCo
           <alternative-statement-delimiter value="" />
         </details>
         <object-filters hide-empty-schemas="false" hide-pseudo-columns="false">
-          <object-type-filter use-master-settings="true">
+          <object-type-filter>
+            <object-type name="SCHEMA" enabled="true" />
+            <object-type name="USER" enabled="true" />
+            <object-type name="ROLE" enabled="true" />
+            <object-type name="PRIVILEGE" enabled="true" />
+            <object-type name="CHARSET" enabled="true" />
+            <object-type name="TABLE" enabled="true" />
+            <object-type name="VIEW" enabled="true" />
+            <object-type name="MATERIALIZED_VIEW" enabled="true" />
+            <object-type name="NESTED_TABLE" enabled="true" />
+            <object-type name="COLUMN" enabled="true" />
+            <object-type name="INDEX" enabled="true" />
+            <object-type name="CONSTRAINT" enabled="true" />
+            <object-type name="DATASET_TRIGGER" enabled="true" />
+            <object-type name="DATABASE_TRIGGER" enabled="true" />
+            <object-type name="SYNONYM" enabled="true" />
+            <object-type name="SEQUENCE" enabled="true" />
+            <object-type name="PROCEDURE" enabled="true" />
+            <object-type name="FUNCTION" enabled="true" />
+            <object-type name="PACKAGE" enabled="true" />
+            <object-type name="TYPE" enabled="true" />
+            <object-type name="TYPE_ATTRIBUTE" enabled="true" />
+            <object-type name="ARGUMENT" enabled="true" />
+            <object-type name="DIMENSION" enabled="true" />
+            <object-type name="CLUSTER" enabled="true" />
+            <object-type name="DBLINK" enabled="true" />
+          </object-type-filter>
+          <object-name-filters />
+        </object-filters>
+      </connection>
+      <connection id="1636b64b-770a-495d-bde8-1c716d8c2b61" active="true" signed="false">
+        <database>
+          <name value="122.9.129.71" />
+          <description value="" />
+          <database-type value="MYSQL" />
+          <config-type value="BASIC" />
+          <database-version value="8.0" />
+          <driver-source value="BUILTIN" />
+          <driver-library value="" />
+          <driver value="" />
+          <url-type value="DATABASE" />
+          <host value="122.9.129.71" />
+          <port value="3306" />
+          <database value="mysql" />
+          <type value="USER_PASSWORD" />
+          <user value="jiulong" />
+          <deprecated-pwd value="empsMDA1" />
+        </database>
+        <properties>
+          <auto-commit value="true" />
+        </properties>
+        <ssh-settings>
+          <active value="false" />
+          <proxy-host value="" />
+          <proxy-port value="22" />
+          <proxy-user value="" />
+          <deprecated-proxy-pwd value="" />
+          <auth-type value="PASSWORD" />
+          <key-file value="" />
+          <key-passphrase value="" />
+        </ssh-settings>
+        <ssl-settings>
+          <active value="false" />
+          <certificate-authority-file value="" />
+          <client-certificate-file value="" />
+          <client-key-file value="" />
+        </ssl-settings>
+        <details>
+          <charset value="UTF-8" />
+          <session-management value="true" />
+          <ddl-file-binding value="true" />
+          <database-logging value="true" />
+          <connect-automatically value="true" />
+          <restore-workspace value="true" />
+          <restore-workspace-deep value="false" />
+          <environment-type value="default" />
+          <connectivity-timeout value="5" />
+          <idle-time-to-disconnect value="30" />
+          <idle-time-to-disconnect-pool value="5" />
+          <credential-expiry-time value="10" />
+          <max-connection-pool-size value="7" />
+          <alternative-statement-delimiter value="" />
+        </details>
+        <object-filters hide-empty-schemas="false" hide-pseudo-columns="false">
+          <object-type-filter>
             <object-type name="SCHEMA" enabled="true" />
             <object-type name="USER" enabled="true" />
             <object-type name="ROLE" enabled="true" />
