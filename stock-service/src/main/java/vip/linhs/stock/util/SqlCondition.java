@@ -1,10 +1,6 @@
 package vip.linhs.stock.util;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import org.springframework.util.StringUtils;
 
@@ -13,10 +9,16 @@ public class SqlCondition {
     private StringBuilder sqlString;
     private Map<String, Object> params;
     private List<Object> objList = new ArrayList<>();
+    private Map<String, Object> notEquals = new HashMap<>();
+    private Map<String, Object> stringGE = new HashMap<>();
+    private Map<String, Object> stringLE = new HashMap<>();
 
-    public SqlCondition(String sqlString, Map<String, Object> params) {
+    public SqlCondition(String sqlString, Map<String, Object> params, Map<String, Object> notEquals, Map<String, Object> stringGE, Map<String, Object> stringLE) {
         this.sqlString = new StringBuilder(sqlString);
         this.params = params;
+        this.stringGE = stringGE;
+        this.notEquals = notEquals;
+        this.stringLE = stringLE;
     }
 
     public SqlCondition(String sqlString, Map<String, Object> params, List<Object> objList) {
@@ -41,7 +43,7 @@ public class SqlCondition {
      * 新增字符串查询条件(等价于 != )
      */
     public SqlCondition addStringNotEquals(String key, String column) {
-        String value = Objects.toString(params.get(key), null);
+        String value = Objects.toString(notEquals.get(key), null);
         if (StringUtils.hasLength(value)) {
             sqlString.append(String.format(" and %s <> ? ", column));
             objList.add(value);
@@ -64,7 +66,7 @@ public class SqlCondition {
      * 新增字符串查询条件(等价于 >= )
      */
     public SqlCondition addStringGE(String key, String column) {
-        String value = Objects.toString(params.get(key), null);
+        String value = Objects.toString(stringGE.get(key), null);
         if (StringUtils.hasLength(value)) {
             sqlString.append(String.format(" and %s >= ? ", column));
             objList.add(value);
@@ -76,7 +78,7 @@ public class SqlCondition {
      * 新增字符串查询条件(等价于 <= )
      */
     public SqlCondition addStringLE(String key, String column) {
-        String value = Objects.toString(params.get(key), null);
+        String value = Objects.toString(stringLE.get(key), null);
         if (StringUtils.hasLength(value)) {
             sqlString.append(String.format(" and %s <= ? ", column));
             objList.add(value);
@@ -154,4 +156,27 @@ public class SqlCondition {
         return objList;
     }
 
+    public Map<String, Object> getNotEquals() {
+        return notEquals;
+    }
+
+    public void setNotEquals(Map<String, Object> notEquals) {
+        this.notEquals = notEquals;
+    }
+
+    public Map<String, Object> getStringGE() {
+        return stringGE;
+    }
+
+    public void setStringGE(Map<String, Object> stringGE) {
+        this.stringGE = stringGE;
+    }
+
+    public Map<String, Object> getStringLE() {
+        return stringLE;
+    }
+
+    public void setStringLE(Map<String, Object> stringLE) {
+        this.stringLE = stringLE;
+    }
 }

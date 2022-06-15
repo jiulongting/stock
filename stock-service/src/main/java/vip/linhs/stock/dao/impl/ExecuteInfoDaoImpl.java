@@ -42,7 +42,7 @@ public class ExecuteInfoDaoImpl extends BaseDao implements ExecuteInfoDao {
     public PageVo<TaskVo> get(PageParam pageParam) {
         SqlCondition dataSqlCondition = new SqlCondition(
                 "select e.id, t.name, e.state, t.description, e.start_time as startTime, e.complete_time as completeTime from execute_info e, task t where e.task_id = t.id",
-                pageParam.getCondition());
+                pageParam.getCondition(), pageParam.getNotEquals(), pageParam.getStringGE(), pageParam.getStringLE());
 
         int totalRecords = jdbcTemplate.queryForObject(dataSqlCondition.getCountSql(), Integer.class,
                 dataSqlCondition.toArgs());

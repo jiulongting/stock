@@ -49,19 +49,25 @@ select id as id, name as name, bean_name as beanName, state as state, create_tim
 select id, rule_id as ruleId, stock_code as stockCode, entrust_code as entrustCode, deal_code as dealCode, related_deal_code as relatedDealCode, price, volume, trade_type as tradeType, trade_state as tradeState, trade_time as tradeTime, state, create_time as createTime, update_time as updateTime from trade_order]]></console>
     </connection>
     <connection id="1636b64b-770a-495d-bde8-1c716d8c2b61">
-      <console name="122.9.129.71" type="STANDARD" schema="stock_master" session="Main"><![CDATA[select * from daily_index where code='sh688311'
+      <console name="122.9.129.71" type="STANDARD" schema="stock_master" session="Main"><![CDATA[select * from daily_index where  code='sh600207' and date >= '2022-5-1'
+select s.name, s.abbreviation, d.code, d.date, d.pre_closing_price as preClosingPrice, d.closing_price as closingPrice, d.lowest_price as lowestPrice, d.highest_price as highestPrice, d.opening_price as openingPrice, d.trading_value as tradingValue, d.trading_volume as tradingVolume, d.rurnover_rate as rurnoverRate from daily_index d, stock_info s where d.code = concat(s.exchange, s.code) and d.code = 'sh688311'  and date >='2022-5-1'  order by date desc  
+
 
 select * from execute_info
 
 select * from task
+select * from stock_info where name='安彩高科'
 select count(1) from daily_index
-select * from daily_index order by update_time desc 
+
+select * from daily_index  where code='sh603131' limit 0,100 order by date desc 
 
 insert into task (name,state,description) values ('update_of_stock_info',1,'获取股票历史数据')
 
 insert into execute_info (task_id) values (9)
 
-update]]></console>
+alter table daily_index add unique index(code,date)
+
+truncate table daily_index]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

@@ -1,10 +1,13 @@
 package vip.linhs.stock.service.impl;
 
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import vip.linhs.stock.StockApplication;
 import vip.linhs.stock.model.po.DailyIndex;
 import vip.linhs.stock.model.po.StockInfo;
 import vip.linhs.stock.parser.DailyIndexParser;
@@ -22,6 +25,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class StockCrawlerServiceImpl implements StockCrawlerService {
+    private static final Logger logger = LoggerFactory.getLogger(StockCrawlerServiceImpl.class);
 
     @Autowired
     private CloseableHttpClient httpClient;
@@ -86,11 +90,13 @@ public class StockCrawlerServiceImpl implements StockCrawlerService {
 
     @Override
     public String getHistoryDailyIndexsString(String code) {
+        logger.info("http://www.aigaogao.com/tools/history.html?s=" + code, "gbk");
         return HttpUtil.sendGet(httpClient, "http://www.aigaogao.com/tools/history.html?s=" + code, "gbk");
     }
 
     @Override
     public String getHistoryDailyIndexsStringFrom163(String code, int year, int season) {
+        logger.info(String.format("https://quotes.money.163.com/trade/lsjysj_%s.html?year=%d&season=%d", code, year, season));
         return HttpUtil.sendGet(httpClient, String.format("https://quotes.money.163.com/trade/lsjysj_%s.html?year=%d&season=%d", code, year, season));
     }
 

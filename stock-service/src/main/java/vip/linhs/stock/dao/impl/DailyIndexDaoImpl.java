@@ -6,6 +6,8 @@ import java.sql.Types;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.StatementCreatorUtils;
 import org.springframework.stereotype.Repository;
@@ -16,10 +18,12 @@ import vip.linhs.stock.model.po.DailyIndex;
 import vip.linhs.stock.model.vo.DailyIndexVo;
 import vip.linhs.stock.model.vo.PageParam;
 import vip.linhs.stock.model.vo.PageVo;
+import vip.linhs.stock.scheduled.ScheduledTasks;
 import vip.linhs.stock.util.SqlCondition;
 
 @Repository
 public class DailyIndexDaoImpl extends BaseDao implements DailyIndexDao {
+    private final Logger logger = LoggerFactory.getLogger(DailyIndexDaoImpl.class);
 
     private static final String INSERT_SQL = "insert into daily_index(code, date, opening_price, pre_closing_price, highest_price, closing_price, lowest_price, trading_volume, trading_value, rurnover_rate) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -48,20 +52,32 @@ public class DailyIndexDaoImpl extends BaseDao implements DailyIndexDao {
     @Override
     public PageVo<DailyIndexVo> getDailyIndexList(PageParam pageParam) {
         String sql = "select"
-            + " s.name, s.abbreviation, d.code, d.date, d.pre_closing_price as preClosingPrice,"
-            + " d.closing_price as closingPrice, d.lowest_price as lowestPrice,"
-            + " d.highest_price as highestPrice, d.opening_price as openingPrice,"
-            + " d.trading_value as tradingValue, d.trading_volume as tradingVolume,"
-            + " d.rurnover_rate as rurnoverRate"
-            + " from daily_index d, stock_info s where d.code = concat(s.exchange, s.code)";
+                + " s.name, s.abbreviation, d.code, d.date, d.pre_closing_price as preClosingPrice,"
+                + " d.closing_price as closingPrice, d.lowest_price as lowestPrice,"
+                + " d.highest_price as highestPrice, d.opening_price as openingPrice,"
+                + " d.trading_value as tradingValue, d.trading_volume as tradingVolume,"
+                + " d.rurnover_rate as rurnoverRate"
+                + " from daily_index d, stock_info s where d.code = concat(s.exchange, s.code)";
 
-        SqlCondition dataSqlCondition = new SqlCondition(sql, pageParam.getCondition());
-        dataSqlCondition.addString("date", "date");
+        SqlCondition dataSqlCondition = new SqlCondition(sql, pageParam.getCondition(), pageParam.getNotEquals(), pageParam.getStringGE(), pageParam.getStringLE());
+
+        for (String key : pageParam.getCondition().keySet()) {
+            dataSqlCondition.addString(key, key);
+        }
+        for (String key : pageParam.getStringGE().keySet()) {
+            dataSqlCondition.addStringGE(key, key);
+        }
+        for (String key : pageParam.getStringLE().keySet()) {
+            dataSqlCondition.addStringLE(key, key);
+        }
+        for (String key : pageParam.getNotEquals().keySet()) {
+            dataSqlCondition.addStringNotEquals(key, key);
+        }
 
         int totalRecords = jdbcTemplate.queryForObject(dataSqlCondition.getCountSql(), Integer.class, dataSqlCondition.toArgs());
 
-        dataSqlCondition.addSort("tradingValue", false, true);
-        dataSqlCondition.addSql(" limit ?, ?");
+        dataSqlCondition.addSort(pageParam.getSort(), false, true);
+        dataSqlCondition.addSql(" limit ?, ? ");
         dataSqlCondition.addPage(pageParam.getStart(), pageParam.getLength());
 
         List<DailyIndexVo> list = jdbcTemplate.query(dataSqlCondition.toSql(),

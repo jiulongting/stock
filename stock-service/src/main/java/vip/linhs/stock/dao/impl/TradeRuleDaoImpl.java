@@ -21,7 +21,7 @@ public class TradeRuleDaoImpl extends BaseDao implements TradeRuleDao {
     public PageVo<TradeRule> get(PageParam pageParam) {
         SqlCondition dataSqlCondition = new SqlCondition(
                 TradeRuleDaoImpl.SELECT_SQL,
-                pageParam.getCondition());
+                pageParam.getCondition(), pageParam.getNotEquals(), pageParam.getStringGE(), pageParam.getStringLE());
 
         int totalRecords = jdbcTemplate.queryForObject(dataSqlCondition.getCountSql(), Integer.class,
                 dataSqlCondition.toArgs());

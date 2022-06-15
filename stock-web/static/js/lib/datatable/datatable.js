@@ -1,5 +1,5 @@
 var DataTable = function() {
-  var PAGE_SIZE = 10;
+  var PAGE_SIZE = 100;
 
   var _options;
 

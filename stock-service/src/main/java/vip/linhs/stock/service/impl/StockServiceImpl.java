@@ -212,6 +212,7 @@ public class StockServiceImpl implements StockService {
     @Override
     public PageVo<DailyIndexVo> getDailyIndexList(PageParam pageParam) {
         pageParam.getCondition().put("date", DateFormatUtils.format(new Date(), "yyyy-MM-dd") );
+        pageParam.setSort("tradingValue");
         return dailyIndexDao.getDailyIndexList(pageParam);
     }
 
@@ -220,6 +221,11 @@ public class StockServiceImpl implements StockService {
         return dailyIndexDao.getDailyIndexListByDate(date);
     }
 
+    /**
+     * 按照季度采集数据，https://quotes.money.163.com/trade/lsjysj_300898.html?year=2022&season=1
+     * @param date
+     * @param code
+     */
     @Override
     public void fixDailyIndex(int date, List<String> code) {
         List<StockInfo> list = getAll().stream().filter(StockInfo::isA).collect(Collectors.toList());
