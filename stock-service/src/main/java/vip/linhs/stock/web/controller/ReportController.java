@@ -1,5 +1,6 @@
 package vip.linhs.stock.web.controller;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import vip.linhs.stock.service.StockService;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -34,10 +37,115 @@ public class ReportController extends BaseController {
     }
 
     @RequestMapping("selectStockList")
-    public PageVo<DailyIndexVo> getSelectStockList(PageParam pageParam) {
-        dikai2(pageParam);
-        return null;//baoHanXian(pageParam);
+    public PageVo<StockInfo> getSelectStockList(PageParam pageParam) {
+        //dikai2(pageParam);
+        // pageParam.getCondition().put("code","600210");
+        //dikai3(pageParam);
+
+
+        return momoRetracement(pageParam);
     }
+
+    /**
+     * 一段行情的涨幅超过40% 期间包含涨停板 回撤 25% 30%等待机会
+     * 一段行情 涨幅35%但是振幅达到40% 然后回撤25% 回撤30% 等待机会
+     * 35%要包含两个涨停板
+     *
+     * @param pageParam
+     */
+
+    private PageVo<StockInfo> momoRetracement(PageParam pageParam) {
+        List<StockInfo> data = new ArrayList<>();
+        //获取待筛选的股票
+        logger.info("默默回撤选股策略");
+        List<StockInfo> stockInfoList = stockService.getAllListed();
+        for (StockInfo stockInfo : stockInfoList) {
+            try {
+                //过滤st，科创板
+                if (filterZhuBan(stockInfo)) continue;
+                //获取最近一百天k线数据
+                stockInfo.setDate(null);
+                stockInfo.setLength(100);
+                stockInfo.setStart(0);
+                PageVo<DailyIndexVo> dailyIndexVoPageVo = getDailyIndexVoPageVo(stockInfo);
+                if (CollectionUtils.isEmpty(dailyIndexVoPageVo.getData())) continue;
+                DailyIndexVo maxDaily = dailyIndexVoPageVo.getData().stream().max(Comparator.comparing(DailyIndex::getHighestPrice)).get();
+                DailyIndexVo minDaily = dailyIndexVoPageVo.getData().stream().min(Comparator.comparing(DailyIndex::getLowestPrice)).get();
+                logger.info("{},最大价格：{},最小价格:{},差价{}", stockInfo.getName(), maxDaily.getHighestPrice().doubleValue(), minDaily.getLowestPrice().doubleValue(), (maxDaily.getHighestPrice().doubleValue() - minDaily.getLowestPrice().doubleValue()) / maxDaily.getHighestPrice().doubleValue());
+                //计算回撤幅度大于25%的
+                if (minDaily.getDate().compareTo(maxDaily.getDate()) < 0 || (maxDaily.getHighestPrice().doubleValue() - minDaily.getLowestPrice().doubleValue()) / maxDaily.getHighestPrice().doubleValue() < 0.25) {
+                    continue;
+                }
+                logger.info("{},回撤幅度打标", stockInfo.getName());
+                //计算高点前20个交易日内是否有涨停超过2次
+                stockInfo.setDate(maxDaily.getDate());
+                stockInfo.setLength(20);
+                stockInfo.setStart(0);
+                PageVo<DailyIndexVo> dailyIndexVoPageVoOne = getDailyIndexVoPageVo(stockInfo);
+                if (dailyIndexVoPageVoOne.getData().stream().filter(dailyIndexVo -> dailyIndexVo.getRurnoverRate().doubleValue() > 9.95).count() < 2) {
+                    continue;
+                }
+                logger.info("{},前一波行情涨幅达标", stockInfo.getName());
+                stockInfo.setMaxPriceDate(maxDaily.getDate());
+                stockInfo.setMinPriceDate(minDaily.getDate());
+                data.add(stockInfo);
+            } catch (Exception e) {
+                logger.error("出错了",e);
+            }
+        }
+        return new PageVo<>(data, data.size());
+    }
+
+    private void daban(PageParam pageParam) {
+        logger.info("打板策略回测开始");
+        List<StockInfo> stockInfoList = stockService.getAllListed();
+        double totalSs = 0;
+        double totalNn = 0;
+        for (StockInfo stockInfo : stockInfoList) {
+
+            if (filterZhuBan(stockInfo)) continue;
+
+            PageVo<DailyIndexVo> dailyIndexVoPageVo = getDailyIndexVoPageVo(stockInfo);
+            double totalS = 0;
+            double totalN = 0;
+            for (int i = 0; i < dailyIndexVoPageVo.getData().size() - 1; i++) {
+
+                DailyIndexVo dailyIndexVo = dailyIndexVoPageVo.getData().get(i);
+                DailyIndexVo dailyIndexVoN = dailyIndexVoPageVo.getData().get(i + 1);
+
+                //在当日跌幅1个点以上则买入，收盘价卖出。
+
+                //当日最大跌幅
+                double onePre = zhanFu(dailyIndexVo.getLowestPrice(), dailyIndexVo.getOpeningPrice());
+                if (onePre > -5) {
+                    continue;
+                }
+
+
+                //买入价
+                double buyPrice = 0l;
+                if (zhanFu(dailyIndexVo.getOpeningPrice(), dailyIndexVoN.getClosingPrice()) < -5) {
+                    buyPrice = dailyIndexVo.getOpeningPrice().doubleValue();
+                } else {
+                    //买入价
+                    buyPrice = 0.95 * dailyIndexVo.getOpeningPrice().doubleValue();
+                }
+                // logger.info(dailyIndexVo.getName() + "在" + dailyIndexVo.getDate() + "日内跌幅" + String.format("%.2f", onePre) + "%，买入价："+buyPrice);
+                double s = 0;
+                //模拟计算收益
+                s = zhanFu(dailyIndexVo.getClosingPrice(), BigDecimal.valueOf(buyPrice));
+                // logger.info("模拟收益:" + String.format("%.2f", s) + "%");
+                totalS = totalS + s;
+                totalN++;
+                totalSs = totalSs + s;
+                totalNn++;
+            }
+
+            logger.info(stockInfo.getName() + "模拟总收益:" + totalS + " 一共交易：" + totalN + "笔 平均：" + totalS / totalN);
+        }
+        logger.info("模拟总收益:" + totalSs + " 一共交易：" + totalNn + "笔 平均：" + totalSs / totalNn);
+    }
+
 
     private PageVo<DailyIndexVo> baoHanXian(PageParam pageParam) {
         List<DailyIndexVo> list = new ArrayList<>();
@@ -45,7 +153,7 @@ public class ReportController extends BaseController {
         for (int i = pageParam.getStart(); i < stockInfoList.size(); i++) {
             StockInfo stockInfo = stockInfoList.get(i);
             if (filterZhuBan(stockInfo)) continue;
-            PageVo<DailyIndexVo> dailyIndexVoPageVo = getDailyIndexVoPageVo(pageParam, stockInfo);
+            PageVo<DailyIndexVo> dailyIndexVoPageVo = getDailyIndexVoPageVo(stockInfo);
             for (int j = 1; j < dailyIndexVoPageVo.getData().size() - 4; j++) {
                 DailyIndexVo dailyIndexVo = dailyIndexVoPageVo.getData().get(j);
                 dailyIndexVo.setName(stockInfo.getName());
@@ -69,8 +177,17 @@ public class ReportController extends BaseController {
     }
 
     private DailyIndexVo isLowBao(int j, DailyIndexVo dailyIndexVo, PageVo<DailyIndexVo> dailyIndexVoPageVo) {
-        for (int k = j - 1; k > -1; k--) {
+        int end = -1;
+        for (int k = j - 1; k > end; k--) {
             DailyIndexVo dailyIndexVoT = dailyIndexVoPageVo.getData().get(k);
+            //当前股价是否已运行超过包含线
+            if (dailyIndexVoT.getHighestPrice().doubleValue() > dailyIndexVo.getHighestPrice().doubleValue()) {
+                break;
+            }
+            //当前股价跌穿包含线，则需在5日内返回包含线
+            if (dailyIndexVoT.getLowestPrice().doubleValue() < dailyIndexVo.getLowestPrice().doubleValue() && end == -1) {
+                end = k - 5 > -2 ? k - 5 : -1;
+            }
             //当前k线的最低价高于包含线的最低价，并且最高价低于包含线振幅的20%
             if (dailyIndexVoT.getLowestPrice().doubleValue() - dailyIndexVo.getLowestPrice().doubleValue() > 0 &&
                     (dailyIndexVoT.getHighestPrice().doubleValue() - dailyIndexVo.getLowestPrice().doubleValue()) / dailyIndexVo.getLowestPrice().doubleValue() < 0.03) {
@@ -79,6 +196,56 @@ public class ReportController extends BaseController {
         }
         return null;
 
+    }
+
+    private void dikai3(PageParam pageParam) {
+        logger.info("做T策略回测开始");
+        List<StockInfo> stockInfoList = stockService.getAllListed();//stockService.getStockList(pageParam).getData();
+        double totalSs = 0;
+        double totalNn = 0;
+        for (StockInfo stockInfo : stockInfoList) {
+
+            if (filterZhuBan(stockInfo)) continue;
+
+            PageVo<DailyIndexVo> dailyIndexVoPageVo = getDailyIndexVoPageVo(stockInfo);
+            double totalS = 0;
+            double totalN = 0;
+            for (int i = 0; i < dailyIndexVoPageVo.getData().size() - 1; i++) {
+
+                DailyIndexVo dailyIndexVo = dailyIndexVoPageVo.getData().get(i);
+                DailyIndexVo dailyIndexVoN = dailyIndexVoPageVo.getData().get(i + 1);
+
+                //在当日跌幅1个点以上则买入，收盘价卖出。
+
+                //当日最大跌幅
+                double onePre = zhanFu(dailyIndexVo.getLowestPrice(), dailyIndexVo.getOpeningPrice());
+                if (onePre > -5) {
+                    continue;
+                }
+
+
+                //买入价
+                double buyPrice = 0l;
+                if (zhanFu(dailyIndexVo.getOpeningPrice(), dailyIndexVoN.getClosingPrice()) < -5) {
+                    buyPrice = dailyIndexVo.getOpeningPrice().doubleValue();
+                } else {
+                    //买入价
+                    buyPrice = 0.95 * dailyIndexVo.getOpeningPrice().doubleValue();
+                }
+                // logger.info(dailyIndexVo.getName() + "在" + dailyIndexVo.getDate() + "日内跌幅" + String.format("%.2f", onePre) + "%，买入价："+buyPrice);
+                double s = 0;
+                //模拟计算收益
+                s = zhanFu(dailyIndexVo.getClosingPrice(), BigDecimal.valueOf(buyPrice));
+                // logger.info("模拟收益:" + String.format("%.2f", s) + "%");
+                totalS = totalS + s;
+                totalN++;
+                totalSs = totalSs + s;
+                totalNn++;
+            }
+
+            logger.info(stockInfo.getName() + "模拟总收益:" + totalS + " 一共交易：" + totalN + "笔 平均：" + totalS / totalN);
+        }
+        logger.info("模拟总收益:" + totalSs + " 一共交易：" + totalNn + "笔 平均：" + totalSs / totalNn);
     }
 
     private void dikai2(PageParam pageParam) {
@@ -90,7 +257,7 @@ public class ReportController extends BaseController {
 
             if (filterZhuBan(stockInfo)) continue;
 
-            PageVo<DailyIndexVo> dailyIndexVoPageVo = getDailyIndexVoPageVo(pageParam, stockInfo);
+            PageVo<DailyIndexVo> dailyIndexVoPageVo = getDailyIndexVoPageVo(stockInfo);
 
             for (int i = 1; i < dailyIndexVoPageVo.getData().size() - 4; i++) {
                 DailyIndexVo dailyIndexVoN = dailyIndexVoPageVo.getData().get(i - 1);
@@ -151,14 +318,14 @@ public class ReportController extends BaseController {
 
     private void dikai(PageParam pageParam) {
         logger.info("低开策略回测开始");
-                List<StockInfo> stockInfoList = stockService.getAllListed();
+        List<StockInfo> stockInfoList = stockService.getAllListed();
         double totalS = 0;
         double totalN = 0;
         for (StockInfo stockInfo : stockInfoList) {
 
             if (filterZhuBan(stockInfo)) continue;
 
-            PageVo<DailyIndexVo> dailyIndexVoPageVo = getDailyIndexVoPageVo(pageParam, stockInfo);
+            PageVo<DailyIndexVo> dailyIndexVoPageVo = getDailyIndexVoPageVo(stockInfo);
 
             for (int i = 2; i < dailyIndexVoPageVo.getData().size() - 4; i++) {
                 DailyIndexVo dailyIndexVoNN = dailyIndexVoPageVo.getData().get(i - 2);
@@ -205,20 +372,23 @@ public class ReportController extends BaseController {
         logger.info("模拟总收益:" + totalS + " 一共交易：" + totalN + "笔 平均：" + totalS / totalN);
     }
 
-    private PageVo<DailyIndexVo> getDailyIndexVoPageVo(PageParam pageParam, StockInfo stockInfo) {
+    private PageVo<DailyIndexVo> getDailyIndexVoPageVo(StockInfo stockInfo) {
+        PageParam pageParam = new PageParam();
         //获取所有数据
         pageParam.getCondition().put("d.code", stockInfo.getExchange() + stockInfo.getCode());
-        pageParam.setStart(0);
-        pageParam.setLength(200);
+        pageParam.setStart(stockInfo.getStart());
+        pageParam.setLength(stockInfo.getLength());
         pageParam.setSort("date");
-        pageParam.getStringLE().put("date", "2022-4-30");
+        if(stockInfo.getDate()!=null) {
+            pageParam.getStringLE().put("date", stockInfo.getDate());
+        }
         PageVo<DailyIndexVo> dailyIndexVoPageVo = dailyIndexDao.getDailyIndexList(pageParam);
         return dailyIndexVoPageVo;
     }
 
     private boolean filterZhuBan(StockInfo stockInfo) {
-        //主板
-        if (!(stockInfo.getCode().startsWith("600") || stockInfo.getCode().startsWith("002") || stockInfo.getCode().startsWith("000"))
+        //主板 || stockInfo.getCode().startsWith("002") || stockInfo.getCode().startsWith("000")
+        if (!(stockInfo.getCode().startsWith("600"))
                 || stockInfo.getName().contains("ST") || stockInfo.getName().contains("退市")) {
             return true;
         }

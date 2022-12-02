@@ -56,10 +56,12 @@ select s.name, s.abbreviation, d.code, d.date, d.pre_closing_price as preClosing
 select * from execute_info
 
 select * from task
-select * from stock_info where name='安彩高科'
+select * from stock_info where name='首商股份'
 select count(1) from daily_index
 
-select * from daily_index  where code='sh603131' limit 0,100 order by date desc 
+select * from daily_index  where code='sh600210' limit 0,100 order by date  desc
+
+select * from daily_index  limit 0,100 order by update_time  desc
 
 insert into task (name,state,description) values ('update_of_stock_info',1,'获取股票历史数据')
 
@@ -323,6 +325,7 @@ truncate table daily_index]]></console>
         <object-type name="FUNCTION" sorting-type="NAME" />
         <object-type name="PROCEDURE" sorting-type="NAME" />
         <object-type name="ARGUMENT" sorting-type="POSITION" />
+        <object-type name="TYPE ATTRIBUTE" sorting-type="POSITION" />
       </sorting>
       <default-editors>
         <object-type name="VIEW" editor-type="SELECTION" />
@@ -369,11 +372,11 @@ truncate table daily_index]]></console>
         <nulls-first value="true" />
         <max-sorting-columns value="4" />
       </sorting>
-      <tracking-columns>
-        <columnNames value="" />
+      <audit-columns>
+        <column-names value="" />
         <visible value="true" />
         <editable value="false" />
-      </tracking-columns>
+      </audit-columns>
     </dataset-grid-settings>
     <dataset-editor-settings>
       <text-editor-popup>

@@ -73,7 +73,9 @@ public class StockInfoDaoImpl extends BaseDao implements StockInfoDao {
 
         int totalRecords = jdbcTemplate.queryForObject(dataSqlCondition.getCountSql(), Integer.class,
                 dataSqlCondition.toArgs());
-
+        for (String key : pageParam.getCondition().keySet()) {
+            dataSqlCondition.addString(key, key);
+        }
         dataSqlCondition.addSql(" limit ?, ?");
         dataSqlCondition.addPage(pageParam.getStart(), pageParam.getLength());
 

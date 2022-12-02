@@ -11,6 +11,35 @@ public class BaseModel implements Serializable {
     private Date createTime;
     private Date updateTime;
 
+    private int start;
+    private int length;
+
+    private Date date;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getStart() {
+        return start;
+    }
+
+    public void setStart(int start) {
+        this.start = start;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
     public int getId() {
         return id;
     }

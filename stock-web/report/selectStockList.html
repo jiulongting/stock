@@ -63,15 +63,21 @@
               }
             },
             {
-              title: '时间',
+              title: '价格最高点时间',
               render: function(row) {
-                return new Date(row.date).format('yyyy-MM-dd hh:mm');
+                return new Date(row.maxPriceDate).format('yyyy-MM-dd hh:mm');
+              }
+            },
+            {
+              title: '价格最低点时间',
+              render: function(row) {
+                return new Date(row.minPriceDate).format('yyyy-MM-dd hh:mm');
               }
             },
             {
               title: '操作',
               render: function(row) {
-                return '<a target="_blank" href="http://quote.eastmoney.com/concept/' + row.code +'.html?from=classic#fschart-k">查看</a>';
+                return '<a target="_blank" href="http://quote.eastmoney.com/concept/' + row.exchange + row.code +'.html?from=classic#fschart-k">查看</a>';
               }
             }
           ],

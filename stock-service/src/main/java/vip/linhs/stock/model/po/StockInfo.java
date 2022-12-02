@@ -2,6 +2,8 @@ package vip.linhs.stock.model.po;
 
 import vip.linhs.stock.util.StockConsts;
 
+import java.util.Date;
+
 public class StockInfo extends BaseModel {
 
     private static final long serialVersionUID = 1L;
@@ -12,6 +14,25 @@ public class StockInfo extends BaseModel {
     private String abbreviation;
     private int state;
     private int type;
+
+    private Date maxPriceDate;
+    private Date minPriceDate;
+
+    public Date getMaxPriceDate() {
+        return maxPriceDate;
+    }
+
+    public void setMaxPriceDate(Date maxPriceDate) {
+        this.maxPriceDate = maxPriceDate;
+    }
+
+    public Date getMinPriceDate() {
+        return minPriceDate;
+    }
+
+    public void setMinPriceDate(Date minPriceDate) {
+        this.minPriceDate = minPriceDate;
+    }
 
     public String getCode() {
         return code;
