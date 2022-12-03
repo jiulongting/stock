@@ -18,6 +18,16 @@ public class StockInfo extends BaseModel {
     private Date maxPriceDate;
     private Date minPriceDate;
 
+    private String retracementRate;
+
+    public String getRetracementRate() {
+        return retracementRate;
+    }
+
+    public void setRetracementRate(String retracementRate) {
+        this.retracementRate = retracementRate;
+    }
+
     public Date getMaxPriceDate() {
         return maxPriceDate;
     }

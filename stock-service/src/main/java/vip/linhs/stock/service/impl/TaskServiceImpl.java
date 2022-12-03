@@ -126,7 +126,11 @@ public class TaskServiceImpl implements TaskService {
 
     private void updateOfStockInfo() {
         //stockService.fixDailyIndex(Integer.parseInt(DateFormatUtils.format(new Date(), "yyyyMM")), null);
-        stockService.fixDailyIndex(202203, null);
+        stockService.fixDailyIndex(202205, null);
+        stockService.fixDailyIndex(202208, null);
+        stockService.fixDailyIndex(202211, null);
+
+
 //        stockService.fixDailyIndex(202202, null);
 //        stockService.fixDailyIndex(202201, null);
     }

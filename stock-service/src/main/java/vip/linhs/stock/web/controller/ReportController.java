@@ -73,7 +73,8 @@ public class ReportController extends BaseController {
                 DailyIndexVo minDaily = dailyIndexVoPageVo.getData().stream().min(Comparator.comparing(DailyIndex::getLowestPrice)).get();
                 logger.info("{},最大价格：{},最小价格:{},差价{}", stockInfo.getName(), maxDaily.getHighestPrice().doubleValue(), minDaily.getLowestPrice().doubleValue(), (maxDaily.getHighestPrice().doubleValue() - minDaily.getLowestPrice().doubleValue()) / maxDaily.getHighestPrice().doubleValue());
                 //计算回撤幅度大于25%的
-                if (minDaily.getDate().compareTo(maxDaily.getDate()) < 0 || (maxDaily.getHighestPrice().doubleValue() - minDaily.getLowestPrice().doubleValue()) / maxDaily.getHighestPrice().doubleValue() < 0.25) {
+                double retracementRate = (maxDaily.getHighestPrice().doubleValue() - minDaily.getLowestPrice().doubleValue()) / maxDaily.getHighestPrice().doubleValue();
+                if (minDaily.getDate().compareTo(maxDaily.getDate()) < 0 ||  retracementRate < 0.25) {
                     continue;
                 }
                 logger.info("{},回撤幅度打标", stockInfo.getName());
@@ -88,6 +89,7 @@ public class ReportController extends BaseController {
                 logger.info("{},前一波行情涨幅达标", stockInfo.getName());
                 stockInfo.setMaxPriceDate(maxDaily.getDate());
                 stockInfo.setMinPriceDate(minDaily.getDate());
+                stockInfo.setRetracementRate(String.format("%.2f", retracementRate*100));
                 data.add(stockInfo);
             } catch (Exception e) {
                 logger.error("出错了",e);
