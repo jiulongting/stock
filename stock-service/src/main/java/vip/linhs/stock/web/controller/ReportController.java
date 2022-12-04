@@ -71,9 +71,9 @@ public class ReportController extends BaseController {
                 if (CollectionUtils.isEmpty(dailyIndexVoPageVo.getData())) continue;
                 DailyIndexVo maxDaily = dailyIndexVoPageVo.getData().stream().max(Comparator.comparing(DailyIndex::getHighestPrice)).get();
                 DailyIndexVo minDaily = dailyIndexVoPageVo.getData().stream().min(Comparator.comparing(DailyIndex::getLowestPrice)).get();
-                logger.info("{},最大价格：{},最小价格:{},差价{}", stockInfo.getName(), maxDaily.getHighestPrice().doubleValue(), minDaily.getLowestPrice().doubleValue(), (maxDaily.getHighestPrice().doubleValue() - minDaily.getLowestPrice().doubleValue()) / maxDaily.getHighestPrice().doubleValue());
+                logger.info("{},最大价格：{},最小价格:{},差价{}", stockInfo.getName(), maxDaily.getClosingPrice().doubleValue(), minDaily.getLowestPrice().doubleValue(), (maxDaily.getClosingPrice().doubleValue() - minDaily.getClosingPrice().doubleValue()) / maxDaily.getClosingPrice().doubleValue());
                 //计算回撤幅度大于25%的
-                double retracementRate = (maxDaily.getHighestPrice().doubleValue() - minDaily.getLowestPrice().doubleValue()) / maxDaily.getHighestPrice().doubleValue();
+                double retracementRate = (maxDaily.getClosingPrice().doubleValue() - minDaily.getClosingPrice().doubleValue()) / maxDaily.getClosingPrice().doubleValue();
                 if (minDaily.getDate().compareTo(maxDaily.getDate()) < 0 ||  retracementRate < 0.25) {
                     continue;
                 }
