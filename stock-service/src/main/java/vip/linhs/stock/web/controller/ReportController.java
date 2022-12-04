@@ -80,7 +80,7 @@ public class ReportController extends BaseController {
                 logger.info("{},回撤幅度打标", stockInfo.getName());
                 //计算高点前20个交易日内是否有涨停超过2次
                 stockInfo.setDate(maxDaily.getDate());
-                stockInfo.setLength(20);
+                stockInfo.setLength(10);
                 stockInfo.setStart(0);
                 PageVo<DailyIndexVo> dailyIndexVoPageVoOne = getDailyIndexVoPageVo(stockInfo);
                 if (dailyIndexVoPageVoOne.getData().stream().filter(dailyIndexVo -> dailyIndexVo.getRurnoverRate().doubleValue() > 9.95).count() < 2) {
