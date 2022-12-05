@@ -109,6 +109,9 @@ public class TaskServiceImpl implements TaskService {
             case UpdateOfStockInfo:
                 updateOfStockInfo();
                 break;
+            case UpdateOfSelectEdInfo:
+                updateOfselectEdInfo();
+                break;
             default:
                 break;
             }
@@ -127,12 +130,13 @@ public class TaskServiceImpl implements TaskService {
     private void updateOfStockInfo() {
         //stockService.fixDailyIndex(Integer.parseInt(DateFormatUtils.format(new Date(), "yyyyMM")), null);
         stockService.fixDailyIndex(202205, null);
-        stockService.fixDailyIndex(202208, null);
-        stockService.fixDailyIndex(202211, null);
 
 
 //        stockService.fixDailyIndex(202202, null);
 //        stockService.fixDailyIndex(202201, null);
+    }
+    private void updateOfselectEdInfo() {
+        stockService.momoRetracement();
     }
 
     private void autoLogin() {

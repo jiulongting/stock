@@ -43,60 +43,9 @@ public class ReportController extends BaseController {
         //dikai3(pageParam);
 
 
-        return momoRetracement(pageParam);
+        return stockService.getAllSeledted();
     }
 
-    /**
-     * 一段行情的涨幅超过40% 期间包含涨停板 回撤 25% 30%等待机会
-     * 一段行情 涨幅35%但是振幅达到40% 然后回撤25% 回撤30% 等待机会
-     * 35%要包含两个涨停板
-     *
-     * @param pageParam
-     */
-
-    private PageVo<StockInfo> momoRetracement(PageParam pageParam) {
-        List<StockInfo> data = new ArrayList<>();
-        //获取待筛选的股票
-        logger.info("默默回撤选股策略");
-        List<StockInfo> stockInfoList = stockService.getAllListed();
-        for (StockInfo stockInfo : stockInfoList) {
-            try {
-                //过滤st，科创板
-                if (filterZhuBan(stockInfo)) continue;
-                //获取最近一百天k线数据
-                stockInfo.setDate(null);
-                stockInfo.setLength(100);
-                stockInfo.setStart(0);
-                PageVo<DailyIndexVo> dailyIndexVoPageVo = getDailyIndexVoPageVo(stockInfo);
-                if (CollectionUtils.isEmpty(dailyIndexVoPageVo.getData())) continue;
-                DailyIndexVo maxDaily = dailyIndexVoPageVo.getData().stream().max(Comparator.comparing(DailyIndex::getHighestPrice)).get();
-                DailyIndexVo minDaily = dailyIndexVoPageVo.getData().stream().min(Comparator.comparing(DailyIndex::getLowestPrice)).get();
-                logger.info("{},最大价格：{},最小价格:{},差价{}", stockInfo.getName(), maxDaily.getClosingPrice().doubleValue(), minDaily.getLowestPrice().doubleValue(), (maxDaily.getClosingPrice().doubleValue() - minDaily.getClosingPrice().doubleValue()) / maxDaily.getClosingPrice().doubleValue());
-                //计算回撤幅度大于25%的
-                double retracementRate = (maxDaily.getClosingPrice().doubleValue() - minDaily.getClosingPrice().doubleValue()) / maxDaily.getClosingPrice().doubleValue();
-                if (minDaily.getDate().compareTo(maxDaily.getDate()) < 0 ||  retracementRate < 0.25) {
-                    continue;
-                }
-                logger.info("{},回撤幅度打标", stockInfo.getName());
-                //计算高点前20个交易日内是否有涨停超过2次
-                stockInfo.setDate(maxDaily.getDate());
-                stockInfo.setLength(10);
-                stockInfo.setStart(0);
-                PageVo<DailyIndexVo> dailyIndexVoPageVoOne = getDailyIndexVoPageVo(stockInfo);
-                if (dailyIndexVoPageVoOne.getData().stream().filter(dailyIndexVo -> dailyIndexVo.getRurnoverRate().doubleValue() > 9.95).count() < 2) {
-                    continue;
-                }
-                logger.info("{},前一波行情涨幅达标", stockInfo.getName());
-                stockInfo.setMaxPriceDate(maxDaily.getDate());
-                stockInfo.setMinPriceDate(minDaily.getDate());
-                stockInfo.setRetracementRate(String.format("%.2f", retracementRate*100));
-                data.add(stockInfo);
-            } catch (Exception e) {
-                logger.error("出错了",e);
-            }
-        }
-        return new PageVo<>(data, data.size());
-    }
 
     private void daban(PageParam pageParam) {
         logger.info("打板策略回测开始");
@@ -390,8 +339,8 @@ public class ReportController extends BaseController {
 
     private boolean filterZhuBan(StockInfo stockInfo) {
         //主板 || stockInfo.getCode().startsWith("002") || stockInfo.getCode().startsWith("000")
-        if (!(stockInfo.getCode().startsWith("600"))
-                || stockInfo.getName().contains("ST") || stockInfo.getName().contains("退市")) {
+        if (!(stockInfo.getCode().startsWith("600")
+                || stockInfo.getName().contains("ST") || stockInfo.getName().contains("退市"))) {
             return true;
         }
         return false;

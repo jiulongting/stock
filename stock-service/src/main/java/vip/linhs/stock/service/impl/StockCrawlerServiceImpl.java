@@ -1,13 +1,18 @@
 package vip.linhs.stock.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import vip.linhs.stock.StockApplication;
 import vip.linhs.stock.model.po.DailyIndex;
 import vip.linhs.stock.model.po.StockInfo;
 import vip.linhs.stock.parser.DailyIndexParser;
@@ -17,10 +22,8 @@ import vip.linhs.stock.service.StockCrawlerService;
 import vip.linhs.stock.util.HttpUtil;
 import vip.linhs.stock.util.StockUtil;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.net.URI;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -98,6 +101,20 @@ public class StockCrawlerServiceImpl implements StockCrawlerService {
     public String getHistoryDailyIndexsStringFrom163(String code, int year, int season) {
         logger.info(String.format("https://quotes.money.163.com/trade/lsjysj_%s.html?year=%d&season=%d", code, year, season));
         return HttpUtil.sendGet(httpClient, String.format("https://quotes.money.163.com/trade/lsjysj_%s.html?year=%d&season=%d", code, year, season));
+    }
+
+
+    //public static String sendPost(CloseableHttpClient httpClient, String url, Map<String, Object> params, Map<String, String> header)
+//https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=SH000001&begin=1670247216429&period=day&type=before&count=-284&indicator=kline,pe,pb,ps,pcf,market_capital,agt,ggt,balance
+        @Override
+    public String getHistoryDailyIndexsStringFromXueQiu(String code, int day) {
+
+            Map<String, String> header = new HashMap<>();
+            header.put("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
+            header.put("cookie", "device_id=6843aff8e6949458ff0296b588d0f280; xq_a_token=df4b782b118f7f9cabab6989b39a24cb04685f95; xqat=df4b782b118f7f9cabab6989b39a24cb04685f95; xq_r_token=3ae1ada2a33de0f698daa53fb4e1b61edf335952; xq_id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1aWQiOi0xLCJpc3MiOiJ1YyIsImV4cCI6MTY3MjE4Njc1MSwiY3RtIjoxNjcwMTY0NTA3MTAzLCJjaWQiOiJkOWQwbjRBWnVwIn0.QkTb4BDzdwQ_Y4dZFhfPWJMXwzVjEH6KM6K9TyuE6mndK_HWuHxXDJWwClUixJgXGacK0uEVDuWs_TifIVbJN0PS6Vw0-eHWjOsMuzWEJhSq-G60eZDYD2HE_6p3ZuhYe9Sd-pj71lxM1qg4W0UcG896VVOURahsC16XTpWtS61rAu-kSqgkxHrv3t7njHc9VqpdLfBw-dlvzOS9VirqktEKluOFIzht1679Ia4R_PRNEsV_LGZydzvUWCdmoM7iJpXE6bcEMrZcklHyXpyQDqnIBGLzIaUhM-Uvl1L0A2Od-n6DaYnihvndhh0Kohqi94SJrIv4jeSPUv87cp_KHA; u=291670164562230; Hm_lvt_1db88642e346389874251b5a1eded6e3=1668578158,1668776329,1669182895,1670164563; Hm_lpvt_1db88642e346389874251b5a1eded6e3=1670164637");
+            header.put("user-agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.68");
+
+            return HttpUtil.sendGet(httpClient, "https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol="+code+"&begin="+System.currentTimeMillis()+"&period=day&type=before&count=-230&indicator=kline,pe,pb,ps,pcf,market_capital,agt,ggt,balance", header);
     }
 
 }

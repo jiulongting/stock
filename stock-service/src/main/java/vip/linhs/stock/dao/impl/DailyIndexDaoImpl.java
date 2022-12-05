@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import vip.linhs.stock.dao.BaseDao;
 import vip.linhs.stock.dao.DailyIndexDao;
 import vip.linhs.stock.model.po.DailyIndex;
+import vip.linhs.stock.model.po.StockInfo;
 import vip.linhs.stock.model.vo.DailyIndexVo;
 import vip.linhs.stock.model.vo.PageParam;
 import vip.linhs.stock.model.vo.PageVo;
@@ -32,6 +33,32 @@ public class DailyIndexDaoImpl extends BaseDao implements DailyIndexDao {
 
         jdbcTemplate.batchUpdate(DailyIndexDaoImpl.INSERT_SQL, list, list.size(),
                 DailyIndexDaoImpl::setArgument);
+    }
+
+    @Override
+    public void saveSelected(List<StockInfo> list) {
+        jdbcTemplate.batchUpdate("insert into selected_info (name,code, maxPriceDate, minPriceDate, retracementRate) values(?,?, ?, ?, ?)", list, list.size(),
+                DailyIndexDaoImpl::setArgumentSelected);
+    }
+
+    public void truncateSelected() {
+        jdbcTemplate.batchUpdate("truncate table selected_info");
+    }
+
+    public List<StockInfo> selectAllSelected(){
+        List<StockInfo> list = jdbcTemplate.query("select name,code,maxPriceDate,minPriceDate,retracementRate from selected_info",BeanPropertyRowMapper.newInstance(StockInfo.class));
+        return list;
+    }
+
+    private static void setArgumentSelected(PreparedStatement ps, StockInfo dailyIndex)
+            throws SQLException {
+        ps.setString(1,dailyIndex.getName());
+        ps.setString(2, dailyIndex.getCode());
+        StatementCreatorUtils.setParameterValue(ps, 3, Types.DATE,
+                dailyIndex.getMaxPriceDate());
+        StatementCreatorUtils.setParameterValue(ps, 4, Types.DATE,
+                dailyIndex.getMinPriceDate());
+        ps.setString(5, dailyIndex.getRetracementRate());
     }
 
     private static void setArgument(PreparedStatement ps, DailyIndex dailyIndex)

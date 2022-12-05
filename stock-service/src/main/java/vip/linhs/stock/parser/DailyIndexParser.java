@@ -1,7 +1,9 @@
 package vip.linhs.stock.parser;
 
 import java.math.BigDecimal;
+import java.net.URI;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -10,7 +12,16 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.time.DateUtils;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Component;
 
 import vip.linhs.stock.model.po.DailyIndex;
@@ -54,7 +65,7 @@ public class DailyIndexParser {
         BigDecimal tradingValue = new BigDecimal(strs[9]);
         Date date;
         try {
-            date = DateUtils.parseDate(strs[30], "yyyy-MM-dd" );
+            date = DateUtils.parseDate(strs[30], "yyyy-MM-dd");
         } catch (ParseException e) {
             throw new IllegalArgumentException(e);
         }
@@ -157,6 +168,7 @@ public class DailyIndexParser {
         return dailyIndex;
     }
 
+
     public List<DailyIndex> parse163HistoryDailyIndexList(String content) {
         int beginIndex = content.indexOf("<table class=\"table_bg001 border_box limit_sale\">");
         int endIndex = content.indexOf("</table>", beginIndex);
@@ -183,7 +195,7 @@ public class DailyIndexParser {
             String[] values = new String[11];
             int i = 0;
             while (trMatcher.find()) {
-               values[i++] = trMatcher.group(2).replace(",", "");
+                values[i++] = trMatcher.group(2).replace(",", "");
             }
 
             DailyIndex dailyIndex = new DailyIndex();
@@ -211,4 +223,33 @@ public class DailyIndexParser {
         return list;
     }
 
+    public List<DailyIndex> parseXueQiuHistoryDailyIndexList(String content) {
+        List<DailyIndex> list = new ArrayList<>();
+
+        JSONObject jsonObject = JSONObject.parseObject(content);
+
+        if (jsonObject.getJSONObject("data").getJSONArray("item").isEmpty()) return list;
+        for (Object o : jsonObject.getJSONObject("data").getJSONArray("item")) {
+            JSONArray j = JSON.parseArray(o.toString());
+            DailyIndex dailyIndex = new DailyIndex();
+            try {
+                dailyIndex.setDate(DateUtils.parseDate(new SimpleDateFormat("yyyy-MM-dd").format(j.getLongValue(0)),"yyyy-MM-dd"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            dailyIndex.setOpeningPrice(new BigDecimal(j.getString(2)));
+            dailyIndex.setHighestPrice(new BigDecimal(j.getString(3)));
+            dailyIndex.setLowestPrice(new BigDecimal(j.getString(4)));
+            dailyIndex.setClosingPrice(new BigDecimal(j.getString(5)));
+            dailyIndex.setTradingVolume(Long.parseLong(j.getString(1)) * 100);
+            dailyIndex.setTradingValue(new BigDecimal(j.getString(9)).movePointRight(4));
+            dailyIndex.setRurnoverRate(new BigDecimal(j.getString(7)));
+            dailyIndex.setPreClosingPrice(dailyIndex.getClosingPrice().subtract(new BigDecimal(j.getString(6))));
+
+            list.add(dailyIndex);
+        }
+
+        list.sort(Comparator.comparing(DailyIndex::getDate));
+        return list;
+    }
 }

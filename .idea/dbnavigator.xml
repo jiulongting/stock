@@ -56,12 +56,12 @@ select s.name, s.abbreviation, d.code, d.date, d.pre_closing_price as preClosing
 select * from execute_info
 
 select * from task
-select * from stock_info where name='首商股份'
+select * from stock_info where name='青岛双星'
 select count(1) from daily_index
 
-select * from daily_index  where code='sh600235' limit 0,100 order by date  desc
+select * from daily_index  where code='sz000599' limit 0,100 order by date  
 
-select * from daily_index where code='sh600235' order by 'date'  desc
+select * from daily_index
 
 insert into task (name,state,description) values ('update_of_stock_info',1,'获取股票历史数据')
 
@@ -69,7 +69,14 @@ insert into execute_info (task_id) values (9)
 
 alter table daily_index add unique index(code,date)
 
-truncate table daily_index]]></console>
+truncate table daily_index
+
+select * from task
+SELECT * FROM execute_info
+INSERT INTO `execute_info` (`id`, `task_id`, `state`) VALUES ('10', '10', '2');
+
+INSERT INTO `task` (`id`, `name`, `state`, `description`) VALUES ('10', 'update_of_selected_info', '1', '更新选票');]]></console>
+      <console name="122.9.129.71 1" type="STANDARD" schema="mysql" session="Main"><![CDATA[show creat table daily_index]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

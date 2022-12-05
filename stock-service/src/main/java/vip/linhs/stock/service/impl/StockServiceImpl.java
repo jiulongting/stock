@@ -3,12 +3,15 @@ package vip.linhs.stock.service.impl;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,7 +75,7 @@ public class StockServiceImpl implements StockService {
     @Override
     public List<StockInfo> getAllListed() {
         return getAll().stream().filter(stockInfo ->
-            stockInfo.isValid() && stockInfo.isA()
+                stockInfo.isValid() && stockInfo.isA()
         ).collect(Collectors.toList());
     }
 
@@ -211,7 +214,7 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public PageVo<DailyIndexVo> getDailyIndexList(PageParam pageParam) {
-        pageParam.getCondition().put("date", DateFormatUtils.format(new Date(), "yyyy-MM-dd") );
+        pageParam.getCondition().put("date", DateFormatUtils.format(new Date(), "yyyy-MM-dd"));
         pageParam.setSort("tradingValue");
         return dailyIndexDao.getDailyIndexList(pageParam);
     }
@@ -223,6 +226,7 @@ public class StockServiceImpl implements StockService {
 
     /**
      * 按照季度采集数据，https://quotes.money.163.com/trade/lsjysj_300898.html?year=2022&season=1
+     *
      * @param date
      * @param code
      */
@@ -233,12 +237,13 @@ public class StockServiceImpl implements StockService {
             list = getAll().stream().filter(v -> code.contains(v.getCode())).collect(Collectors.toList());
         }
         list.forEach(stockInfo -> {
-            logger.info("start fixDailyIndex {}: {}", stockInfo.getName(), stockInfo.getCode());
+            //logger.info("start fixDailyIndex {}: {}", stockInfo.getName(), stockInfo.getCode());
             try {
                 int year = date / 100;
                 int season = (date % 100 - 1) / 3 + 1;
-                String content = stockCrawlerService.getHistoryDailyIndexsStringFrom163(stockInfo.getCode(), year, season);
-                List<DailyIndex> dailyIndexList = dailyIndexParser.parse163HistoryDailyIndexList(content);
+                String content = stockCrawlerService.getHistoryDailyIndexsStringFromXueQiu(stockInfo.getExchange().toUpperCase() + stockInfo.getCode(), 20);
+                List<DailyIndex> dailyIndexList = dailyIndexParser.parseXueQiuHistoryDailyIndexList(content);
+                logger.info("start fixDailyIndex {}: {},更新记录:{}", stockInfo.getName(), stockInfo.getCode(), dailyIndexList.size());
                 dailyIndexList.forEach(d -> d.setCode(stockInfo.getFullCode()));
                 dailyIndexDao.save(dailyIndexList);
                 TimeUnit.SECONDS.sleep(1);
@@ -246,6 +251,83 @@ public class StockServiceImpl implements StockService {
                 logger.error("fixDailyIndex error {} {}", stockInfo.getName(), stockInfo.getCode(), e);
             }
         });
+    }
+
+
+    /**
+     * 一段行情的涨幅超过40% 期间包含涨停板 回撤 25% 30%等待机会
+     * 一段行情 涨幅35%但是振幅达到40% 然后回撤25% 回撤30% 等待机会
+     * 35%要包含两个涨停板
+     */
+
+    public void momoRetracement() {
+        dailyIndexDao.truncateSelected();
+        //获取待筛选的股票
+        logger.info("默默回撤选股策略");
+        List<StockInfo> stockInfoList = getAllListed();
+        for (StockInfo stockInfo : stockInfoList) {
+            try {
+                List<StockInfo> data = new ArrayList<>();
+                //过滤st，科创板
+                // logger.info("{}",stockInfo.getName());
+                //if (filterZhuBan(stockInfo)) continue;
+                //logger.info("{}",stockInfo.getName());
+                //获取最近一百天k线数据
+                stockInfo.setDate(null);
+                stockInfo.setLength(100);
+                stockInfo.setStart(0);
+                PageVo<DailyIndexVo> dailyIndexVoPageVo = getDailyIndexVoPageVo(stockInfo);
+                if (CollectionUtils.isEmpty(dailyIndexVoPageVo.getData())) continue;
+                DailyIndexVo maxDaily = dailyIndexVoPageVo.getData().stream().max(Comparator.comparing(DailyIndex::getHighestPrice)).get();
+                DailyIndexVo minDaily = dailyIndexVoPageVo.getData().stream().min(Comparator.comparing(DailyIndex::getLowestPrice)).get();
+                logger.info("{},最大价格：{},最小价格:{},差价{}", stockInfo.getName(), maxDaily.getClosingPrice().doubleValue(), minDaily.getLowestPrice().doubleValue(), (maxDaily.getClosingPrice().doubleValue() - minDaily.getClosingPrice().doubleValue()) / maxDaily.getClosingPrice().doubleValue());
+                //计算回撤幅度大于25%的
+                double retracementRate = (maxDaily.getClosingPrice().doubleValue() - minDaily.getClosingPrice().doubleValue()) / maxDaily.getClosingPrice().doubleValue();
+                if (minDaily.getDate().compareTo(maxDaily.getDate()) < 0 || retracementRate < 0.25) {
+                    continue;
+                }
+                logger.info("{},回撤幅度打标", stockInfo.getName());
+                //计算高点前20个交易日内是否有涨停超过2次
+                stockInfo.setDate(maxDaily.getDate());
+                stockInfo.setLength(10);
+                stockInfo.setStart(0);
+                PageVo<DailyIndexVo> dailyIndexVoPageVoOne = getDailyIndexVoPageVo(stockInfo);
+                if (dailyIndexVoPageVoOne.getData().stream().filter(dailyIndexVo -> dailyIndexVo.getRurnoverRate().doubleValue() > 9.95).count() < 2) {
+                    continue;
+                }
+                logger.info("{},前一波行情涨幅达标", stockInfo.getName());
+                stockInfo.setMaxPriceDate(maxDaily.getDate());
+                stockInfo.setMinPriceDate(minDaily.getDate());
+                stockInfo.setRetracementRate(String.format("%.2f", retracementRate * 100));
+                stockInfo.setCode(stockInfo.getExchange()+stockInfo.getCode());
+                data.add(stockInfo);
+                dailyIndexDao.saveSelected(data);
+            } catch (Exception e) {
+                logger.error("出错了", e);
+            }
+        }
+    }
+
+
+    @Override
+    public PageVo<StockInfo> getAllSeledted() {
+        List<StockInfo> data = new ArrayList<>();
+        data = dailyIndexDao.selectAllSelected();
+        return new PageVo<>(data, data.size());
+    }
+
+    private PageVo<DailyIndexVo> getDailyIndexVoPageVo(StockInfo stockInfo) {
+        PageParam pageParam = new PageParam();
+        //获取所有数据
+        pageParam.getCondition().put("d.code", stockInfo.getExchange() + stockInfo.getCode());
+        pageParam.setStart(stockInfo.getStart());
+        pageParam.setLength(stockInfo.getLength());
+        pageParam.setSort("date");
+        if (stockInfo.getDate() != null) {
+            pageParam.getStringLE().put("date", stockInfo.getDate());
+        }
+        PageVo<DailyIndexVo> dailyIndexVoPageVo = dailyIndexDao.getDailyIndexList(pageParam);
+        return dailyIndexVoPageVo;
     }
 
 }

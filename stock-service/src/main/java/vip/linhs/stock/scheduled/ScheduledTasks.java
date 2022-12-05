@@ -47,6 +47,23 @@ public class ScheduledTasks {
     }
 
     /**
+     * begin of selected_info
+     */
+    @Scheduled(cron = "0 0 7 ? * MON-FRI")
+    public void runUpdateSelected() {
+        boolean isBusinessTime = holidayCalendarService.isBusinessDate(new Date());
+        if (!isBusinessTime) {
+            return;
+        }
+        try {
+            List<ExecuteInfo> list = taskService.getPendingTaskListById(Task.UpdateOfSelectEdInfo.getId());
+            executeTask(list);
+        } catch (Exception e) {
+            logger.error("task runUpdateSelected error", e);
+        }
+    }
+
+    /**
      * begin of day
      */
     @Scheduled(cron = "0 0 6 ? * MON-FRI")

@@ -21,4 +21,5 @@ public interface StockCrawlerService {
 
     String getHistoryDailyIndexsStringFrom163(String code, int year, int season);
 
+    String getHistoryDailyIndexsStringFromXueQiu(String code, int day);
 }

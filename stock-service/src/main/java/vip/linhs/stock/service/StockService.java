@@ -36,4 +36,6 @@ public interface StockService {
 
     void fixDailyIndex(int date, List<String> codeList);
 
+    PageVo<StockInfo> getAllSeledted();
+    void momoRetracement();
 }
