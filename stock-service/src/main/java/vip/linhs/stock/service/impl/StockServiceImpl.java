@@ -255,9 +255,8 @@ public class StockServiceImpl implements StockService {
 
 
     /**
-     * 一段行情的涨幅超过40% 期间包含涨停板 回撤 25% 30%等待机会
-     * 一段行情 涨幅35%但是振幅达到40% 然后回撤25% 回撤30% 等待机会
-     * 35%要包含两个涨停板
+     * 一段行情的涨幅超过40% 期间包含1个涨停板 回撤 25% 30%等待机会
+     * 一段行情 涨幅35%但是振幅达到40% 包含两个涨停板，然后回撤25% 回撤30% 等待机会
      */
 
     public void momoRetracement() {
@@ -270,7 +269,7 @@ public class StockServiceImpl implements StockService {
                 List<StockInfo> data = new ArrayList<>();
                 //过滤st，科创板
                 // logger.info("{}",stockInfo.getName());
-                //if (filterZhuBan(stockInfo)) continue;
+                if (filterZhuBan(stockInfo)) continue;
                 //logger.info("{}",stockInfo.getName());
                 //获取最近一百天k线数据
                 stockInfo.setDate(null);
@@ -278,6 +277,7 @@ public class StockServiceImpl implements StockService {
                 stockInfo.setStart(0);
                 PageVo<DailyIndexVo> dailyIndexVoPageVo = getDailyIndexVoPageVo(stockInfo);
                 if (CollectionUtils.isEmpty(dailyIndexVoPageVo.getData())) continue;
+
                 DailyIndexVo maxDaily = dailyIndexVoPageVo.getData().stream().max(Comparator.comparing(DailyIndex::getHighestPrice)).get();
                 DailyIndexVo minDaily = dailyIndexVoPageVo.getData().stream().min(Comparator.comparing(DailyIndex::getLowestPrice)).get();
                 logger.info("{},最大价格：{},最小价格:{},差价{}", stockInfo.getName(), maxDaily.getClosingPrice().doubleValue(), minDaily.getLowestPrice().doubleValue(), (maxDaily.getClosingPrice().doubleValue() - minDaily.getClosingPrice().doubleValue()) / maxDaily.getClosingPrice().doubleValue());
@@ -286,16 +286,9 @@ public class StockServiceImpl implements StockService {
                 if (minDaily.getDate().compareTo(maxDaily.getDate()) < 0 || retracementRate < 0.25) {
                     continue;
                 }
-                logger.info("{},回撤幅度打标", stockInfo.getName());
-                //计算高点前20个交易日内是否有涨停超过2次
                 stockInfo.setDate(maxDaily.getDate());
-                stockInfo.setLength(10);
-                stockInfo.setStart(0);
-                PageVo<DailyIndexVo> dailyIndexVoPageVoOne = getDailyIndexVoPageVo(stockInfo);
-                if (dailyIndexVoPageVoOne.getData().stream().filter(dailyIndexVo -> dailyIndexVo.getRurnoverRate().doubleValue() > 9.95).count() < 2) {
-                    continue;
-                }
-                logger.info("{},前一波行情涨幅达标", stockInfo.getName());
+                if (extracted(stockInfo) && extracted2(stockInfo)) continue;
+
                 stockInfo.setMaxPriceDate(maxDaily.getDate());
                 stockInfo.setMinPriceDate(minDaily.getDate());
                 stockInfo.setRetracementRate(String.format("%.2f", retracementRate * 100));
@@ -308,6 +301,66 @@ public class StockServiceImpl implements StockService {
         }
     }
 
+    private boolean extracted2(StockInfo stockInfo) {
+        //计算高点前50个交易日内是涨幅35%但是振幅达到40% 包含两个涨停板
+        stockInfo.setLength(100);
+        stockInfo.setStart(0);
+        PageVo<DailyIndexVo> dailyIndexVoPageVoOne = getDailyIndexVoPageVo(stockInfo);
+        //包含一个涨停
+        if (dailyIndexVoPageVoOne.getData().stream().filter(dailyIndexVo -> dailyIndexVo.getRurnoverRate().doubleValue() > 9.95).count() < 2) {
+            return true;
+        }
+        DailyIndexVo maxDaily = dailyIndexVoPageVoOne.getData().stream().max(Comparator.comparing(DailyIndex::getClosingPrice)).get();
+        DailyIndexVo minDaily = dailyIndexVoPageVoOne.getData().stream().min(Comparator.comparing(DailyIndex::getClosingPrice)).get();
+
+        //计算回撤幅度大于25%的
+        double retracementRate = (maxDaily.getClosingPrice().doubleValue() - minDaily.getClosingPrice().doubleValue()) / maxDaily.getClosingPrice().doubleValue();
+        if (minDaily.getDate().compareTo(maxDaily.getDate()) > 0 || retracementRate < 0.35) {
+            return true;
+        }
+
+        retracementRate = (maxDaily.getHighestPrice().doubleValue() - minDaily.getLowestPrice().doubleValue()) / maxDaily.getHighestPrice().doubleValue();
+        if (minDaily.getDate().compareTo(maxDaily.getDate()) > 0 || retracementRate < 0.40) {
+            return true;
+        }
+
+        logger.info("{},extracted2", stockInfo.getName());
+        return false;
+    }
+
+    private boolean extracted(StockInfo stockInfo) {
+        //计算高点前50个交易日内是涨幅超过40% 期间包含1个涨停板
+        stockInfo.setLength(100);
+        stockInfo.setStart(0);
+        PageVo<DailyIndexVo> dailyIndexVoPageVoOne = getDailyIndexVoPageVo(stockInfo);
+        //包含一个涨停
+        if (dailyIndexVoPageVoOne.getData().stream().filter(dailyIndexVo -> dailyIndexVo.getRurnoverRate().doubleValue() > 9.95).count() < 1) {
+            return true;
+        }
+        DailyIndexVo maxDaily = dailyIndexVoPageVoOne.getData().stream().max(Comparator.comparing(DailyIndex::getHighestPrice)).get();
+        DailyIndexVo minDaily = dailyIndexVoPageVoOne.getData().stream().min(Comparator.comparing(DailyIndex::getLowestPrice)).get();
+
+        //计算回撤幅度大于25%的
+        double retracementRate = (maxDaily.getClosingPrice().doubleValue() - minDaily.getClosingPrice().doubleValue()) / maxDaily.getClosingPrice().doubleValue();
+        if (minDaily.getDate().compareTo(maxDaily.getDate()) > 0 || retracementRate < 0.4) {
+            return true;
+        }
+
+        logger.info("{},extracted", stockInfo.getName());
+        return false;
+    }
+
+
+    private boolean filterZhuBan(StockInfo stockInfo) {
+        //主板 || stockInfo.getCode().startsWith("002") || stockInfo.getCode().startsWith("000")
+        if (stockInfo.getCode().startsWith("688") || stockInfo.getCode().startsWith("300")
+                || stockInfo.getName().contains("ST") || stockInfo.getName().contains("st") || stockInfo.getName().contains("退市")
+                || stockInfo.getExchange().startsWith("bj") || (stockInfo.getExchange().contains("sz") && stockInfo.getCode().startsWith("30"))
+        ||(stockInfo.getExchange().contains("sh") && stockInfo.getCode().startsWith("68")) ) {
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public PageVo<StockInfo> getAllSeledted() {

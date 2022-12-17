@@ -1,7 +1,9 @@
 package vip.linhs.stock.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +23,9 @@ import vip.linhs.stock.model.vo.TaskVo;
 import vip.linhs.stock.model.vo.trade.TradeRuleVo;
 import vip.linhs.stock.service.*;
 import vip.linhs.stock.trategy.handle.StrategyHandler;
-import vip.linhs.stock.util.DecimalUtil;
-import vip.linhs.stock.util.StockConsts;
-import vip.linhs.stock.util.StockUtil;
-import vip.linhs.stock.util.TradeUtil;
+import vip.linhs.stock.util.*;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -36,6 +36,7 @@ public class TaskServiceImpl implements TaskService {
     private final Logger logger = LoggerFactory.getLogger(TaskServiceImpl.class);
 
     private Map<String, BigDecimal> lastPriceMap = new HashMap<>();
+    private Map<String, String> last500Map = new HashMap<>();
 
     @Value("${ocr.service}")
     private String ocrServiceName;
@@ -66,6 +67,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Autowired
     private SystemConfigService systemConfigService;
+    @Autowired
+    private CloseableHttpClient httpClient;
 
     private static final boolean CrawIndexFromSina = false;
 
@@ -82,38 +85,39 @@ public class TaskServiceImpl implements TaskService {
         Task task = Task.valueOf(id);
         try {
             switch (task) {
-            case BeginOfYear:
-                holidayCalendarService.updateCurrentYear();
-                break;
-            case BeginOfDay:
-                lastPriceMap.clear();
-                break;
-            case UpdateOfStock:
-                runUpdateOfStock();
-                break;
-            case UpdateOfDailyIndex:
-                runUpdateOfDailyIndex();
-                break;
-            case Ticker:
-                runTicker();
-                break;
-            case TradeTicker:
-                runTradeTicker();
-                break;
-            case ApplyNewStock:
-                applyNewStock();
-                break;
-            case AutoLogin:
-                autoLogin();
-                break;
-            case UpdateOfStockInfo:
-                updateOfStockInfo();
-                break;
-            case UpdateOfSelectEdInfo:
-                updateOfselectEdInfo();
-                break;
-            default:
-                break;
+                case BeginOfYear:
+                    holidayCalendarService.updateCurrentYear();
+                    break;
+                case BeginOfDay:
+                    lastPriceMap.clear();
+                    break;
+                case UpdateOfStock:
+                    runUpdateOfStock();
+                    break;
+                case UpdateOfDailyIndex:
+                    runUpdateOfDailyIndex();
+                    break;
+                case Ticker:
+                    //runTicker();
+                    runTickerMy();
+                    break;
+                case TradeTicker:
+                    runTradeTicker();
+                    break;
+                case ApplyNewStock:
+                    applyNewStock();
+                    break;
+                case AutoLogin:
+                    autoLogin();
+                    break;
+                case UpdateOfStockInfo:
+                    updateOfStockInfo();
+                    break;
+                case UpdateOfSelectEdInfo:
+                    updateOfselectEdInfo();
+                    break;
+                default:
+                    break;
             }
         } catch (Exception e) {
             executeInfo.setMessage(e.getMessage());
@@ -135,6 +139,7 @@ public class TaskServiceImpl implements TaskService {
 //        stockService.fixDailyIndex(202202, null);
 //        stockService.fixDailyIndex(202201, null);
     }
+
     private void updateOfselectEdInfo() {
         stockService.momoRetracement();
     }
@@ -262,12 +267,67 @@ public class TaskServiceImpl implements TaskService {
     private List<DailyIndex> filterInvalid(List<DailyIndex> dailyIndexList) {
         final String currentDateStr = DateFormatUtils.format(new Date(), "yyyy-MM-dd");
         return dailyIndexList.stream().filter(dailyIndex ->
-            DecimalUtil.bg(dailyIndex.getOpeningPrice(), BigDecimal.ZERO)
-            && dailyIndex.getTradingVolume() > 0
-            && DecimalUtil.bg(dailyIndex.getTradingValue(), BigDecimal.ZERO)
-            && currentDateStr.equals(DateFormatUtils.format(dailyIndex.getDate(), "yyyy-MM-dd"))
+                DecimalUtil.bg(dailyIndex.getOpeningPrice(), BigDecimal.ZERO)
+                        && dailyIndex.getTradingVolume() > 0
+                        && DecimalUtil.bg(dailyIndex.getTradingValue(), BigDecimal.ZERO)
+                        && currentDateStr.equals(DateFormatUtils.format(dailyIndex.getDate(), "yyyy-MM-dd"))
         ).collect(Collectors.toList());
     }
+
+    /**
+     * http://500order.10jqka.com.cn:8081/ordersque?market=USZA&code=002567&orderside=2&orderlevels=1-10
+     * orderside 这里填写1是买盘、2是卖盘
+     * 沪市的股票吧USZA改成USHA
+     */
+    @Autowired
+    private DingTalkUtil dingTalker;
+
+    private void runTickerMy() {
+        List<StockSelected> selectList = stockSelectedService.getList();
+
+        for (StockSelected stockSelected : selectList) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(stockSelected.getCode());
+            //买盘价格检查
+            String url = "http://500order.10jqka.com.cn:8081/ordersque?market=" + stockSelected.getDescription() + "&code=" + stockSelected.getCode() + "&orderside=1&orderlevels=1-200";
+            JSONObject bodyJson = JSONObject.parseObject(HttpUtil.sendGet(httpClient, url));
+            sb.append("买价：");
+            for (Object j : bodyJson.getJSONArray("orderlevels")) {
+                JSONObject jsonObject = JSONObject.parseObject(j.toString());
+                if (jsonObject.getString("ordersque").contains("50000") || jsonObject.getString("ordersque").contains("134267728")) {
+                    sb.append(jsonObject.getString("price") + "，");
+                }
+            }
+
+            //卖盘价格检查
+            url = "http://500order.10jqka.com.cn:8081/ordersque?market=" + stockSelected.getDescription() + "&code=" + stockSelected.getCode() + "&orderside=2&orderlevels=1-200";
+            bodyJson = JSONObject.parseObject(HttpUtil.sendGet(httpClient, url));
+            sb.append("卖价：");
+            for (Object m : bodyJson.getJSONArray("orderlevels")) {
+                JSONObject jsonObjectm = JSONObject.parseObject(m.toString());
+                if (jsonObjectm.getString("ordersque").contains("50000") || jsonObjectm.getString("ordersque").contains("134267728")) {
+                    sb.append(jsonObjectm.getString("price") + "，");
+                }
+            }
+            if (sb.length() > 0) {
+                sb.setLength(sb.length() - 1);
+                if (last500Map.get(stockSelected.getCode()) != null && last500Map.get(stockSelected.getCode()).equals(sb.toString())) {
+                    logger.debug(stockSelected.getCode() + "无变化");
+                }else {
+                    last500Map.put(stockSelected.getCode(), sb.toString());
+                    messageServicve.send(sb.toString());
+                    try {
+                        dingTalker.sendMsg("code", sb.toString());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        }
+
+
+    }
+
 
     private void runTicker() {
         List<StockSelected> selectList = stockSelectedService.getList();
@@ -288,9 +348,9 @@ public class TaskServiceImpl implements TaskService {
                     lastPriceMap.put(code, dailyIndex.getClosingPrice());
                     String name = stockService.getStockByFullCode(StockUtil.getFullCode(code)).getName();
                     String body = String.format("%s:当前价格:%.02f, 涨幅%.02f%%", name,
-                        dailyIndex.getClosingPrice().doubleValue(),
-                        StockUtil.calcIncreaseRate(dailyIndex.getClosingPrice(),
-                                dailyIndex.getPreClosingPrice()).movePointRight(2).doubleValue());
+                            dailyIndex.getClosingPrice().doubleValue(),
+                            StockUtil.calcIncreaseRate(dailyIndex.getClosingPrice(),
+                                    dailyIndex.getPreClosingPrice()).movePointRight(2).doubleValue());
                     sb.append(body + "\n");
                 }
             } else {
@@ -382,17 +442,17 @@ public class TaskServiceImpl implements TaskService {
         List<SubmitData> newStockList = getCanBuyResponse.getNewStockList().stream()
                 .filter(newStock -> getCanBuyResponse.getNewQuota().stream().anyMatch(v -> v.getMarket().equals(newStock.getMarket())))
                 .map(newStock -> {
-            NewQuotaInfo newQuotaInfo = getCanBuyResponse.getNewQuota().stream().filter(v -> v.getMarket().equals(newStock.getMarket())).findAny().orElse(null);
-            SubmitData submitData = new SubmitData();
+                    NewQuotaInfo newQuotaInfo = getCanBuyResponse.getNewQuota().stream().filter(v -> v.getMarket().equals(newStock.getMarket())).findAny().orElse(null);
+                    SubmitData submitData = new SubmitData();
 
-            submitData.setAmount(Integer.min(Integer.parseInt(newStock.getKsgsx()), Integer.parseInt(newQuotaInfo.getKsgsz())));
-            submitData.setMarket(newStock.getMarket());
-            submitData.setPrice(newStock.getFxj());
-            submitData.setStockCode(newStock.getSgdm());
-            submitData.setStockName(newStock.getZqmc());
-            submitData.setTradeType(SubmitRequest.B);
-            return submitData;
-        }).collect(Collectors.toList());
+                    submitData.setAmount(Integer.min(Integer.parseInt(newStock.getKsgsx()), Integer.parseInt(newQuotaInfo.getKsgsz())));
+                    submitData.setMarket(newStock.getMarket());
+                    submitData.setPrice(newStock.getFxj());
+                    submitData.setStockCode(newStock.getSgdm());
+                    submitData.setStockName(newStock.getZqmc());
+                    submitData.setTradeType(SubmitRequest.B);
+                    return submitData;
+                }).collect(Collectors.toList());
 
         if (systemConfigService.isApplyNewConvertibleBond()) {
             TradeResultVo<GetConvertibleBondListV2Response> getConvertibleBondResultVo = getGetConvertibleBondListV2ResultVo();

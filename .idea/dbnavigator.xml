@@ -30,6 +30,7 @@
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="7ec45d18-d637-4b33-a90b-a84cf75f7ae7">
       <console name="Connection 1" type="STANDARD" schema="stock_master" session="Main"><![CDATA[select * from user
+select * from stock_selected
 
 update stock_master.trade_rule set value='0.006' where id=1
 
@@ -47,6 +48,7 @@ select id, code, name, exchange, abbreviation, state, type, create_time as creat
 select id as id, name as name, bean_name as beanName, state as state, create_time as createTime, update_time as updateTime from trade_strategy
 
 select id, rule_id as ruleId, stock_code as stockCode, entrust_code as entrustCode, deal_code as dealCode, related_deal_code as relatedDealCode, price, volume, trade_type as tradeType, trade_state as tradeState, trade_time as tradeTime, state, create_time as createTime, update_time as updateTime from trade_order]]></console>
+      <console name="Connection 1 1" type="STANDARD" schema="" session="Main"><![CDATA[select distinct province_id ,city_id,county_id from large_capacity_config where yn = 0 and town_id = 0 and end_date &gt;= '11']]></console>
     </connection>
     <connection id="1636b64b-770a-495d-bde8-1c716d8c2b61">
       <console name="122.9.129.71" type="STANDARD" schema="stock_master" session="Main"><![CDATA[select * from daily_index where  code='sh600207' and date >= '2022-5-1'

@@ -120,9 +120,9 @@ public class ScheduledTasks {
     @Scheduled(cron = "0,15,30,45 * 9,10,11,13,14 ? * MON-FRI")
     public void runTicker() {
         boolean isBusinessTime = holidayCalendarService.isBusinessTime(new Date());
-        if (!isBusinessTime) {
-            return;
-        }
+//        if (!isBusinessTime) {
+//            return;
+//        }
 
         try {
             List<ExecuteInfo> list = taskService.getPendingTaskListById(Task.Ticker.getId(), Task.TradeTicker.getId());

@@ -46,7 +46,7 @@ public class DailyIndexDaoImpl extends BaseDao implements DailyIndexDao {
     }
 
     public List<StockInfo> selectAllSelected(){
-        List<StockInfo> list = jdbcTemplate.query("select name,code,maxPriceDate,minPriceDate,retracementRate from selected_info",BeanPropertyRowMapper.newInstance(StockInfo.class));
+        List<StockInfo> list = jdbcTemplate.query("select name,code,maxPriceDate,minPriceDate,retracementRate from selected_info order by minPriceDate desc",BeanPropertyRowMapper.newInstance(StockInfo.class));
         return list;
     }
 
