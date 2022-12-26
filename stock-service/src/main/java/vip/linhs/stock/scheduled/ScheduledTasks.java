@@ -117,12 +117,12 @@ public class ScheduledTasks {
     /**
      * ticker: 价格提醒
      */
-    @Scheduled(cron = "0,15,30,45 * 9,10,11,13,14 ? * MON-FRI")
+    @Scheduled(cron = "0,5,10,15,20,25,30,35,40,45,50,55 * 9,10,11,13,14 ? * MON-FRI")
     public void runTicker() {
         boolean isBusinessTime = holidayCalendarService.isBusinessTime(new Date());
-//        if (!isBusinessTime) {
-//            return;
-//        }
+        if (!isBusinessTime) {
+            return;
+        }
 
         try {
             List<ExecuteInfo> list = taskService.getPendingTaskListById(Task.Ticker.getId(), Task.TradeTicker.getId());

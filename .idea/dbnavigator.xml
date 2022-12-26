@@ -39,6 +39,8 @@ select id, type, webhook, state from robot
 update robot set webhook='https://sctapi.ftqq.com/SCT84190To7lZtN3gtC3C9K2nsI1UHAGc.send' where id=1;
 commit;
 
+
+
 select * from trade_order
 
 select id as id, code as code, rate as rate, create_time as createTime, update_time as updateTime, description as description from stock_selected
@@ -48,12 +50,16 @@ select id, code, name, exchange, abbreviation, state, type, create_time as creat
 select id as id, name as name, bean_name as beanName, state as state, create_time as createTime, update_time as updateTime from trade_strategy
 
 select id, rule_id as ruleId, stock_code as stockCode, entrust_code as entrustCode, deal_code as dealCode, related_deal_code as relatedDealCode, price, volume, trade_type as tradeType, trade_state as tradeState, trade_time as tradeTime, state, create_time as createTime, update_time as updateTime from trade_order]]></console>
-      <console name="Connection 1 1" type="STANDARD" schema="" session="Main"><![CDATA[select distinct province_id ,city_id,county_id from large_capacity_config where yn = 0 and town_id = 0 and end_date &gt;= '11']]></console>
+      <console name="Connection 1 1" type="STANDARD" schema="" session="Main"><![CDATA[select * from stock_selected]]></console>
     </connection>
     <connection id="1636b64b-770a-495d-bde8-1c716d8c2b61">
       <console name="122.9.129.71" type="STANDARD" schema="stock_master" session="Main"><![CDATA[select * from daily_index where  code='sh600207' and date >= '2022-5-1'
 select s.name, s.abbreviation, d.code, d.date, d.pre_closing_price as preClosingPrice, d.closing_price as closingPrice, d.lowest_price as lowestPrice, d.highest_price as highestPrice, d.opening_price as openingPrice, d.trading_value as tradingValue, d.trading_volume as tradingVolume, d.rurnover_rate as rurnoverRate from daily_index d, stock_info s where d.code = concat(s.exchange, s.code) and d.code = 'sh688311'  and date >='2022-5-1'  order by date desc  
 
+select * from stock_selected
+delete from stock_selected where id=3
+
+insert into stock_selected (code,rate,description) values ('002079','0.02','USZA')
 
 select * from execute_info
 

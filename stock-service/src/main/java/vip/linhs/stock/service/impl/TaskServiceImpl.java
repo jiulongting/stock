@@ -284,30 +284,55 @@ public class TaskServiceImpl implements TaskService {
 
     private void runTickerMy() {
         List<StockSelected> selectList = stockSelectedService.getList();
+        List<String> codeList = selectList.stream().map(v -> StockUtil.getFullCode(v.getCode())).collect(Collectors.toList());
+        List<DailyIndex> dailyIndexList = stockCrawlerService.getDailyIndex(codeList);
 
         for (StockSelected stockSelected : selectList) {
+            DailyIndex dailyIndex = dailyIndexList.stream().filter(d -> d.getCode().contains(stockSelected.getCode())).findAny().orElse(null);
+            if (dailyIndex == null) {
+                continue;
+            }
+
             StringBuilder sb = new StringBuilder();
             sb.append(stockSelected.getCode());
+            sb.append("高：" + dailyIndex.getHighestPrice());
+            sb.append("现：%s" );
+            sb.append("低：" + dailyIndex.getLowestPrice());
             //买盘价格检查
             String url = "http://500order.10jqka.com.cn:8081/ordersque?market=" + stockSelected.getDescription() + "&code=" + stockSelected.getCode() + "&orderside=1&orderlevels=1-200";
             JSONObject bodyJson = JSONObject.parseObject(HttpUtil.sendGet(httpClient, url));
-            sb.append("买价：");
+            sb.append("买：");
             for (Object j : bodyJson.getJSONArray("orderlevels")) {
                 JSONObject jsonObject = JSONObject.parseObject(j.toString());
-                if (jsonObject.getString("ordersque").contains("50000") || jsonObject.getString("ordersque").contains("134267728")) {
-                    sb.append(jsonObject.getString("price") + "，");
+                if (Double.valueOf(jsonObject.getString("price")) < Double.valueOf(dailyIndex.getHighestPrice().doubleValue()) && Double.valueOf(jsonObject.getString("price")) > Double.valueOf(dailyIndex.getLowestPrice().doubleValue())) {
+                    int count = 0;
+                    for (String tempNum : jsonObject.getString("ordersque").split(",")) {
+                        int tempNumDouble = Integer.valueOf(tempNum);
+                        if (tempNumDouble == 134267728 || (tempNumDouble > 50000 && tempNumDouble < 60000)) {
+                            count++;
+                        }
+                    }
+                    sb.append(jsonObject.getString("price") + ":" + count + ",");
                 }
             }
 
             //卖盘价格检查
             url = "http://500order.10jqka.com.cn:8081/ordersque?market=" + stockSelected.getDescription() + "&code=" + stockSelected.getCode() + "&orderside=2&orderlevels=1-200";
             bodyJson = JSONObject.parseObject(HttpUtil.sendGet(httpClient, url));
-            sb.append("卖价：");
+            sb.append("卖：");
             for (Object m : bodyJson.getJSONArray("orderlevels")) {
                 JSONObject jsonObjectm = JSONObject.parseObject(m.toString());
-                if (jsonObjectm.getString("ordersque").contains("50000") || jsonObjectm.getString("ordersque").contains("134267728")) {
-                    sb.append(jsonObjectm.getString("price") + "，");
+                if (Double.valueOf(jsonObjectm.getString("price")) < Double.valueOf(dailyIndex.getHighestPrice().doubleValue()) && Double.valueOf(jsonObjectm.getString("price")) > Double.valueOf(dailyIndex.getLowestPrice().doubleValue())) {
+                    int count = 0;
+                    for (String tempNum : jsonObjectm.getString("ordersque").split(",")) {
+                        int tempNumDouble = Integer.valueOf(tempNum);
+                        if (tempNumDouble == 134267728 || (tempNumDouble > 50000 && tempNumDouble < 60000)) {
+                            count++;
+                        }
+                    }
+                    sb.append(jsonObjectm.getString("price") + ":" + count + ",");
                 }
+
             }
             if (sb.length() > 0) {
                 sb.setLength(sb.length() - 1);
@@ -315,17 +340,15 @@ public class TaskServiceImpl implements TaskService {
                     logger.debug(stockSelected.getCode() + "无变化");
                 }else {
                     last500Map.put(stockSelected.getCode(), sb.toString());
-                    messageServicve.send(sb.toString());
-                    try {
-                        dingTalker.sendMsg("code", sb.toString());
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                    messageServicve.send(String.format(sb.toString(),dailyIndex.getClosingPrice()));
+//                    try {
+//                        dingTalker.sendMsg("code", sb.toString());
+//                    } catch (IOException e) {
+//                        throw new RuntimeException(e);
+//                    }
                 }
             }
         }
-
-
     }
 
 
