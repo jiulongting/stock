@@ -117,7 +117,7 @@ public class ScheduledTasks {
     /**
      * ticker: 价格提醒
      */
-    @Scheduled(cron = "0,5,10,15,20,25,30,35,40,45,50,55 * 9,10,11,13,14 ? * MON-FRI")
+    @Scheduled(cron = "0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58 * 9,10,11,13,14 ? * MON-FRI")
     public void runTicker() {
         boolean isBusinessTime = holidayCalendarService.isBusinessTime(new Date());
         if (!isBusinessTime) {

@@ -47,7 +47,7 @@ public final class MailUtils {
             MimeMessage message = new MimeMessage(mailSession);
             // 设置发件人
             String username = props.getProperty("mail.user");
-            InternetAddress form = new InternetAddress(username,"量化");
+            InternetAddress form = new InternetAddress(username,title);
             message.setFrom(form);
 
             // 设置收件人

@@ -294,7 +294,8 @@ public class TaskServiceImpl implements TaskService {
             }
 
             StringBuilder sb = new StringBuilder();
-            sb.append(stockSelected.getCode());
+            boolean importInfo = false;
+            sb.append("%s");
             sb.append("高：" + dailyIndex.getHighestPrice());
             sb.append("现：%s" );
             sb.append("低：" + dailyIndex.getLowestPrice());
@@ -305,14 +306,18 @@ public class TaskServiceImpl implements TaskService {
             for (Object j : bodyJson.getJSONArray("orderlevels")) {
                 JSONObject jsonObject = JSONObject.parseObject(j.toString());
                 if (Double.valueOf(jsonObject.getString("price")) < Double.valueOf(dailyIndex.getHighestPrice().doubleValue()) && Double.valueOf(jsonObject.getString("price")) > Double.valueOf(dailyIndex.getLowestPrice().doubleValue())) {
-                    int count = 0;
-                    for (String tempNum : jsonObject.getString("ordersque").split(",")) {
-                        int tempNumDouble = Integer.valueOf(tempNum);
-                        if (tempNumDouble == 134267728 || (tempNumDouble > 50000 && tempNumDouble < 60000)) {
+                    importInfo=true;
+
+                int count = 0;
+                    for (Object tempNum : jsonObject.getJSONArray("ordersque")) {
+                        int tempNumDouble = Integer.valueOf(tempNum.toString());
+                        if (tempNumDouble == 134267728 || tempNumDouble == 50000) {
                             count++;
                         }
                     }
-                    sb.append(jsonObject.getString("price") + ":" + count + ",");
+                    if (count > 0) {
+                        sb.append(jsonObject.getString("price") + "-" + count + ",");
+                    }
                 }
             }
 
@@ -323,16 +328,19 @@ public class TaskServiceImpl implements TaskService {
             for (Object m : bodyJson.getJSONArray("orderlevels")) {
                 JSONObject jsonObjectm = JSONObject.parseObject(m.toString());
                 if (Double.valueOf(jsonObjectm.getString("price")) < Double.valueOf(dailyIndex.getHighestPrice().doubleValue()) && Double.valueOf(jsonObjectm.getString("price")) > Double.valueOf(dailyIndex.getLowestPrice().doubleValue())) {
-                    int count = 0;
-                    for (String tempNum : jsonObjectm.getString("ordersque").split(",")) {
-                        int tempNumDouble = Integer.valueOf(tempNum);
-                        if (tempNumDouble == 134267728 || (tempNumDouble > 50000 && tempNumDouble < 60000)) {
+                    importInfo=true;
+
+                int count = 0;
+                    for (Object tempNum : jsonObjectm.getJSONArray("ordersque")) {
+                        int tempNumDouble = Integer.valueOf(tempNum.toString());
+                        if (tempNumDouble == 134267728 || tempNumDouble == 50000 ) {
                             count++;
                         }
                     }
-                    sb.append(jsonObjectm.getString("price") + ":" + count + ",");
+                    if (count > 0) {
+                        sb.append(jsonObjectm.getString("price") + "-" + count + ",");
+                    }
                 }
-
             }
             if (sb.length() > 0) {
                 sb.setLength(sb.length() - 1);
@@ -340,7 +348,7 @@ public class TaskServiceImpl implements TaskService {
                     logger.debug(stockSelected.getCode() + "无变化");
                 }else {
                     last500Map.put(stockSelected.getCode(), sb.toString());
-                    messageServicve.send(String.format(sb.toString(),dailyIndex.getClosingPrice()));
+                    messageServicve.sendMd(stockSelected.getName(),String.format(sb.toString(), importInfo ? "★️" : "", dailyIndex.getClosingPrice()));
 //                    try {
 //                        dingTalker.sendMsg("code", sb.toString());
 //                    } catch (IOException e) {
