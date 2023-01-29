@@ -16,6 +16,16 @@ public class BaseModel implements Serializable {
 
     private Date date;
 
+    private String CreateTimeStr;
+
+    public String getCreateTimeStr() {
+        return CreateTimeStr;
+    }
+
+    public void setCreateTimeStr(String createTimeStr) {
+        CreateTimeStr = createTimeStr;
+    }
+
     public Date getDate() {
         return date;
     }

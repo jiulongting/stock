@@ -1,12 +1,22 @@
 package vip.linhs.stock.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang3.time.DateUtils;
+import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +30,14 @@ import vip.linhs.stock.parser.StockInfoParser;
 import vip.linhs.stock.parser.StockInfoParser.EmStock;
 import vip.linhs.stock.service.StockCrawlerService;
 import vip.linhs.stock.util.HttpUtil;
+import vip.linhs.stock.util.StockConsts;
 import vip.linhs.stock.util.StockUtil;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -117,4 +132,103 @@ public class StockCrawlerServiceImpl implements StockCrawlerService {
             return HttpUtil.sendGet(httpClient, "https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol="+code+"&begin="+System.currentTimeMillis()+"&period=day&type=before&count=-230&indicator=kline,pe,pb,ps,pcf,market_capital,agt,ggt,balance", header);
     }
 
+    public List<StockInfo> getZTfromddxgubitcn(String dateStr) {
+        String url = "http://ddx.gubit.cn/jiedu/?date=" + dateStr;
+        String body = HttpUtil.sendGet(httpClient, url);
+        Document doc = Jsoup.parse(body);
+
+        List<StockInfo> list = new ArrayList();
+        Elements header = doc.getElementsByClass("header");
+
+        for (int i = 0; i < header.size(); i++) {
+            String key = header.get(i).children().get(0).text();
+            if (key.contains("公告") || key.contains("其他") || key.contains("ST股")||key.contains("业绩预增")) {
+                continue;
+            }
+            // 所有#id的标签
+            Elements elements = doc.select("tbody").get(i).children();
+            for (Element element : elements) {
+                StockInfo stockInfo = new StockInfo();
+                String text = element.children().get(0).children().get(0).children().get(2).text();
+                stockInfo.setName(element.children().get(0).children().get(0).children().get(0).text());
+                stockInfo.setCode(text.split("\\.")[0]);
+                stockInfo.setExchange(text.split("\\.")[1]);
+                stockInfo.setTag(key.equals("大金融") ? "金融" : key.equals("大消费") ? "消费" : key.equals("汽车产业链") ? "汽车零部件" :
+                        key.equals("半导体产业链") ? "国产芯片" : key.equals("医药医疗")?"医药":key.equals("优化生育（三孩）")?"三胎":key);
+                stockInfo.setType(StockConsts.StockZTType.ChaGuWang.value());
+                try {
+                    Date date = new SimpleDateFormat("yyyyMMdd").parse(dateStr);
+                    date = DateUtils.parseDate(new SimpleDateFormat("yyyy-MM-dd").format(date), "yyyy-MM-dd");
+                    stockInfo.setCreateTime(date);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+
+                list.add(stockInfo);
+            }
+        }
+        return list;
+    }
+
+    public List<StockInfo> getZTfromjiuyangongshe(String dateStr) {
+
+        String url = "https://app.jiuyangongshe.com/jystock-app/api/v1/action/field";
+        // 获得Http客户端(可以理解为:你得先有一个浏览器;注意:实际上HttpClient与浏览器是不一样的)
+        CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+
+        HttpPost httppost = new HttpPost(url); //建立HttpPost对象
+        httppost.addHeader("content-type", "application/json");
+        httppost.addHeader("platform", "3");
+        httppost.addHeader("timestamp", "1674908485669");
+        httppost.addHeader("token", "13c4e84197dcba3a46e77a6f521a774e");
+
+        JSONObject param2 = new JSONObject();
+        param2.put("date", dateStr);
+        param2.put("pc", "1");
+
+        StringEntity stringEntity = null;
+        CloseableHttpResponse response = null;
+        JSONObject dataJson = null;
+        try {
+            stringEntity = new StringEntity(param2.toString());
+            httppost.setEntity(stringEntity);
+            response = httpClient.execute(httppost);
+            // 从响应模型中获取响应实体
+            HttpEntity responseEntity = response.getEntity();
+            String str = EntityUtils.toString(responseEntity);
+            dataJson = JSONObject.parseObject(str);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        List<StockInfo> list = new ArrayList();
+        for (int i = 1; i < dataJson.getJSONArray("data").size(); i++) {
+            JSONObject temp = JSONObject.parseObject(dataJson.getJSONArray("data").get(i).toString());
+            String key = temp.getString("name");
+            if (key.contains("公告") || key.contains("新股")|| key.contains("年报披露")||key.contains("其他") || key.contains("ST板块")||key.contains("业绩预增")) {
+                continue;
+            }
+            for (Object element : temp.getJSONArray("list")) {
+                StockInfo stockInfo = new StockInfo();
+                JSONObject e = JSONObject.parseObject(element.toString());
+                String code = e.getString("code");
+
+                stockInfo.setName(e.getString("name"));
+                stockInfo.setCode(code.substring(2));
+                stockInfo.setExchange(code.substring(0,2));
+                stockInfo.setTag(key);
+                stockInfo.setType(StockConsts.StockZTType.JiuYanGoneShe.value());
+                try {
+                    Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
+                    stockInfo.setCreateTime(date);
+                } catch (ParseException parseException) {
+                    throw new RuntimeException(parseException);
+                }
+                list.add(stockInfo);
+            }
+        }
+
+
+        return list;
+}
 }

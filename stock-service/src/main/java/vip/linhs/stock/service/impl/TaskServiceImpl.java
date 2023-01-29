@@ -27,6 +27,8 @@ import vip.linhs.stock.util.*;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -96,6 +98,7 @@ public class TaskServiceImpl implements TaskService {
                     break;
                 case UpdateOfDailyIndex:
                     runUpdateOfDailyIndex();
+                    updateStockZt();
                     break;
                 case Ticker:
                     //runTicker();
@@ -217,6 +220,33 @@ public class TaskServiceImpl implements TaskService {
 
         stockService.update(needAddedList, needUpdatedList, stockLogList);
     }
+
+    public void updateStockZt() {
+        List<StockInfo> list = stockService.getZtAll().stream().filter(v -> v.getState() == StockConsts.StockZTState.Valid.value()).collect(Collectors.toList());
+        Map<String,StockInfo> dbStockMap = list.stream().collect(Collectors.toMap(stockInfo ->getStockInfoString(stockInfo),stockInfo -> stockInfo));
+
+        ArrayList<StockInfo> needAddedList = new ArrayList<>();
+        ArrayList<StockInfo> needUpdatedList = new ArrayList<>();
+        ArrayList<StockLog> stockLogList = new ArrayList<>();
+
+        List<StockInfo> ddxgubitList = stockCrawlerService.getZTfromddxgubitcn(new SimpleDateFormat("yyyyMMdd").format(new Date()));
+        List<StockInfo> jiuyangongsheList = stockCrawlerService.getZTfromjiuyangongshe(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        ddxgubitList.addAll(jiuyangongsheList);
+        for (StockInfo stockInfo : ddxgubitList) {
+            StockInfo StockInfoMap = dbStockMap.get(getStockInfoString(stockInfo));
+            if (StockInfoMap == null) {
+                needAddedList.add(stockInfo);
+            }
+
+        }
+
+        stockService.updatezt(needAddedList, needUpdatedList, stockLogList);
+    }
+
+    private String getStockInfoString(StockInfo stockInfo) {
+        return stockInfo.getCode() + stockInfo.getExchange() + stockInfo.getTag() + stockInfo.getType() + stockInfo.getCreateTime();
+    }
+
 
     private void runUpdateOfDailyIndex() {
         List<StockInfo> list = stockService.getAll().stream()

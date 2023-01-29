@@ -12,13 +12,32 @@ public class StockInfo extends BaseModel {
     private String name;
     private String exchange;
     private String abbreviation;
+
+    private String tag;
     private int state;
     private int type;
 
+    private int num;
     private Date maxPriceDate;
     private Date minPriceDate;
 
     private String retracementRate;
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
 
     public String getRetracementRate() {
         return retracementRate;

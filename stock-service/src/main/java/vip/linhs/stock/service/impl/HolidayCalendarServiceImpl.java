@@ -17,6 +17,7 @@ import vip.linhs.stock.dao.HolidayCalendarDao;
 import vip.linhs.stock.model.po.HolidayCalendar;
 import vip.linhs.stock.service.HolidayCalendarService;
 import vip.linhs.stock.service.SystemConfigService;
+import vip.linhs.stock.util.DateUtil;
 
 @Service
 public class HolidayCalendarServiceImpl implements HolidayCalendarService {
@@ -72,6 +73,21 @@ public class HolidayCalendarServiceImpl implements HolidayCalendarService {
             return false;
         }
         return holidayCalendarDao.getByDate(date) == null;
+    }
+
+    public Date businesDateSubtraction(String dateStr,int dayNum){
+        int countBusinesDate=0;
+        Date date = DateUtil.subtraction(dateStr, -1);
+        for (int i = 0; i < 15; i++) {
+            if(isBusinessDate(date)){
+                countBusinesDate++;
+            }
+            if (countBusinesDate == dayNum) {
+                break;
+            }
+            date = DateUtil.subtraction(date, -1);
+        }
+        return date;
     }
 
     @Override

@@ -12,6 +12,7 @@ public class StockConsts {
 
     private static final String CACHE_KEY_DATA_PREFIX = CACHE_KEY_PREFIX + "data:";
     public static final String CACHE_KEY_DATA_STOCK = StockConsts.CACHE_KEY_DATA_PREFIX + "stock";
+    public static final String CACHE_KEY_DATA_STOCK_ZT = StockConsts.CACHE_KEY_DATA_PREFIX + "stockZT";
 
     private static final String CACHE_KEY_CONFIG_PREFIX = CACHE_KEY_PREFIX + "config:";
     public static final String CACHE_KEY_CONFIG_ROBOT = StockConsts.CACHE_KEY_CONFIG_PREFIX + "robot";
@@ -90,6 +91,40 @@ public class StockConsts {
         private int value;
 
         private StockType(int value) {
+            this.value = value;
+        }
+
+        public int value() {
+            return value;
+        }
+    }
+
+    public enum StockZTState {
+        /**
+         * 有效
+         */
+        Valid(0),
+        /**
+         * 失效
+         */
+        Invalid(1);
+
+        private int value;
+
+        private StockZTState(int value) {
+            this.value = value;
+        }
+
+        public int value() {
+            return value;
+        }
+    }
+
+    public enum StockZTType {
+        A(0), ChaGuWang(1), JiuYanGoneShe(2), B(3);
+        private int value;
+
+        private StockZTType(int value) {
             this.value = value;
         }
 

@@ -1,5 +1,6 @@
 package vip.linhs.stock.service;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
@@ -37,9 +38,27 @@ public class StockCrawlerServiceTest {
 
     @Test
     public void testGetHistoryDailyIndexs() {
-       // List<DailyIndex> list = stockCrawlerService.getHistoryDailyIndexs("300542");
+        // List<DailyIndex> list = stockCrawlerService.getHistoryDailyIndexs("300542");
         List<DailyIndex> list = stockCrawlerService.getHistoryDailyIndexs("688580");
         Assertions.assertFalse(list.isEmpty());
     }
 
+    @Test
+    public void testZT() {
+        stockCrawlerService.getZTfromddxgubitcn("20230120");
+    }
+
+
+    public static void main(String[] args) {
+        String t ="com.framework.redis.aaa.mmm";
+        String[] split = t.split(".");
+        for (int i = 0; i < split.length; i++) {
+            System.out.println(split[i]);
+        }
+        String m ="123.123.123" ;
+        String[] split1 = m.split("\\.");
+        Arrays.stream(split1).forEach(System.out::println);
+
+        System.out.println(t.indexOf("."));
+    }
 }

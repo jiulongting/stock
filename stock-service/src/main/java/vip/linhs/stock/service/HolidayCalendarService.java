@@ -10,4 +10,5 @@ public interface HolidayCalendarService {
 
     boolean isBusinessTime(Date date);
 
+    Date businesDateSubtraction(String createTimeStr, int num);
 }

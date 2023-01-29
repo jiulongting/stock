@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import vip.linhs.stock.dao.DailyIndexDao;
@@ -38,12 +39,89 @@ public class ReportController extends BaseController {
 
     @RequestMapping("selectStockList")
     public PageVo<StockInfo> getSelectStockList(PageParam pageParam) {
+        return stockService.getAllSeledted();
         //dikai2(pageParam);
         // pageParam.getCondition().put("code","600210");
         //dikai3(pageParam);
+//        gaokai(-9.5,-9);
+//        gaokai(-9,-8.5);
+//        gaokai(-8.5,-8);
+//        gaokai(-8,-7.5);
+//        gaokai(-7.5,-7);
+//        gaokai(-7,-6.5);
+//        gaokai(-6.5,-6);
+//        gaokai(-6,-5.5);
+//        gaokai(-5.5,-5);
+//        gaokai(-5,-4.5);
+//        gaokai(-4.5,-4);
+//        gaokai(-4,-3.5);
+//        gaokai(-3.5,-3);
+//        gaokai(-3,-2.5);
+//        gaokai(-2.5,-2);
+//        gaokai(-2,-1.5);
+//        gaokai(-1.5,-1);
+//        gaokai(-1,-0.5);
+//        gaokai(-0.5,0);
+//        gaokai(0,0.5);
+//        gaokai(0.5,1);
+//        gaokai(1,1.5);
+//        gaokai(1.5,2);
+//        gaokai(2,2.5);
+//        gaokai(2.5,3);
+//        gaokai(3,3.5);
+//        gaokai(3.5,4);
+//        gaokai(4,4.5);
+//        gaokai(4.5,5);
+//        gaokai(5,5.5);
+//        gaokai(5.5,6);
+//        gaokai(6,6.5);
+//        gaokai(6.5,7);
+//        gaokai(7,7.5);
+//        gaokai(7.5,8);
+//        gaokai(8,8.5);
+//        gaokai(8.5,9);
+//        gaokai(9,9.5);
+    }
 
+    @RequestMapping("hotMap")
+    public PageVo<StockInfo> getHotMap(StockInfo pageParam) {
+        return stockService.getStockZtFromDate(pageParam);
+    }
 
-        return stockService.getAllSeledted();
+    /**
+     * 高开回测
+     */
+    public void gaokai(double b,double e) {
+        logger.info("高开回测开始");
+        List<StockInfo> stockInfoList = stockService.getAllListed();
+        double gaokaiRat = 0l;
+        double gaokaiNumber = 0l;
+        for (StockInfo stockInfo : stockInfoList) {
+            if (filterZhuBan(stockInfo)) continue;
+            stockInfo.setLength(200);
+            PageVo<DailyIndexVo> dailyIndexVoPageVo = getDailyIndexVoPageVo(stockInfo);
+            double gaokaiNum = 0;
+            double gaokaiTotal = 0;
+            double rate=0l;
+            for (int i = 0; i < dailyIndexVoPageVo.getData().size() - 2; i++) {
+                DailyIndexVo dailyIndexVo=dailyIndexVoPageVo.getData().get(i);
+                DailyIndexVo dailyIndexVoZ=dailyIndexVoPageVo.getData().get(i+1);
+                if (dailyIndexVoZ.getRurnoverRate().doubleValue() > b && dailyIndexVoZ.getRurnoverRate().doubleValue() < e ) {
+                    gaokaiTotal++;
+                    if (dailyIndexVo.getOpeningPrice().doubleValue() > dailyIndexVoZ.getClosingPrice().doubleValue()) {
+                        gaokaiNum++;
+                        rate = rate + dailyIndexVoPageVo.getData().get(i).getRurnoverRate().doubleValue();
+                    }
+                }
+            }
+            if(gaokaiTotal>0) {
+                gaokaiNumber++;
+                gaokaiRat = gaokaiRat + (gaokaiNum / gaokaiTotal);
+               // logger.info(stockInfo.getName()+"gaokaiNum"+gaokaiNum+"gaokaiTotal"+gaokaiTotal+" 平均:"+gaokaiNum / gaokaiTotal);
+            }
+        }
+        logger.info(b+"到"+e+"个点gaokaiRat:" + gaokaiRat+"股票个数："+gaokaiNumber+" 平均:"+gaokaiRat/gaokaiNumber);
+
     }
 
 
@@ -330,7 +408,7 @@ public class ReportController extends BaseController {
         pageParam.setStart(stockInfo.getStart());
         pageParam.setLength(stockInfo.getLength());
         pageParam.setSort("date");
-        if(stockInfo.getDate()!=null) {
+        if (stockInfo.getDate() != null) {
             pageParam.getStringLE().put("date", stockInfo.getDate());
         }
         PageVo<DailyIndexVo> dailyIndexVoPageVo = dailyIndexDao.getDailyIndexList(pageParam);
@@ -339,8 +417,8 @@ public class ReportController extends BaseController {
 
     private boolean filterZhuBan(StockInfo stockInfo) {
         //主板 || stockInfo.getCode().startsWith("002") || stockInfo.getCode().startsWith("000")
-        if (!(stockInfo.getCode().startsWith("600")
-                || stockInfo.getName().contains("ST") || stockInfo.getName().contains("退市"))) {
+        if (stockInfo.getCode().startsWith("600")
+                || stockInfo.getName().contains("ST") || stockInfo.getName().contains("退市")) {
             return true;
         }
         return false;

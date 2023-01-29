@@ -4,6 +4,7 @@ import vip.linhs.stock.model.po.DailyIndex;
 import vip.linhs.stock.model.po.StockInfo;
 
 import java.util.List;
+import java.util.Map;
 
 public interface StockCrawlerService {
 
@@ -22,4 +23,7 @@ public interface StockCrawlerService {
     String getHistoryDailyIndexsStringFrom163(String code, int year, int season);
 
     String getHistoryDailyIndexsStringFromXueQiu(String code, int day);
+    List<StockInfo> getZTfromddxgubitcn(String date);
+
+    List<StockInfo> getZTfromjiuyangongshe(String dateStr);
 }

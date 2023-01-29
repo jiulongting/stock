@@ -3,6 +3,8 @@ package vip.linhs.stock.service.impl;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -34,8 +36,10 @@ import vip.linhs.stock.model.vo.DailyIndexVo;
 import vip.linhs.stock.model.vo.PageParam;
 import vip.linhs.stock.model.vo.PageVo;
 import vip.linhs.stock.parser.DailyIndexParser;
+import vip.linhs.stock.service.HolidayCalendarService;
 import vip.linhs.stock.service.StockCrawlerService;
 import vip.linhs.stock.service.StockService;
+import vip.linhs.stock.util.DateUtil;
 import vip.linhs.stock.util.StockConsts;
 
 @Service
@@ -63,15 +67,27 @@ public class StockServiceImpl implements StockService {
     @Autowired
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
+    @Autowired
+    private HolidayCalendarService holidayCalendarService;
     @Override
     public List<StockInfo> getAll() {
-        PageParam pageParam = new PageParam();
-        pageParam.setStart(0);
-        pageParam.setLength(Integer.MAX_VALUE);
+        PageParam pageParam = getPageParam();
         PageVo<StockInfo> pageVo = stockInfoDao.get(pageParam);
         return pageVo.getData();
     }
 
+    private PageParam getPageParam() {
+        PageParam pageParam = new PageParam();
+        pageParam.setStart(0);
+        pageParam.setLength(Integer.MAX_VALUE);
+        return pageParam;
+    }
+
+    public List<StockInfo> getZtAll() {
+        PageParam pageParam = getPageParam();
+        PageVo<StockInfo> pageVo = stockInfoDao.getzt(pageParam);
+        return pageVo.getData();
+    }
     @Override
     public List<StockInfo> getAllListed() {
         return getAll().stream().filter(stockInfo ->
@@ -107,6 +123,20 @@ public class StockServiceImpl implements StockService {
         }
     }
 
+    @CacheEvict(value = StockConsts.CACHE_KEY_DATA_STOCK_ZT, allEntries = true)
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
+    @Override
+    public void updatezt(List<StockInfo> needAddedList, List<StockInfo> needUpdatedList, List<StockLog> stockLogList) {
+        if (needAddedList != null) {
+            addzt(needAddedList);
+        }
+        if (needUpdatedList != null) {
+            updatezt(needUpdatedList);
+        }
+
+    }
+
+
     private void add(List<StockInfo> list) {
         Assert.notNull(list, StockServiceImpl.LIST_MESSAGE);
         if (!list.isEmpty()) {
@@ -114,10 +144,24 @@ public class StockServiceImpl implements StockService {
         }
     }
 
+    private void addzt(List<StockInfo> list) {
+        Assert.notNull(list, StockServiceImpl.LIST_MESSAGE);
+        if (!list.isEmpty()) {
+            stockInfoDao.addzt(list);
+        }
+    }
+
     private void update(List<StockInfo> list) {
         Assert.notNull(list, StockServiceImpl.LIST_MESSAGE);
         if (!list.isEmpty()) {
             stockInfoDao.update(list);
+        }
+    }
+
+    private void updatezt(List<StockInfo> list) {
+        Assert.notNull(list, StockServiceImpl.LIST_MESSAGE);
+        if (!list.isEmpty()) {
+            stockInfoDao.updatezt(list);
         }
     }
 
@@ -239,8 +283,6 @@ public class StockServiceImpl implements StockService {
         list.forEach(stockInfo -> {
             //logger.info("start fixDailyIndex {}: {}", stockInfo.getName(), stockInfo.getCode());
             try {
-                int year = date / 100;
-                int season = (date % 100 - 1) / 3 + 1;
                 String content = stockCrawlerService.getHistoryDailyIndexsStringFromXueQiu(stockInfo.getExchange().toUpperCase() + stockInfo.getCode(), 20);
                 List<DailyIndex> dailyIndexList = dailyIndexParser.parseXueQiuHistoryDailyIndexList(content);
                 logger.info("start fixDailyIndex {}: {},更新记录:{}", stockInfo.getName(), stockInfo.getCode(), dailyIndexList.size());
@@ -366,6 +408,17 @@ public class StockServiceImpl implements StockService {
     public PageVo<StockInfo> getAllSeledted() {
         List<StockInfo> data = new ArrayList<>();
         data = dailyIndexDao.selectAllSelected();
+        return new PageVo<>(data, data.size());
+    }
+
+    public PageVo<StockInfo> getStockZtFromDate(StockInfo stockInfo) {
+        try {
+            stockInfo.setCreateTime(new SimpleDateFormat("yyyy-MM-dd").parse(stockInfo.getCreateTimeStr()));
+            stockInfo.setUpdateTime(holidayCalendarService.businesDateSubtraction(stockInfo.getCreateTimeStr(),stockInfo.getNum()));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        List<StockInfo> data  = stockInfoDao.getStockZtFromDate(stockInfo);
         return new PageVo<>(data, data.size());
     }
 

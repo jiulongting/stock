@@ -1,0 +1,361 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" href="https://jscdn.com.cn/highcharts/images/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://26d3254z77.zicp.fun/highcharts.js"></script>
+  <script src="https://26d3254z77.zicp.fun/exporting.js"></script>
+  <script src="https://26d3254z77.zicp.fun/heatmap.js"></script>
+  <script src="https://26d3254z77.zicp.fun/treemap.js"></script>
+  <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+  <script src="https://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+
+  <script type="text/javascript" src="/static/js/lib/datatable/datatable.js"></script>
+  <script type="text/javascript" src="/static/js/util/consts.js"></script>
+  <script type="text/javascript" src="/static/js/util/config.js"></script>
+  <script type="text/javascript" src="/static/js/util/common.js"></script>
+  <script type="text/javascript" src="/static/js/util/frame.js"></script>
+  <script type="text/javascript" src="/static/js/modules/report.js"></script>
+
+
+
+
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+<body>
+数据源：<select id="type">
+  <option value="0">全部</option>
+  <option value="2">韭研公社</option>
+  <option value="1">查股网</option>
+</select>
+&nbsp;&nbsp;&nbsp;数据粒度：<select id="dataSize">
+  <option value="5">5天</option>
+  <option value="4">4天</option>
+  <option value="3">3天</option>
+  <option value="2">2天</option>
+  <option value="1">1天</option>
+</select>
+<div id="app">
+  <div class="block" style="display:flex;justify-content: center;">
+    <span class="demonstration">涨停热力图1</span>
+    <el-date-picker value-format="yyyy-MM-dd" @change="getKeys" v-model="value1" type="date"
+                    placeholder="选择日期">
+    </el-date-picker>
+  </div>
+  <div id="container"></div>
+
+</div>
+<!--[if lt IE 9]>
+<script src="https://img.hcharts.cn/highcharts/modules/oldie.js"></script>
+<![endif]-->
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data() {
+            return {
+                hotMapDateJson: "",
+                pickerOptions: {
+                    disabledDate(time) {
+                        return time.getTime() > Date.now();
+                    },
+                    shortcuts: [{
+                        text: '今天',
+                        onClick(picker) {
+                            picker.$emit('pick', new Date());
+                        }
+                    }, {
+                        text: '昨天',
+                        onClick(picker) {
+                            const date = new Date();
+                            date.setTime(date.getTime() - 3600 * 1000 * 24);
+                            picker.$emit('pick', date);
+                        }
+                    }, {
+                        text: '一周前',
+                        onClick(picker) {
+                            const date = new Date();
+                            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+                            picker.$emit('pick', date);
+                        }
+                    }]
+                },
+                value1: '',
+                value2: '',
+            };
+        },
+        created() {
+            console.log(111)
+        },
+        mounted() {
+            this.getDetail();
+        },
+        methods: {
+            getKeys(str) {
+                console.log(str)
+                this.getDetail(str)
+            },
+            getecharts(val) {
+                var hotMapDateBody = "";
+                var hotMapDateJson = val;
+                var charDate = new Array();
+                for (var i = 0; i < hotMapDateJson.data.length; i++) {
+                    var temp = hotMapDateJson.data[i];
+
+                        var user = new Object({
+                            name: hotMapDateJson.data[i].tag,
+                            value: hotMapDateJson.data[i].num,
+                            colorValue: hotMapDateJson.data[i].num
+                        });
+                        charDate.push(user);
+
+                }
+                var chart = Highcharts.chart('container', {
+                    colorAxis: {
+                        minColor: '#FFFFFF',
+                        maxColor: '#FF0000'
+                    },
+                    series: [{
+                        type: "treemap",
+                        layoutAlgorithm: 'squarified',
+                        data: charDate
+                    }],
+                    title: {
+                        text: ''
+                    }
+                });
+            },
+
+            getDetail(str) {
+                fetch(GlobalConfig.serverUrl + '/api/report/hotMap?CreateTimeStr=' + str+'&type='+$('#type').val()+'&num='+$('#dataSize').val(),{headers:getRequestHeaders()}).then(res => {
+                    return res.text()
+                }).then(res => {
+                    console.log(JSON.parse(res))
+                    var hotMapDateJson = JSON.parse(res);
+                    this.getecharts(hotMapDateJson)
+                })
+            }
+        }
+    })
+
+</script>
+
+<hr>
+<div id="app2">
+  <div class="block" style="display:flex;justify-content: center;">
+    <span class="demonstration">涨停热力图2</span>
+    <el-date-picker value-format="yyyy-MM-dd" @change="getKeys" v-model="value1" type="date"
+                    placeholder="选择日期">
+    </el-date-picker>
+  </div>
+  <div id="container2"></div>
+
+</div>
+<!--[if lt IE 9]>
+<script src="https://img.hcharts.cn/highcharts/modules/oldie.js"></script>
+<![endif]-->
+<script>
+
+
+    var vm = new Vue({
+        el: '#app2',
+        data() {
+            return {
+                hotMapDateJson: "",
+                pickerOptions: {
+                    disabledDate(time) {
+                        return time.getTime() > Date.now();
+                    },
+                    shortcuts: [{
+                        text: '今天',
+                        onClick(picker) {
+                            picker.$emit('pick', new Date());
+                        }
+                    }, {
+                        text: '昨天',
+                        onClick(picker) {
+                            const date = new Date();
+                            date.setTime(date.getTime() - 3600 * 1000 * 24);
+                            picker.$emit('pick', date);
+                        }
+                    }, {
+                        text: '一周前',
+                        onClick(picker) {
+                            const date = new Date();
+                            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+                            picker.$emit('pick', date);
+                        }
+                    }]
+                },
+                value1: '',
+                value2: '',
+            };
+        },
+        created() {
+            console.log(111)
+        },
+        mounted() {
+            this.getDetail();
+        },
+        methods: {
+            getKeys(str) {
+                console.log(str)
+                this.getDetail(str)
+            },
+            getecharts(val) {
+                var hotMapDateBody = "";
+                var hotMapDateJson = val;
+                var charDate = new Array();
+                for (var i = 0; i < hotMapDateJson.data.length; i++) {
+                    var temp = hotMapDateJson.data[i];
+
+                        var user = new Object({
+                            name: hotMapDateJson.data[i].tag,
+                            value: hotMapDateJson.data[i].num,
+                            colorValue: hotMapDateJson.data[i].num
+                        });
+                        charDate.push(user);
+
+                }
+                var chart = Highcharts.chart('container2', {
+                    colorAxis: {
+                        minColor: '#FFFFFF',
+                        maxColor: '#FF0000'
+                    },
+                    series: [{
+                        type: "treemap",
+                        layoutAlgorithm: 'squarified',
+                        data: charDate
+                    }],
+                    title: {
+                        text: ''
+                    }
+                });
+            },
+
+            getDetail(str) {
+                fetch(GlobalConfig.serverUrl + '/api/report/hotMap?CreateTimeStr=' + str+'&type='+$('#type').val()+'&num='+$('#dataSize').val(),{headers:getRequestHeaders()}).then(res => {
+                    return res.text()
+                }).then(res => {
+                    console.log(JSON.parse(res))
+                    var hotMapDateJson = JSON.parse(res);
+                    this.getecharts(hotMapDateJson)
+                })
+            }
+        }
+    })
+
+</script>
+<hr>
+
+<div id="app3">
+  <div class="block" style="display:flex;justify-content: center;">
+    <span class="demonstration">涨停热力图3</span>
+    <el-date-picker value-format="yyyy-MM-dd" @change="getKeys" v-model="value1" type="date"
+                    placeholder="选择日期">
+    </el-date-picker>
+  </div>
+  <div id="container3"></div>
+
+</div>
+<!--[if lt IE 9]>
+<script src="https://img.hcharts.cn/highcharts/modules/oldie.js"></script>
+<![endif]-->
+<script>
+
+
+    var vm = new Vue({
+        el: '#app3',
+        data() {
+            return {
+                hotMapDateJson: "",
+                pickerOptions: {
+                    disabledDate(time) {
+                        return time.getTime() > Date.now();
+                    },
+                    shortcuts: [{
+                        text: '今天',
+                        onClick(picker) {
+                            picker.$emit('pick', new Date());
+                        }
+                    }, {
+                        text: '昨天',
+                        onClick(picker) {
+                            const date = new Date();
+                            date.setTime(date.getTime() - 3600 * 1000 * 24);
+                            picker.$emit('pick', date);
+                        }
+                    }, {
+                        text: '一周前',
+                        onClick(picker) {
+                            const date = new Date();
+                            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+                            picker.$emit('pick', date);
+                        }
+                    }]
+                },
+                value1: '',
+                value2: '',
+            };
+        },
+        created() {
+            console.log(111)
+        },
+        mounted() {
+            this.getDetail();
+        },
+        methods: {
+            getKeys(str) {
+                console.log(str)
+                this.getDetail(str)
+            },
+            getecharts(val) {
+                var hotMapDateBody = "";
+                var hotMapDateJson = val;
+                var charDate = new Array();
+                for (var i = 0; i < hotMapDateJson.data.length; i++) {
+                    var temp = hotMapDateJson.data[i];
+
+                        var user = new Object({
+                            name: hotMapDateJson.data[i].tag,
+                            value: hotMapDateJson.data[i].num,
+                            colorValue: hotMapDateJson.data[i].num
+                        });
+                        charDate.push(user);
+
+                }
+                var chart = Highcharts.chart('container3', {
+                    colorAxis: {
+                        minColor: '#FFFFFF',
+                        maxColor: '#FF0000'
+                    },
+                    series: [{
+                        type: "treemap",
+                        layoutAlgorithm: 'squarified',
+                        data: charDate
+                    }],
+                    title: {
+                        text: ''
+                    }
+                });
+            },
+
+            getDetail(str) {
+                fetch(GlobalConfig.serverUrl + '/api/report/hotMap?CreateTimeStr=' + str+'&type='+$('#type').val()+'&num='+$('#dataSize').val(),{headers:getRequestHeaders()}).then(res => {
+                    return res.text()
+                }).then(res => {
+                    console.log(JSON.parse(res))
+                    var hotMapDateJson = JSON.parse(res);
+                    this.getecharts(hotMapDateJson)
+                })
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

@@ -13,12 +13,14 @@ import vip.linhs.stock.model.vo.PageVo;
 public interface StockService {
 
     List<StockInfo> getAll();
+    List<StockInfo> getZtAll();
 
     List<StockInfo> getAllListed();
 
     void addStockLog(List<StockLog> list);
 
     void update(List<StockInfo> needAddedList, List<StockInfo> needUpdatedList, List<StockLog> stockLogList);
+    void updatezt(List<StockInfo> needAddedList, List<StockInfo> needUpdatedList, List<StockLog> stockLogList);
 
     void saveDailyIndexToFile(String rootPath);
 
@@ -38,4 +40,6 @@ public interface StockService {
 
     PageVo<StockInfo> getAllSeledted();
     void momoRetracement();
+
+    PageVo<StockInfo> getStockZtFromDate(StockInfo dateStr);
 }

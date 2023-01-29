@@ -14,6 +14,16 @@ public class PageParam {
 
     private String sort;
 
+    private String beginDate;
+
+    public String getBeginDate() {
+        return beginDate;
+    }
+
+    public void setBeginDate(String beginDate) {
+        this.beginDate = beginDate;
+    }
+
     public String getSort() {
         return sort;
     }
