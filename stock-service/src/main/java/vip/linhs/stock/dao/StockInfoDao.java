@@ -8,7 +8,7 @@ import vip.linhs.stock.model.vo.PageVo;
 
 public interface StockInfoDao {
 
-    List<StockInfo> getStockZtFromDate(StockInfo stockInfo);
+    List<StockInfo> getStockZtTagFromDate(StockInfo stockInfo);
 
     void add(List<StockInfo> list);
 
@@ -21,4 +21,6 @@ public interface StockInfoDao {
     StockInfo getStockByFullCode(String code);
 
     void addzt(List<StockInfo> list);
+
+    List<StockInfo> getStockZtFromDate(StockInfo stockInfo);
 }

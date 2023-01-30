@@ -4,14 +4,18 @@
   <meta charset="utf-8">
   <link rel="icon" href="https://jscdn.com.cn/highcharts/images/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://26d3254z77.zicp.fun/highcharts.js"></script>
-  <script src="https://26d3254z77.zicp.fun/exporting.js"></script>
-  <script src="https://26d3254z77.zicp.fun/heatmap.js"></script>
-  <script src="https://26d3254z77.zicp.fun/treemap.js"></script>
-  <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+  <script src="/static/js/lib/highchart/highcharts.js"></script>
+  <script src="/static/js/lib/highchart/exporting.js"></script>
+  <script src="/static/js/lib/highchart/heatmap.js"></script>
+  <script src="/static/js/lib/highchart/treemap.js"></script>
+  <script src="/static/js/lib/highchart/zh_cn.js"></script>
   <script src="https://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
 
+  <link rel="stylesheet" type="text/css" href="/static/css/common.css">
+  <link rel="stylesheet" type="text/css" href="/static/js/lib/datatable/datatable.css"/>
+
+  <script type="text/javascript" src="/static/js/lib/jquery/3.2.1/jquery.js"></script>
   <script type="text/javascript" src="/static/js/lib/datatable/datatable.js"></script>
   <script type="text/javascript" src="/static/js/util/consts.js"></script>
   <script type="text/javascript" src="/static/js/util/config.js"></script>
@@ -21,13 +25,25 @@
 
 
 
-
   <!-- 引入样式 -->
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
   <!-- 引入组件库 -->
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 </head>
 <body>
+<div id="head" class="head"></div>
+
+<div class="container">
+  <div class="innerBox">
+    <ul class="menu-nav">
+    </ul>
+    <table id="data-table-list" class="data-table-list">
+    </table>
+  </div>
+</div>
+
+<div id="foot" class="foot"></div>
+<br/>
 数据源：<select id="type">
   <option value="0">全部</option>
   <option value="2">韭研公社</option>
@@ -40,6 +56,9 @@
   <option value="2">2天</option>
   <option value="1">1天</option>
 </select>
+&nbsp;&nbsp;&nbsp;强势板块：<input type="text" id="tagId" value="英文逗号分隔:军工,医疗" size="100"/>
+<input type="button" value="获取相关股票" onclick="goToHotMapStockList()"/>
+
 <div id="app">
   <div class="block" style="display:flex;justify-content: center;">
     <span class="demonstration">涨停热力图1</span>
@@ -54,6 +73,15 @@
 <script src="https://img.hcharts.cn/highcharts/modules/oldie.js"></script>
 <![endif]-->
 <script>
+function goToHotMapStockList(){
+  window.location.href = GlobalConfig.serverUrl +"/hotmap/hotMapStockList.html?tag="+$("#tagId").val();
+}
+
+    pageConfiguration.needAuth = true;
+    function onload() {
+      renderReportMenu(1);
+      }
+
     var vm = new Vue({
         el: '#app',
         data() {

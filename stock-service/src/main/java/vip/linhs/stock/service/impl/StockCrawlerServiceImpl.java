@@ -153,8 +153,8 @@ public class StockCrawlerServiceImpl implements StockCrawlerService {
                 stockInfo.setName(element.children().get(0).children().get(0).children().get(0).text());
                 stockInfo.setCode(text.split("\\.")[0]);
                 stockInfo.setExchange(text.split("\\.")[1]);
-                stockInfo.setTag(key.equals("大金融") ? "金融" : key.equals("大消费") ? "消费" : key.equals("汽车产业链") ? "汽车零部件" :
-                        key.equals("半导体产业链") ? "国产芯片" : key.equals("医药医疗")?"医药":key.equals("优化生育（三孩）")?"三胎":key);
+                stockInfo.setTag(key.equals("大金融") ? "金融" : key.equals("大消费") ? "消费" : key.equals("汽车零部件") ? "汽车产业链" :
+                        key.equals("半导体产业链") ? "国产芯片" : key.equals("医药医疗")?"医药":key.equals("优化生育（三孩）")?"三胎":key.equals("新能源汽车")?"汽车零部件":key);
                 stockInfo.setType(StockConsts.StockZTType.ChaGuWang.value());
                 try {
                     Date date = new SimpleDateFormat("yyyyMMdd").parse(dateStr);

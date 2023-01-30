@@ -85,6 +85,10 @@ public class ReportController extends BaseController {
 
     @RequestMapping("hotMap")
     public PageVo<StockInfo> getHotMap(StockInfo pageParam) {
+        return stockService.getStockZtTagFromDate(pageParam);
+    }
+    @RequestMapping("hotMapStockList")
+    public PageVo<StockInfo> hotMapStockList(StockInfo pageParam) {
         return stockService.getStockZtFromDate(pageParam);
     }
 

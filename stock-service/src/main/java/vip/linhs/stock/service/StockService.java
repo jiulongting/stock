@@ -41,5 +41,7 @@ public interface StockService {
     PageVo<StockInfo> getAllSeledted();
     void momoRetracement();
 
-    PageVo<StockInfo> getStockZtFromDate(StockInfo dateStr);
+    PageVo<StockInfo> getStockZtTagFromDate(StockInfo dateStr);
+
+    PageVo<StockInfo> getStockZtFromDate(StockInfo pageParam);
 }

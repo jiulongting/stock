@@ -22,6 +22,17 @@
   <script type="text/javascript" src="/static/js/modules/report.js"></script>
 
   <script type="text/javascript">
+  function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg); //获取url中"?"符后的字符串并正则匹配
+    var context = "";
+    if (r != null)
+        context = decodeURIComponent(r[2]);
+    reg = null;
+    r = null;
+    return context == null || context == "" || context == "undefined" ? "" : context;
+}
+
     pageConfiguration.needAuth = true;
     function onload() {
       renderReportMenu(1);
@@ -34,7 +45,7 @@
         src: table,
         dataTable: {
           ajax: {
-            url: GlobalConfig.serverUrl + '/api/report/selectStockList',
+            url: GlobalConfig.serverUrl + '/api/report/hotMapStockList?tag='+GetQueryString("tag"),
             type: 'GET',
             data: {},
             headers: getRequestHeaders(),
@@ -63,21 +74,21 @@
               }
             },
             {
-              title: '价格最高点时间',
+              title: '出现时间',
               render: function(row) {
-                return new Date(row.maxPriceDate).format('yyyy-MM-dd hh:mm');
+                return row.createTime;
               }
             },
             {
-              title: '价格最低点时间',
+              title: '板块',
               render: function(row) {
-                return new Date(row.minPriceDate).format('yyyy-MM-dd hh:mm');
+                return row.tag;
               }
             },
             {
-              title: '回撤幅度',
+              title: '出现次数',
               render: function(row) {
-                return  row.retracementRate;
+                return  row.num;
               }
             },
             {

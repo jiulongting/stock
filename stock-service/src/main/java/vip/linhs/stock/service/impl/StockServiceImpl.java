@@ -5,15 +5,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -411,15 +409,35 @@ public class StockServiceImpl implements StockService {
         return new PageVo<>(data, data.size());
     }
 
+    public PageVo<StockInfo> getStockZtTagFromDate(StockInfo stockInfo) {
+        buildStockInfo(stockInfo);
+        List<StockInfo> data  = stockInfoDao.getStockZtTagFromDate(stockInfo);
+        return new PageVo<>(data, data.size());
+    }
+
     public PageVo<StockInfo> getStockZtFromDate(StockInfo stockInfo) {
+        buildStockInfo(stockInfo);
+        List<StockInfo> data  = stockInfoDao.getStockZtFromDate(stockInfo);
+        return new PageVo<>(data, data.size());
+    }
+
+    private void buildStockInfo(StockInfo stockInfo) {
         try {
-            stockInfo.setCreateTime(new SimpleDateFormat("yyyy-MM-dd").parse(stockInfo.getCreateTimeStr()));
-            stockInfo.setUpdateTime(holidayCalendarService.businesDateSubtraction(stockInfo.getCreateTimeStr(),stockInfo.getNum()));
+            if(stockInfo.getTag()!=null){
+                String tagStr[] = stockInfo.getTag().split(",");
+                for (int i = 0; i < tagStr.length; i++) {
+                    tagStr[i] = "'" + tagStr[i] + "'";
+                }
+                stockInfo.setTag(StringUtils.join(tagStr,","));
+                stockInfo.setCreateTime(new SimpleDateFormat("yyyy-MM-dd").parse(new SimpleDateFormat("yyyy-MM-dd").format(new Date())));
+                stockInfo.setUpdateTime(holidayCalendarService.businesDateSubtraction(new SimpleDateFormat("yyyy-MM-dd").format(new Date()), 30));
+            } else {
+                stockInfo.setCreateTime(new SimpleDateFormat("yyyy-MM-dd").parse(stockInfo.getCreateTimeStr()));
+                stockInfo.setUpdateTime(holidayCalendarService.businesDateSubtraction(stockInfo.getCreateTimeStr(), stockInfo.getNum()));
+            }
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        List<StockInfo> data  = stockInfoDao.getStockZtFromDate(stockInfo);
-        return new PageVo<>(data, data.size());
     }
 
     private PageVo<DailyIndexVo> getDailyIndexVoPageVo(StockInfo stockInfo) {

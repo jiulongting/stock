@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.StatementCreatorUtils;
@@ -25,10 +26,18 @@ public class StockInfoDaoImpl extends BaseDao implements StockInfoDao {
     private static final String SELECT_SQL_ZT = "select id, code, name, exchange, abbreviation, state, type, tag,create_time as createTime, update_time as updateTime from stock_zt where 1 = 1";
 
     @Override
-    public List<StockInfo> getStockZtFromDate(StockInfo stockInfo) {
-        String sql = "select * from (select tag ,count(1) as num from stock_zt where create_time  >= ? and create_time <= ? " + (stockInfo.getType() == 0 ? "" : "and type=" + stockInfo.getType()) + " group by tag ) temp  where num > 2 ";
+    public List<StockInfo> getStockZtTagFromDate(StockInfo stockInfo) {
+        String sql = "select * from (select tag ,count(1) as num from stock_zt where create_time  > ? and create_time <= ? " + (stockInfo.getType() == 0 ? "" : "and type=" + stockInfo.getType()) + " group by tag ) temp  where num > 2 ";
         List<StockInfo> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(StockInfo.class),
                new java.sql.Date(stockInfo.getUpdateTime().getTime()), new java.sql.Date(stockInfo.getCreateTime().getTime()));
+        return list;
+    }
+
+    @Override
+    public List<StockInfo> getStockZtFromDate(StockInfo stockInfo) {
+        String sql = "select create_time,name,tag,code,exchange ,count(1) as num from stock_zt where create_time  > ? and create_time <= ? " + (StringUtils.isEmpty(stockInfo.getTag()) ? "" : "and tag in (" + stockInfo.getTag()) + ") group by name order by num desc";
+        List<StockInfo> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(StockInfo.class),
+                new java.sql.Date(stockInfo.getUpdateTime().getTime()), new java.sql.Date(stockInfo.getCreateTime().getTime()));
         return list;
     }
 
