@@ -23,7 +23,21 @@
   <script type="text/javascript" src="/static/js/util/frame.js"></script>
   <script type="text/javascript" src="/static/js/modules/report.js"></script>
 
+<!--  <script src="/static/js/lib/highchart/6ee7c7f.js"></script>-->
+<!--  <script src="/static/js/lib/highchart/9ed2d50.js"></script>-->
+<!--  <script src="/static/js/lib/highchart/a7238e0.js"></script>-->
+<!--  <script src="/static/js/lib/highchart/ded5cc5.js"></script>-->
+<!--  <script src="/static/js/lib/highchart/e0ad3f9.js"></script>-->
+<!--  <script src="/static/js/lib/highchart/bb91a8c.js"></script>-->
+<!--  <script src="/static/js/lib/highchart/d7c556b.js"></script>-->
+<!--  <script src="/static/js/lib/highchart/9fc998a.js"></script>-->
 
+<!--  <script>-->
+
+<!--    var time = (new Date).getTime(), n = "Uu0KfOB8iUP69d3c:".concat(time),token = y()(n);-->
+<!--    console.log(token);-->
+
+<!--  </script>-->
 
   <!-- 引入样式 -->
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
@@ -159,13 +173,15 @@ function goToHotMapStockList(){
             },
 
             getDetail(str) {
-                fetch(GlobalConfig.serverUrl + '/api/report/hotMap?CreateTimeStr=' + str+'&type='+$('#type').val()+'&num='+$('#dataSize').val(),{headers:getRequestHeaders()}).then(res => {
-                    return res.text()
-                }).then(res => {
-                    console.log(JSON.parse(res))
-                    var hotMapDateJson = JSON.parse(res);
-                    this.getecharts(hotMapDateJson)
-                })
+            if(str!=undefined){
+                  fetch(GlobalConfig.serverUrl + '/api/report/hotMap?CreateTimeStr=' + str+'&type='+$('#type').val()+'&num='+$('#dataSize').val(),{headers:getRequestHeaders()}).then(res => {
+                      return res.text()
+                  }).then(res => {
+                      console.log(JSON.parse(res))
+                      var hotMapDateJson = JSON.parse(res);
+                      this.getecharts(hotMapDateJson)
+                  })
+              }
             }
         }
     })
@@ -266,13 +282,15 @@ function goToHotMapStockList(){
             },
 
             getDetail(str) {
-                fetch(GlobalConfig.serverUrl + '/api/report/hotMap?CreateTimeStr=' + str+'&type='+$('#type').val()+'&num='+$('#dataSize').val(),{headers:getRequestHeaders()}).then(res => {
-                    return res.text()
-                }).then(res => {
-                    console.log(JSON.parse(res))
-                    var hotMapDateJson = JSON.parse(res);
-                    this.getecharts(hotMapDateJson)
-                })
+            if(str!=undefined){
+                  fetch(GlobalConfig.serverUrl + '/api/report/hotMap?CreateTimeStr=' + str+'&type='+$('#type').val()+'&num='+$('#dataSize').val(),{headers:getRequestHeaders()}).then(res => {
+                      return res.text()
+                  }).then(res => {
+                      console.log(JSON.parse(res))
+                      var hotMapDateJson = JSON.parse(res);
+                      this.getecharts(hotMapDateJson)
+                  })
+               }
             }
         }
     })
@@ -373,13 +391,15 @@ function goToHotMapStockList(){
             },
 
             getDetail(str) {
-                fetch(GlobalConfig.serverUrl + '/api/report/hotMap?CreateTimeStr=' + str+'&type='+$('#type').val()+'&num='+$('#dataSize').val(),{headers:getRequestHeaders()}).then(res => {
-                    return res.text()
-                }).then(res => {
-                    console.log(JSON.parse(res))
-                    var hotMapDateJson = JSON.parse(res);
-                    this.getecharts(hotMapDateJson)
-                })
+            if(str!=undefined){
+                  fetch(GlobalConfig.serverUrl + '/api/report/hotMap?CreateTimeStr=' + str+'&type='+$('#type').val()+'&num='+$('#dataSize').val(),{headers:getRequestHeaders()}).then(res => {
+                      return res.text()
+                  }).then(res => {
+                      console.log(JSON.parse(res))
+                      var hotMapDateJson = JSON.parse(res);
+                      this.getecharts(hotMapDateJson)
+                  })
+                }
             }
         }
     })

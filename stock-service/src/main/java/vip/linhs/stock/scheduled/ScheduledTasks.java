@@ -115,6 +115,23 @@ public class ScheduledTasks {
     }
 
     /**
+     * UpdateOfStockZt
+     */
+    @Scheduled(cron = "0 0 12,14,16 ? * MON-FRI")
+    public void runUpdateOfStockZt() {
+        boolean isBusinessTime = holidayCalendarService.isBusinessDate(new Date());
+        if (!isBusinessTime) {
+            return;
+        }
+        try {
+            List<ExecuteInfo> list = taskService.getPendingTaskListById(Task.UpdateOfStockZt.getId());
+            executeTask(list);
+        } catch (Exception e) {
+            logger.error("task UpdateOfStockZt error", e);
+        }
+    }
+
+    /**
      * ticker: 价格提醒
      */
     @Scheduled(cron = "0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58 * 9,10,11,13,14 ? * MON-FRI")
@@ -156,7 +173,7 @@ public class ScheduledTasks {
         }
     }
 
-    @Scheduled(cron = "0 0,20,40 * ? * MON-FRI")
+   // @Scheduled(cron = "0 0,20,40 * ? * MON-FRI")
     public void heartbeat() {
         boolean isBusinessDate = holidayCalendarService.isBusinessDate(new Date());
         if (!isBusinessDate) {

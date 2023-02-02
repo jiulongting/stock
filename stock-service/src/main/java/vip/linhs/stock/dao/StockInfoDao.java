@@ -16,11 +16,12 @@ public interface StockInfoDao {
     void updatezt(List<StockInfo> list);
 
     PageVo<StockInfo> get(PageParam pageParam);
-    PageVo<StockInfo> getzt(PageParam pageParam);
 
     StockInfo getStockByFullCode(String code);
 
     void addzt(List<StockInfo> list);
 
     List<StockInfo> getStockZtFromDate(StockInfo stockInfo);
+
+    StockInfo getStockZtByStock(StockInfo stockInfo);
 }

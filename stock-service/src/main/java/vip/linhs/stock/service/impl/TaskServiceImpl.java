@@ -98,6 +98,8 @@ public class TaskServiceImpl implements TaskService {
                     break;
                 case UpdateOfDailyIndex:
                     runUpdateOfDailyIndex();
+                    break;
+                case UpdateOfStockZt:
                     updateStockZt();
                     break;
                 case Ticker:
@@ -222,24 +224,35 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public void updateStockZt() {
-        List<StockInfo> list = stockService.getZtAll().stream().filter(v -> v.getState() == StockConsts.StockZTState.Valid.value()).collect(Collectors.toList());
-        Map<String,StockInfo> dbStockMap = list.stream().collect(Collectors.toMap(stockInfo ->getStockInfoString(stockInfo),stockInfo -> stockInfo));
+        String dateStr="20230130,20230131,20230201,20230202,20230120,20230119,20230118,20230117,20230116,20230113,20230112,20230111,20230110,20230109,20230106,20230105,20230104,20230103,20221230,20221229,20221228,20221227,20221226,20221223,20221222,20221221,20221220,20221219,20221216,20221215,20221214,20221213,20221212,20221209,20221208,20221207,20221206,20221205,20221202,20221201,20221130,20221129,20221128,20221125,20221124,20221123,20221122,20221121,20221118,20221117,20221116,20221115,20221114,20221111,20221110,20221109,20221108,20221107,20221104,20221103,20221102,20221101,20221031,20221028,20221027,20221026,20221025,20221024,20221021,20221020,20221019,20221018,20221017,20221014,20221013,20221012,20221011,20221010,20220930,20220929,20220928,20220927,20220926,20220923,20220922,20220921,20220920,20220919,20220916,20220915,20220914,20220913,20220909,20220908,20220907,20220906,20220905,20220902,20220901,20220831,20220830,20220829,20220826,20220825,20220824,20220823,20220822,20220819,20220818,20220817,20220816,20220815,20220812,20220811,20220810,20220809,20220808,20220805,20220804,20220803,20220802,20220801,20220729,20220728,20220727,20220726,20220725,20220722,20220721,20220720,20220719,20220718,20220715,20220714,20220713,20220712,20220711,20220708,20220707,20220706,20220705,20220704,20220701,20220630,20220629,20220628,20220627,20220624,20220623,20220622,20220621,20220620,20220617,20220616,20220615,20220614,20220613,20220610,20220609,20220608,20220607,20220606,20220602,20220601,20220531,20220530,20220527,20220526,20220525,20220524,20220523,20220520,20220519,20220518,20220517,20220516,20220513,20220512,20220511,20220510,20220509,20220506,20220505,20220429,20220428,20220427,20220426,20220425,20220422,20220421,20220420,20220419,20220418,20220415,20220414,20220413,20220412,20220411,20220408,20220407,20220406,20220401,20220331,20220330,20220329,20220328,20220325,20220324,20220323,20220322,20220321,20220318,20220317,20220316,20220315,20220314,20220311,20220310,20220309,20220308,20220307,20220304,20220303,20220302,20220301,20220228,20220225,20220224,20220223,20220222,20220221,20220218,20220217,20220216,20220215,20220214,20220211,20220210,20220209,20220208,20220207,20220128,20220127,20220126,20220125,20220124,20220121,20220120,20220119,20220118,20220117,20220114,20220113,20220112,20220111,20220110,20220107,20220106,20220105,20220104";
+        for(String date:dateStr.split(",")) {
+            List<StockInfo> ddxgubitList = stockCrawlerService.getZTfromddxgubitcn(date);
+        updateStockZtByList(ddxgubitList);
+        List<StockInfo> jiuyangongsheList = stockCrawlerService.getZTfromTonghuashun(date);
+        updateStockZtByList(jiuyangongsheList);
+
+        }
+
+//        List<StockInfo> ddxgubitList = stockCrawlerService.getZTfromddxgubitcn(new SimpleDateFormat("yyyyMMdd").format(new Date()));
+//        updateStockZtByList(ddxgubitList);
+//        List<StockInfo> jiuyangongsheList = stockCrawlerService.getZTfromTonghuashun(new SimpleDateFormat("yyyyMMdd").format(new Date()));
+//        updateStockZtByList(jiuyangongsheList);
+    }
+
+    private void updateStockZtByList(List<StockInfo> dataList) {
+//        List<StockInfo> list = stockService.getZtAll().stream().filter(v -> v.getState() == StockConsts.StockZTState.Valid.value()).collect(Collectors.toList());
+//        Map<String,StockInfo> dbStockMap = list.stream().collect(Collectors.toMap(stockInfo ->getStockInfoString(stockInfo),stockInfo -> stockInfo));
 
         ArrayList<StockInfo> needAddedList = new ArrayList<>();
         ArrayList<StockInfo> needUpdatedList = new ArrayList<>();
         ArrayList<StockLog> stockLogList = new ArrayList<>();
 
-        List<StockInfo> ddxgubitList = stockCrawlerService.getZTfromddxgubitcn(new SimpleDateFormat("yyyyMMdd").format(new Date()));
-        List<StockInfo> jiuyangongsheList = stockCrawlerService.getZTfromjiuyangongshe(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-        ddxgubitList.addAll(jiuyangongsheList);
-        for (StockInfo stockInfo : ddxgubitList) {
-            StockInfo StockInfoMap = dbStockMap.get(getStockInfoString(stockInfo));
-            if (StockInfoMap == null) {
+        for (StockInfo stockInfo : dataList) {
+            StockInfo StockInfoExit = stockService.getStockZtByStock(stockInfo);
+            if (StockInfoExit == null) {
                 needAddedList.add(stockInfo);
             }
-
         }
-
         stockService.updatezt(needAddedList, needUpdatedList, stockLogList);
     }
 

@@ -81,11 +81,6 @@ public class StockServiceImpl implements StockService {
         return pageParam;
     }
 
-    public List<StockInfo> getZtAll() {
-        PageParam pageParam = getPageParam();
-        PageVo<StockInfo> pageVo = stockInfoDao.getzt(pageParam);
-        return pageVo.getData();
-    }
     @Override
     public List<StockInfo> getAllListed() {
         return getAll().stream().filter(stockInfo ->
@@ -421,6 +416,11 @@ public class StockServiceImpl implements StockService {
         return new PageVo<>(data, data.size());
     }
 
+    @Override
+    public StockInfo getStockZtByStock(StockInfo stockInfo) {
+        return stockInfoDao.getStockZtByStock(stockInfo);
+    }
+
     private void buildStockInfo(StockInfo stockInfo) {
         try {
             if(stockInfo.getTag()!=null){
@@ -430,7 +430,7 @@ public class StockServiceImpl implements StockService {
                 }
                 stockInfo.setTag(StringUtils.join(tagStr,","));
                 stockInfo.setCreateTime(new SimpleDateFormat("yyyy-MM-dd").parse(new SimpleDateFormat("yyyy-MM-dd").format(new Date())));
-                stockInfo.setUpdateTime(holidayCalendarService.businesDateSubtraction(new SimpleDateFormat("yyyy-MM-dd").format(new Date()), 30));
+                stockInfo.setUpdateTime(DateUtil.subtraction(new SimpleDateFormat("yyyy-MM-dd").format(new Date()), -100));
             } else {
                 stockInfo.setCreateTime(new SimpleDateFormat("yyyy-MM-dd").parse(stockInfo.getCreateTimeStr()));
                 stockInfo.setUpdateTime(holidayCalendarService.businesDateSubtraction(stockInfo.getCreateTimeStr(), stockInfo.getNum()));

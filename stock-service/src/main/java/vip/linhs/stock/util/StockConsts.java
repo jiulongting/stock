@@ -121,7 +121,7 @@ public class StockConsts {
     }
 
     public enum StockZTType {
-        A(0), ChaGuWang(1), JiuYanGoneShe(2), B(3);
+        A(0), ChaGuWang(1), TongHuaShun(2), B(3);
         private int value;
 
         private StockZTType(int value) {

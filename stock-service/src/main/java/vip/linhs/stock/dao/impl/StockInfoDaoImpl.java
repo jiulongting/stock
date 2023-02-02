@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -39,6 +40,13 @@ public class StockInfoDaoImpl extends BaseDao implements StockInfoDao {
         List<StockInfo> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(StockInfo.class),
                 new java.sql.Date(stockInfo.getUpdateTime().getTime()), new java.sql.Date(stockInfo.getCreateTime().getTime()));
         return list;
+    }
+
+    public StockInfo getStockZtByStock(StockInfo stockInfo) {
+        String sql = "select id from stock_zt where name =? and tag = ? and code=? and type=? and create_time=?";
+        List<StockInfo> stockInfoList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(StockInfo.class),
+                stockInfo.getName(),stockInfo.getTag(),stockInfo.getCode(),stockInfo.getType(),new java.sql.Date(stockInfo.getCreateTime().getTime()));
+        return CollectionUtils.isEmpty(stockInfoList) ? null : stockInfoList.get(0);
     }
 
     @Override
@@ -137,14 +145,6 @@ public class StockInfoDaoImpl extends BaseDao implements StockInfoDao {
     public PageVo<StockInfo> get(PageParam pageParam) {
         SqlCondition dataSqlCondition = new SqlCondition(
                 StockInfoDaoImpl.SELECT_SQL,
-                pageParam.getCondition(), pageParam.getNotEquals(), pageParam.getStringGE(), pageParam.getStringLE());
-
-        return getStockInfoPageVo(pageParam, dataSqlCondition);
-    }
-
-    public PageVo<StockInfo> getzt(PageParam pageParam) {
-        SqlCondition dataSqlCondition = new SqlCondition(
-                StockInfoDaoImpl.SELECT_SQL_ZT,
                 pageParam.getCondition(), pageParam.getNotEquals(), pageParam.getStringGE(), pageParam.getStringLE());
 
         return getStockInfoPageVo(pageParam, dataSqlCondition);

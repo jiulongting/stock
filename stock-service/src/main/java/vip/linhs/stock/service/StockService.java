@@ -13,8 +13,6 @@ import vip.linhs.stock.model.vo.PageVo;
 public interface StockService {
 
     List<StockInfo> getAll();
-    List<StockInfo> getZtAll();
-
     List<StockInfo> getAllListed();
 
     void addStockLog(List<StockLog> list);
@@ -44,4 +42,6 @@ public interface StockService {
     PageVo<StockInfo> getStockZtTagFromDate(StockInfo dateStr);
 
     PageVo<StockInfo> getStockZtFromDate(StockInfo pageParam);
+
+    StockInfo getStockZtByStock(StockInfo stockInfo);
 }

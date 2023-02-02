@@ -121,15 +121,15 @@ public class StockCrawlerServiceImpl implements StockCrawlerService {
 
     //public static String sendPost(CloseableHttpClient httpClient, String url, Map<String, Object> params, Map<String, String> header)
 //https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=SH000001&begin=1670247216429&period=day&type=before&count=-284&indicator=kline,pe,pb,ps,pcf,market_capital,agt,ggt,balance
-        @Override
+    @Override
     public String getHistoryDailyIndexsStringFromXueQiu(String code, int day) {
 
-            Map<String, String> header = new HashMap<>();
-            header.put("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
-            header.put("cookie", "device_id=6843aff8e6949458ff0296b588d0f280; xq_a_token=df4b782b118f7f9cabab6989b39a24cb04685f95; xqat=df4b782b118f7f9cabab6989b39a24cb04685f95; xq_r_token=3ae1ada2a33de0f698daa53fb4e1b61edf335952; xq_id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1aWQiOi0xLCJpc3MiOiJ1YyIsImV4cCI6MTY3MjE4Njc1MSwiY3RtIjoxNjcwMTY0NTA3MTAzLCJjaWQiOiJkOWQwbjRBWnVwIn0.QkTb4BDzdwQ_Y4dZFhfPWJMXwzVjEH6KM6K9TyuE6mndK_HWuHxXDJWwClUixJgXGacK0uEVDuWs_TifIVbJN0PS6Vw0-eHWjOsMuzWEJhSq-G60eZDYD2HE_6p3ZuhYe9Sd-pj71lxM1qg4W0UcG896VVOURahsC16XTpWtS61rAu-kSqgkxHrv3t7njHc9VqpdLfBw-dlvzOS9VirqktEKluOFIzht1679Ia4R_PRNEsV_LGZydzvUWCdmoM7iJpXE6bcEMrZcklHyXpyQDqnIBGLzIaUhM-Uvl1L0A2Od-n6DaYnihvndhh0Kohqi94SJrIv4jeSPUv87cp_KHA; u=291670164562230; Hm_lvt_1db88642e346389874251b5a1eded6e3=1668578158,1668776329,1669182895,1670164563; Hm_lpvt_1db88642e346389874251b5a1eded6e3=1670164637");
-            header.put("user-agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.68");
+        Map<String, String> header = new HashMap<>();
+        header.put("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
+        header.put("cookie", "device_id=6843aff8e6949458ff0296b588d0f280; xq_a_token=df4b782b118f7f9cabab6989b39a24cb04685f95; xqat=df4b782b118f7f9cabab6989b39a24cb04685f95; xq_r_token=3ae1ada2a33de0f698daa53fb4e1b61edf335952; xq_id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1aWQiOi0xLCJpc3MiOiJ1YyIsImV4cCI6MTY3MjE4Njc1MSwiY3RtIjoxNjcwMTY0NTA3MTAzLCJjaWQiOiJkOWQwbjRBWnVwIn0.QkTb4BDzdwQ_Y4dZFhfPWJMXwzVjEH6KM6K9TyuE6mndK_HWuHxXDJWwClUixJgXGacK0uEVDuWs_TifIVbJN0PS6Vw0-eHWjOsMuzWEJhSq-G60eZDYD2HE_6p3ZuhYe9Sd-pj71lxM1qg4W0UcG896VVOURahsC16XTpWtS61rAu-kSqgkxHrv3t7njHc9VqpdLfBw-dlvzOS9VirqktEKluOFIzht1679Ia4R_PRNEsV_LGZydzvUWCdmoM7iJpXE6bcEMrZcklHyXpyQDqnIBGLzIaUhM-Uvl1L0A2Od-n6DaYnihvndhh0Kohqi94SJrIv4jeSPUv87cp_KHA; u=291670164562230; Hm_lvt_1db88642e346389874251b5a1eded6e3=1668578158,1668776329,1669182895,1670164563; Hm_lpvt_1db88642e346389874251b5a1eded6e3=1670164637");
+        header.put("user-agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.68");
 
-            return HttpUtil.sendGet(httpClient, "https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol="+code+"&begin="+System.currentTimeMillis()+"&period=day&type=before&count=-230&indicator=kline,pe,pb,ps,pcf,market_capital,agt,ggt,balance", header);
+        return HttpUtil.sendGet(httpClient, "https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=" + code + "&begin=" + System.currentTimeMillis() + "&period=day&type=before&count=-230&indicator=kline,pe,pb,ps,pcf,market_capital,agt,ggt,balance", header);
     }
 
     public List<StockInfo> getZTfromddxgubitcn(String dateStr) {
@@ -142,7 +142,7 @@ public class StockCrawlerServiceImpl implements StockCrawlerService {
 
         for (int i = 0; i < header.size(); i++) {
             String key = header.get(i).children().get(0).text();
-            if (key.contains("公告") || key.contains("其他") || key.contains("ST股")||key.contains("业绩预增")) {
+            if (key.contains("公告") || key.contains("其他") || key.contains("ST股") || key.contains("业绩预增")) {
                 continue;
             }
             // 所有#id的标签
@@ -153,8 +153,9 @@ public class StockCrawlerServiceImpl implements StockCrawlerService {
                 stockInfo.setName(element.children().get(0).children().get(0).children().get(0).text());
                 stockInfo.setCode(text.split("\\.")[0]);
                 stockInfo.setExchange(text.split("\\.")[1]);
-                stockInfo.setTag(key.equals("大金融") ? "金融" : key.equals("大消费") ? "消费" : key.equals("汽车零部件") ? "汽车产业链" :
-                        key.equals("半导体产业链") ? "国产芯片" : key.equals("医药医疗")?"医药":key.equals("优化生育（三孩）")?"三胎":key.equals("新能源汽车")?"汽车零部件":key);
+//                stockInfo.setTag(key.equals("大金融") ? "金融" : key.equals("大消费") ? "消费" : key.equals("汽车零部件") ? "汽车产业链" :
+//                        key.equals("半导体产业链") ? "国产芯片" : key.equals("医药医疗")?"医药":key.equals("优化生育（三孩）")?"三胎":key.equals("新能源汽车")?"汽车零部件":key);
+                stockInfo.setTag(key);
                 stockInfo.setType(StockConsts.StockZTType.ChaGuWang.value());
                 try {
                     Date date = new SimpleDateFormat("yyyyMMdd").parse(dateStr);
@@ -205,7 +206,7 @@ public class StockCrawlerServiceImpl implements StockCrawlerService {
         for (int i = 1; i < dataJson.getJSONArray("data").size(); i++) {
             JSONObject temp = JSONObject.parseObject(dataJson.getJSONArray("data").get(i).toString());
             String key = temp.getString("name");
-            if (key.contains("公告") || key.contains("新股")|| key.contains("年报披露")||key.contains("其他") || key.contains("ST板块")||key.contains("业绩预增")) {
+            if (key.contains("公告") || key.contains("新股") || key.contains("年报披露") || key.contains("其他") || key.contains("ST板块") || key.contains("业绩预增")) {
                 continue;
             }
             for (Object element : temp.getJSONArray("list")) {
@@ -215,9 +216,9 @@ public class StockCrawlerServiceImpl implements StockCrawlerService {
 
                 stockInfo.setName(e.getString("name"));
                 stockInfo.setCode(code.substring(2));
-                stockInfo.setExchange(code.substring(0,2));
+                stockInfo.setExchange(code.substring(0, 2));
                 stockInfo.setTag(key);
-                stockInfo.setType(StockConsts.StockZTType.JiuYanGoneShe.value());
+               // stockInfo.setType(StockConsts.StockZTType.JiuYanGoneShe.value());
                 try {
                     Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
                     stockInfo.setCreateTime(date);
@@ -230,5 +231,40 @@ public class StockCrawlerServiceImpl implements StockCrawlerService {
 
 
         return list;
-}
+    }
+
+    public List<StockInfo> getZTfromTonghuashun(String dateStr) {
+
+        String url = "https://data.10jqka.com.cn/dataapi/limit_up/block_top?filter=HS&date="+dateStr;
+        String body = HttpUtil.sendGet(httpClient, url);
+        JSONObject dataJson  = JSONObject.parseObject(body);
+        List<StockInfo> list = new ArrayList();
+        for (int i = 0; i < dataJson.getJSONArray("data").size(); i++) {
+            JSONObject temp = JSONObject.parseObject(dataJson.getJSONArray("data").get(i).toString());
+            String key = temp.getString("name");
+            if (key.contains("公告") || key.contains("新股") || key.contains("年报披露") || key.contains("其他") || key.contains("ST板块") || key.contains("业绩预增")) {
+                continue;
+            }
+            for (Object element : temp.getJSONArray("stock_list")) {
+                StockInfo stockInfo = new StockInfo();
+                JSONObject e = JSONObject.parseObject(element.toString());
+
+                stockInfo.setName(e.getString("name"));
+                stockInfo.setCode(e.getString("code"));
+                stockInfo.setExchange(e.getString("market_type"));
+                stockInfo.setTag(key);
+                stockInfo.setType(StockConsts.StockZTType.TongHuaShun.value());
+                try {
+                    Date date = new SimpleDateFormat("yyyyMMdd").parse(dateStr);
+                    stockInfo.setCreateTime(date);
+                } catch (ParseException parseException) {
+                    throw new RuntimeException(parseException);
+                }
+                list.add(stockInfo);
+            }
+        }
+
+
+        return list;
+    }
 }

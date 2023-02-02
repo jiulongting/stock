@@ -26,4 +26,6 @@ public interface StockCrawlerService {
     List<StockInfo> getZTfromddxgubitcn(String date);
 
     List<StockInfo> getZTfromjiuyangongshe(String dateStr);
+
+    List<StockInfo> getZTfromTonghuashun(String yyyyMMdd);
 }

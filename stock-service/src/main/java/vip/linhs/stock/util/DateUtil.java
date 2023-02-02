@@ -23,7 +23,7 @@ public class DateUtil {
         Date dt1=rightNow.getTime();
 
        // String reStr = sdf.format(dt1);
-        System.out.println(dt1);
+        //System.out.println(dt1);
         return dt1;
     }
 
@@ -36,7 +36,7 @@ public class DateUtil {
         Date dt1=rightNow.getTime();
 
         // String reStr = sdf.format(dt1);
-        System.out.println(dt1);
+        //System.out.println(dt1);
         return dt1;
     }
 }
